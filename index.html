@@ -1,0 +1,1578 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Pausas activas guiadas para la oficina: micro pausas de 3 minutos y pausas largas de 5 minutos, con ejercicios animados.">
+<meta name="theme-color" content="#007F90">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2323B9DD'/%3E%3Crect x='19' y='26' width='10' height='24' rx='5' fill='%2303303B'/%3E%3Crect x='35' y='16' width='10' height='34' rx='5' fill='%2303303B'/%3E%3C/svg%3E">
+<title>Pausa Viva</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+html{-webkit-text-size-adjust:100%}
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+/* Layout: inicio en una columna tipo app (máx. 600px) con tarjeta "mar Caribe" arriba; reproductor a pantalla completa con escenario circular y anillo de tiempo, dos columnas en pantallas anchas para proyectar al equipo */
+:root{
+  --bg:#E9F8FA;--surface:#FFFFFF;--ink:#06313D;--muted:#4A7380;--line:#CBE7EC;
+  --brand:#007F90;--brand-ink:#FFFFFF;--accent:#DE4526;--accent-ink:#FFFFFF;
+  --hero1:#66E6DB;--hero2:#23B9DD;--hero-ink:#03303B;
+  --fig:#0A3D4A;--chair:#BCE0E6;--zc:#0FB5A6;
+  --skin:#EDB58C;--skin2:#D4956A;--hair:#5A3A2B;--shirt:#1B9AAA;--pants:#2D4762;--shoe:#E5603F;--face:#2A1A12;--blush:#EE7F6E;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#041E27;--surface:#0A2C38;--ink:#E4F7FA;--muted:#86B3BD;--line:#17414E;
+  --brand:#2FD3DE;--brand-ink:#03262E;--accent:#FF8F7A;--accent-ink:#2B0D05;
+  --hero1:#0C6C7C;--hero2:#0B4573;--hero-ink:#E8FCFE;
+  --fig:#D9F3F6;--chair:#1F4B58;--hair:#7A5240;--shirt:#2EC4D2;--pants:#7F9DB8;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#041E27;--surface:#0A2C38;--ink:#E4F7FA;--muted:#86B3BD;--line:#17414E;
+  --brand:#2FD3DE;--brand-ink:#03262E;--accent:#FF8F7A;--accent-ink:#2B0D05;
+  --hero1:#0C6C7C;--hero2:#0B4573;--hero-ink:#E8FCFE;
+  --fig:#D9F3F6;--chair:#1F4B58;--hair:#7A5240;--shirt:#2EC4D2;--pants:#7F9DB8;color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+.wrap{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+
+.top{display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:20px;margin-right:auto}
+.mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--hero1),var(--hero2));display:flex;align-items:flex-end;justify-content:center;gap:5px;padding-bottom:8px}
+.mark i{width:5px;border-radius:3px;background:var(--hero-ink);height:14px}
+.mark i:last-child{height:19px}
+.count{font-size:14px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-variant-numeric:tabular-nums;background:var(--surface)}
+
+.hero{border-radius:24px;padding:22px 20px 24px;background:linear-gradient(135deg,var(--hero1),var(--hero2));color:var(--hero-ink)}
+.hero h1{font-size:clamp(30px,8vw,40px);font-weight:700;letter-spacing:-.02em}
+.hero p{margin:8px 0 0;max-width:44ch;opacity:.9}
+
+.lbl{font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.types{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.type{text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.type b{font-family:var(--display);font-size:21px}
+.type span{font-size:14.5px;color:var(--muted)}
+.type .big{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;color:var(--brand);font-variant-numeric:tabular-nums}
+.type .big small{font-size:15px;font-weight:500}
+.type[aria-pressed="true"]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,var(--surface))}
+
+.hint{margin:10px 2px 0;font-size:15px;line-height:1.5;color:var(--muted)}
+.hint b{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 14px;font-weight:600;font-size:15.5px}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--zc)}
+.chip[aria-pressed="true"]{border-color:var(--zc);background:color-mix(in srgb,var(--zc) 20%,var(--surface))}
+
+.plan{background:var(--surface);border-radius:22px;border:1px solid var(--line);padding:18px}
+.plan-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.plan-h h2{font-size:26px}
+.plan-h span{color:var(--muted);font-weight:600;font-size:15px;font-variant-numeric:tabular-nums}
+.list{list-style:none;margin:12px 0 0;padding:0}
+.row{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.thumb{flex:none;width:50px;height:50px;border-radius:14px;background:color-mix(in srgb,var(--zc) 16%,var(--surface))}
+.row .tx{flex:1;min-width:0}
+.row .nm{font-weight:700;line-height:1.2;font-size:16.5px}
+.row .mt{font-size:14px;color:var(--muted)}
+.row .mt b{color:var(--ink);font-weight:700}
+.ib{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--muted);border:1px solid var(--line);background:var(--surface)}
+.ib svg{width:19px;height:19px}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn{border-radius:14px;padding:13px 18px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn svg{width:18px;height:18px}
+.btn.pri{background:var(--brand);color:var(--brand-ink);flex:1 1 100%;font-size:18px;padding:15px}
+.btn.sec{border:1.5px solid var(--line);background:var(--surface);flex:1 1 auto;font-size:15.5px}
+#copyBox{width:100%;margin-top:10px;min-height:120px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:13px/1.4 var(--body);padding:10px}
+
+.tips ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+
+
+.tag-g{display:inline-block;margin-left:7px;font-size:11px;font-weight:700;color:var(--brand);border:1px solid currentColor;border-radius:99px;padding:0 7px;vertical-align:1px}
+.stagewrap{display:flex;flex-direction:column;align-items:center;width:100%;min-width:0}
+.step{margin:24px 0 0;min-height:1.4em;font-weight:700;font-size:clamp(16px,1.9vw,20px);text-align:center;color:var(--ink)}
+.pill.rest{background:var(--brand);color:var(--brand-ink)}
+.clock.big{font-size:30px;padding:2px 20px}
+
+/* figura */
+.pv line,.pv path,.pv polygon{stroke-linecap:round;stroke-linejoin:round}
+.pv .b{stroke:var(--fig);fill:var(--fig)}
+.pv .hl,.pv .halo{stroke:var(--zc);fill:var(--zc)}
+.pv .ch{stroke:var(--chair);fill:var(--chair)}
+.pv .fl{stroke:var(--chair)}
+.pv .sk{stroke:var(--skin);fill:var(--skin)}
+.pv .sk2{stroke:var(--skin2);fill:var(--skin2)}
+.pv .sh{stroke:var(--shirt);fill:var(--shirt)}
+.pv .pa{stroke:var(--pants);fill:var(--pants)}
+.pv .so{stroke:var(--shoe);fill:var(--shoe)}
+.pv .hr{fill:var(--hair);stroke:none}
+.pv .fc{fill:var(--face)}
+.pv .ml{fill:none;stroke:var(--face);stroke-width:1.5}
+.pv .cr{fill:none;stroke:var(--skin2);stroke-width:2}
+.pv .bl{fill:var(--blush);opacity:.45}
+.pv .shd{fill:var(--fig);opacity:.12}
+.pv .ey,.pv .ew{fill:#FFFFFF}
+.pv .eo{fill:none;stroke:var(--fig);stroke-width:4}
+.pv .brow{fill:none;stroke:var(--hair);stroke-width:5}
+.pv .lid{fill:var(--skin)}
+.pv .au{fill:var(--zc);opacity:.26}
+.pv .rbg{fill:none;stroke:var(--line);stroke-width:6}
+.pv .rfg{fill:none;stroke:var(--zc);stroke-width:6;stroke-linecap:round}
+.pv .disc{fill:color-mix(in srgb,var(--zc) 15%,var(--surface))}
+
+/* reproductor */
+#player{position:fixed;inset:0;z-index:50;background:var(--bg);overflow:auto;display:flex;flex-direction:column;gap:8px;
+  padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.pl-top{display:flex;align-items:center;gap:12px;max-width:1040px;width:100%;margin:0 auto}
+.segs{flex:1;display:flex;gap:4px;min-width:0}
+.seg{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.seg i{display:block;height:100%;width:0;background:var(--zc)}
+.pl-body{flex:1;display:grid;gap:18px;align-content:center;justify-items:center;max-width:1040px;width:100%;margin:0 auto}
+.stage{position:relative;width:min(100%,44vh,480px);min-width:200px}
+.stage svg{display:block;width:100%;height:auto}
+.pill{position:absolute;top:2%;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:16px;padding:6px 14px;border-radius:99px;white-space:nowrap}
+.pill:empty{display:none}
+.clock{position:absolute;bottom:-2%;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-family:var(--display);font-weight:700;font-size:24px;padding:3px 16px;border-radius:99px;font-variant-numeric:tabular-nums}
+.info{width:100%;max-width:520px;min-width:0}
+.info .zrow{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14.5px;font-weight:700;color:var(--muted)}
+.ztag{display:inline-flex;align-items:center;gap:7px;color:var(--ink)}
+.ztag i{width:10px;height:10px;border-radius:50%;background:var(--zc)}
+.info h2{font-size:clamp(30px,4.6vw,48px);font-weight:700;letter-spacing:-.02em;margin-top:6px}
+.info .dose{display:inline-block;margin:10px 0 0;font-weight:700;font-size:clamp(17px,1.9vw,21px);background:color-mix(in srgb,var(--zc) 18%,var(--surface));border-radius:10px;padding:5px 12px}
+.facts{margin:14px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 16px}
+.facts div{padding:11px 0}
+.facts div+div{border-top:1px solid var(--line)}
+.facts dt{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-weight:500;font-size:clamp(17px,1.9vw,21px);line-height:1.4}
+.sub{margin:10px 2px 0;font-size:14px;color:var(--muted)}
+.pl-ctrl{display:flex;justify-content:center;align-items:center;gap:22px;padding-top:4px}
+.pl-ctrl .ib{width:50px;height:50px}
+.pl-ctrl .play{width:68px;height:68px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center}
+.pl-ctrl .play svg{width:30px;height:30px}
+.done{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;max-width:440px;margin:0 auto}
+.done .ok{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--hero1),var(--hero2));color:var(--hero-ink);display:grid;place-items:center}
+.done .ok svg{width:44px;height:44px}
+.done h2{font-size:36px}
+.done p{margin:0;color:var(--muted)}
+.done p b{color:var(--ink);font-variant-numeric:tabular-nums}
+.done .acts{width:100%}
+@media (min-width:820px){
+  .pl-body{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;gap:44px}
+  .stage{width:min(100%,62vh,520px)}
+}
+.ib.on{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.remline{margin:-12px 0 0;font-size:14.5px;font-weight:700;color:var(--brand)}
+@media (max-width:430px){.count{display:none}}
+.logo{white-space:nowrap}
+.sheet{position:fixed;inset:0;z-index:70;background:color-mix(in srgb,var(--ink) 45%,transparent);display:grid;place-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet-card{width:100%;max-width:440px;max-height:100%;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.sheet-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sheet-h h2{font-size:24px}
+.sw{position:relative;display:flex;align-items:center;gap:12px;font-weight:700;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw .track{width:50px;height:30px;border-radius:99px;background:var(--line);position:relative;flex:none;transition:background .2s}
+.sw .track i{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.sw input:checked+.track{background:var(--brand)}
+.sw input:checked+.track i{transform:translateX(20px)}
+.sw input:focus-visible+.track{outline:3px solid var(--brand);outline-offset:2px}
+.sheet-p{margin:0;color:var(--muted);font-size:15px}
+.sheet-note{margin:0;color:var(--muted);font-size:14px}
+.rem-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-weight:600}
+.rem-row input{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:7px 10px}
+.days{display:flex;gap:5px;flex-wrap:wrap}
+.days button{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);font-weight:700;background:var(--surface)}
+.days button[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.sheet-next{margin:0;font-weight:700}
+.sheet-card .acts{margin-top:0}
+.alarm{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:80;width:min(520px,calc(100% - 32px));background:var(--surface);border:2px solid var(--brand);border-radius:20px;padding:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 14px;align-items:center;box-shadow:0 12px 40px rgba(0,0,0,.2)}
+.al-ic{width:46px;height:46px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center}
+.al-ic svg{width:24px;height:24px}
+.al-tx b{display:block;font-family:var(--display);font-size:20px;line-height:1.15}
+.al-tx span{color:var(--muted);font-size:15px}
+.al-bt{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}
+.al-bt .btn{flex:1 1 auto;padding:11px 14px;font-size:15.5px}
+.al-bt .btn.pri{flex:2 1 auto;font-size:16px;padding:11px 14px}
+@media (prefers-reduced-motion:no-preference){.alarm:not([hidden]){animation:alIn .35s ease-out}}
+@keyframes alIn{from{opacity:0;margin-top:-16px}}
+.dev{border:1.5px dashed var(--brand);border-radius:16px;padding:12px 14px;font-size:15px;line-height:1.5;background:color-mix(in srgb,var(--brand) 6%,var(--surface))}
+.dev b{color:var(--brand)}
+.shared-in{margin-top:14px;font-size:15px}
+.shared-in summary{cursor:pointer;font-weight:700;color:var(--brand)}
+.shared-row{display:flex;gap:8px;margin-top:10px}
+.shared-row input{flex:1;min-width:0;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.shared-row .btn{flex:none}
+a.btn{text-decoration:none}
+.sh-list{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:3px;font-weight:600}
+.sh-link{width:100%;font:13px/1.4 var(--body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.mus-btn{flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:99px;font-weight:700;font-size:14.5px;white-space:nowrap;border:1.5px solid var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+.mus-btn svg{width:18px;height:18px}
+.mus-btn.on{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+@media (prefers-reduced-motion:no-preference){.mus-btn.off{animation:musPulse 1.8s ease-out 3}}
+@keyframes musPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 50%,transparent)}70%{box-shadow:0 0 0 12px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;z-index:60}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="home">
+  <header class="top">
+    <div class="logo"><span class="mark" aria-hidden="true"><i></i><i></i></span>Pausa Viva</div>
+    <span class="count" id="count">Hoy: 0 pausas</span>
+    <button class="ib" id="bBell" aria-label="Recordatorios" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg></button>
+    <button class="ib" id="bTheme" aria-label="Cambiar entre fondo claro y oscuro"></button>
+  </header>
+  <p class="remline" id="remLine" hidden></p>
+
+  <section class="hero">
+    <h1>¿Qué pausa toca ahora?</h1>
+    <p>Elige el tipo y la zona. Con más de 150 ejercicios, cada pausa sale distinta.</p>
+  </section>
+
+
+  <section>
+    <div class="lbl">Tipo de pausa</div>
+    <div class="types">
+      <button class="type" data-type="micro" aria-pressed="true"><span class="big">3<small> min</small></span><b>Micro pausa</b><span>Cada 1 hora</span></button>
+      <button class="type" data-type="larga" aria-pressed="false"><span class="big">5<small> min</small></span><b>Pausa larga</b><span>Cada 2 horas</span></button>
+    </div>
+    <p class="hint"><b>Micro pausa:</b> una vez por hora, para soltar el cuerpo sin salir del puesto.<br><b>Pausa larga:</b> cada 2 horas, o si se te pasó la micro pausa de la hora anterior.</p>
+  </section>
+
+  <section>
+    <div class="lbl">Zona a trabajar hoy</div>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <section class="plan">
+    <div class="plan-h"><h2 id="planTitle">Pausa de hoy</h2><span id="meta"></span></div>
+    <ol class="list" id="list"></ol>
+    <div class="acts">
+      <button class="btn pri" id="bStart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Comenzar pausa</button>
+      <button class="btn sec" id="bShuffle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"/></svg>Otra combinación</button>
+      <button class="btn sec" id="bCopy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></svg>Compartir esta pausa</button>
+    </div>
+    <textarea id="copyBox" readonly hidden aria-label="Texto de la pausa para copiar"></textarea>
+    <details class="shared-in" id="sharedBox"><summary>¿Te compartieron una pausa? Ábrela aquí</summary>
+      <div class="shared-row"><input id="shareIn" type="text" placeholder="Pega aquí el mensaje o el código" autocomplete="off" aria-label="Mensaje o código de la pausa"><button class="btn sec" id="shareGo">Abrir</button></div>
+    </details>
+  </section>
+
+  <section class="tips">
+    <div class="lbl">Antes de empezar</div>
+    <ul>
+      <li>Busca tensión suave, nunca dolor.</li>
+      <li>Movimientos lentos y sin rebotes.</li>
+      <li>Respira normal, no aguantes el aire.</li>
+      <li>Si hay mareo, hormigueo o dolor que no cede, detente.</li>
+      <li>Si tienes una lesión, una cirugía reciente, estás embarazada o tienes una indicación médica, consulta antes con tu kinesiólogo o médico.</li>
+    </ul>
+    <p class="note">Guía general de pausas activas. No reemplaza la evaluación de un profesional de salud.</p>
+    <p class="note"><b>Privacidad:</b> esta app no pide ni guarda datos personales. Lo que recuerda (tu contador, los últimos ejercicios, los recordatorios y tus preferencias) queda solo en este navegador.</p>
+  </section>
+
+  <section class="dev"><b>App en desarrollo.</b> Pausa Viva sigue creciendo y se aceptan sugerencias: si tienes una idea para mejorarla o algo no funciona bien, cuéntaselo a quien te compartió la app.</section>
+
+</div>
+
+<div id="player" hidden role="dialog" aria-modal="true" aria-label="Pausa en curso">
+  <div class="pl-top">
+    <button class="ib" id="bClose" aria-label="Cerrar pausa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="segs" id="segs"></div>
+    <button class="mus-btn off" id="bMusic" aria-pressed="false" aria-label="Poner música"></button>
+    <button class="ib" id="bSound" aria-label="Sonido" aria-pressed="true"></button>
+  </div>
+
+
+  <div class="pl-body" id="plRun">
+    <div class="stagewrap">
+    <div class="stage">
+      <svg class="pv" viewBox="0 0 220 220" role="img" aria-label="Animación del ejercicio">
+        <defs><clipPath id="discClip"><circle cx="110" cy="110" r="96"/></clipPath></defs>
+        <circle cx="110" cy="110" r="104" class="rbg"/>
+        <circle cx="110" cy="110" r="104" class="rfg" id="ring" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 110 110)"/>
+        <circle cx="110" cy="110" r="96" class="disc"/>
+        <g clip-path="url(#discClip)"><g id="fig" transform="translate(110 112) scale(.86) translate(-100 -118)"></g></g>
+      </svg>
+      <div class="pill" id="pill"></div>
+      <div class="clock" id="clock">0:30</div>
+    </div>
+    <p class="step" id="xStep"></p>
+    </div>
+    <div class="info">
+      <div class="zrow"><span class="ztag"><i></i><span id="xZone"></span></span><span id="xCount"></span></div>
+      <h2 id="xName"></h2>
+      <p class="dose" id="xRep"></p>
+      <dl class="facts">
+        <div><dt>Posición</dt><dd id="xPos"></dd></div>
+        <div><dt>Movimiento</dt><dd id="xMov"></dd></div>
+        <div><dt>Qué sentir</dt><dd id="xFeel"></dd></div>
+      </dl>
+      <p class="sub" id="xNext"></p>
+    </div>
+  </div>
+
+  <div class="pl-ctrl" id="plCtrl">
+    <button class="ib" id="bPrev" aria-label="Ejercicio anterior"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 5l-9 7 9 7zM5 5h3v14H5z"/></svg></button>
+    <button class="play" id="bPlay" aria-label="Pausar"></button>
+    <button class="ib" id="bNext" aria-label="Ejercicio siguiente"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5l9 7-9 7zM16 5h3v14h-3z"/></svg></button>
+  </div>
+
+  <div class="done" id="plDone" hidden>
+    <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h2>Pausa lista</h2>
+    <p id="dMsg"></p>
+    <p>Próxima pausa sugerida: <b id="dNext"></b></p>
+    <div class="acts">
+      <button class="btn pri" id="bHome">Volver al inicio</button>
+      <button class="btn sec" id="bAgain">Repetir esta pausa</button>
+    </div>
+  </div>
+</div>
+<div class="sheet" id="remSheet" hidden role="dialog" aria-modal="true" aria-labelledby="remH">
+  <div class="sheet-card">
+    <div class="sheet-h"><h2 id="remH">Recordatorios</h2><button class="ib" id="remClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <label class="sw"><input type="checkbox" id="remOn"><span class="track"><i></i></span><span>Avisarme cuando toque una pausa</span></label>
+    <p class="sheet-p">Micro pausa cada hora y pausa larga cada 2 horas. Suena un aviso mientras esta página esté abierta, aunque estés en otra pestaña. Si tu navegador lo permite, también verás una notificación.</p>
+    <div class="rem-row"><label for="remStart">Desde</label><input type="time" id="remStart" value="09:00" step="60"><label for="remEnd">hasta</label><input type="time" id="remEnd" value="18:00" step="60"></div>
+    <div class="days" id="remDays" aria-label="Días"></div>
+    <p class="sheet-next" id="remNext"></p>
+    <div class="acts"><button class="btn sec" id="remTest">Probar el aviso</button></div>
+    <p class="sheet-note">Con la página cerrada no puede avisarte. Si quieres el aviso en el celular igual, crea alarmas repetidas en su app de reloj.</p>
+  </div>
+</div>
+<div class="alarm" id="alarm" hidden role="alertdialog" aria-labelledby="alTitle">
+  <div class="al-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg></div>
+  <div class="al-tx"><b id="alTitle">Hora de tu micro pausa</b><span id="alSub"></span></div>
+  <div class="al-bt"><button class="btn pri" id="alGo">Empezar</button><button class="btn sec" id="alSnooze">En 10 min</button><button class="btn sec" id="alNo">Ahora no</button></div>
+</div>
+<div class="sheet" id="shareSheet" hidden role="dialog" aria-modal="true" aria-labelledby="shH">
+  <div class="sheet-card">
+    <div class="sheet-h"><h2 id="shH">Compartir esta pausa</h2><button class="ib" id="shClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <p class="sheet-p">Quien abra este link verá Pausa Viva con estos mismos ejercicios, en el mismo orden:</p>
+    <ol class="sh-list" id="shList"></ol>
+    <input id="shLink" class="sh-link" readonly aria-label="Link de la pausa">
+    <div class="acts"><a class="btn pri" id="shWa" href="https://teams.microsoft.com/" target="_blank" rel="noopener">Compartir en Teams</a><button class="btn sec" id="shCopy">Copiar mensaje</button></div>
+    <p class="sheet-note">Si al abrirlo aparece otra pausa, pega el link en «¿Te compartieron una pausa?», debajo de la pausa.</p>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ---------- Zonas ---------- */
+const Z=[
+ {id:'cuello',n:'Cuello',c:'#3B82F6',e:'est'},
+ {id:'hombros',n:'Hombros',c:'#8B6CF0',e:'est'},
+ {id:'espalda',n:'Espalda',c:'#0FB5A6',e:'mov'},
+ {id:'manos',n:'Muñecas y manos',c:'#F5A623',e:'man'},
+ {id:'piernas',n:'Piernas',c:'#F0668A',e:'cir'},
+ {id:'ojos',n:'Ojos',c:'#1EA7E8',e:'ojo'},
+ {id:'respira',n:'Respirar y postura',c:'#4CC38A',e:'res'}
+];
+const zOf=id=>Z.find(z=>z.id===id);
+
+/* ---------- Motor de animación ---------- */
+const D=Math.PI/180;
+const DEF={px:100,py:122,sp:0,sp2:0,hd:0,hx:0,turn:0,nod:0,tw:0,shL:0,shR:0,sx:0,aL:[-8,-3],aR:[8,3],lL:[-5,-2],lR:[5,2],th:38,toe:0,toe2:0,br:0};
+const BASE={
+ fs:{v:'f'},
+ ft:{v:'f',py:158,aL:[-14,28],aR:[14,-28],lL:[-70,0],lR:[70,0],th:6,chair:1},
+ ss:{v:'s',px:92,aL:[0,8],aR:[0,8],lL:[0,0],lR:[0,0]},
+ st:{v:'s',px:84,py:160,aL:[8,70],aR:[8,70],lL:[90,0],lR:[90,0],chair:1}
+};
+const EDEF={ex:0,ey:0,cv:0,lid:0,palm:0};
+const HDEF={w:0,f:0,help:0,curl:0,spread:.4,rot:0,dy:0,flip:1,op:0,tt:0};
+const RM=typeof matchMedia!=='undefined'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ease=u=>RM?(u<.5?0:1):(u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2);
+const lerp=(a,b,t)=>Array.isArray(a)?a.map((x,i)=>x+(b[i]-x)*t):(typeof a==='number'&&typeof b==='number'?a+(b-a)*t:b);
+function mix(a,b,t){const o={};for(const k in b)o[k]=k in a?lerp(a[k],b[k],t):b[k];return o}
+function prep(a){
+  if(a._k)return a;
+  const def=a.r==='fig'?{...DEF,...BASE[a.b],...(a.all||{})}:a.r==='eye'?EDEF:{...HDEF,...(a.all||{})};
+  a._k=a.k.map(k=>({p:{...def,...k},m:k.m??a.m??1.4,h:k.h??a.h??1,say:k.say,sayH:k.sayH}));
+  a._T=a._k.reduce((s,k)=>s+k.m+k.h,0);return a;
+}
+function frame(a,t){
+  prep(a);const K=a._k;t=((t%a._T)+a._T)%a._T;
+  for(let i=0;i<K.length;i++){
+    const k=K[i],pv=K[(i-1+K.length)%K.length];
+    if(t<k.m)return{p:mix(pv.p,k.p,ease(t/k.m)),say:k.say};
+    t-=k.m;
+    if(t<k.h)return{p:k.p,say:k.sayH??k.say};
+    t-=k.h;
+  }
+  return{p:K[K.length-1].p};
+}
+const f=n=>(+n).toFixed(1);
+const L=(a,b,w,c,o)=>`<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke-width="${w}" class="${c}"${o?` opacity="${o}"`:''}/>`;
+const C=(p,r,c,o)=>`<circle cx="${f(p[0])}" cy="${f(p[1])}" r="${r}" stroke-width="0" class="${c}"${o?` opacity="${o}"`:''}/>`;
+const up=d=>[Math.sin(d*D),-Math.cos(d*D)],dn=d=>[Math.sin(d*D),Math.cos(d*D)],pr=d=>[Math.cos(d*D),Math.sin(d*D)];
+const add=(a,v,k)=>[a[0]+v[0]*k,a[1]+v[1]*k];
+
+const pt=q=>f(q[0])+','+f(q[1]);
+const lp=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+const op=g=>(.14+.3*(g??.55)).toFixed(2);
+function drawFig(p,a){
+  const side=p.v==='s',hl=a.hl||[],HR=13.5;
+  const sw=side?0:19*(1-.5*Math.abs(p.tw)),hw=side?0:9;
+  const pel=[p.px,p.py],U=up(p.sp),mid=add(pel,U,25),a2=p.sp+p.sp2,U2=up(a2),nk=add(mid,U2,25);
+  const P1=pr(p.sp),P2=pr(a2),sc=[nk[0]+p.sx,nk[1]+4];
+  const sL=[sc[0]-P2[0]*sw,sc[1]-P2[1]*sw-p.shL],sR=[sc[0]+P2[0]*sw,sc[1]+P2[1]*sw-p.shR];
+  const tL=side?[sc[0]-P2[0]*6,sc[1]-P2[1]*6-p.shL]:sL,tR=side?[sc[0]+P2[0]*6,sc[1]+P2[1]*6-p.shR]:sR;
+  const mw=side?8:12,bw=side?8:11,hp=side?8:13;
+  const J=(st,ang,l1,l2)=>{const e=add(st,dn(ang[0]),l1);return[st,e,add(e,dn(ang[1]),l2)]};
+  const armL=J(side?sc:sL,p.aL,26,24),armR=J(side?[sc[0],sc[1]-p.shR]:sR,p.aR,26,24);
+  const legL=J([pel[0]-hw,pel[1]],p.lL,p.th,38),legR=J([pel[0]+hw,pel[1]],p.lR,p.th,38);
+  const a3=a2+p.hd,hc=add(nk,up(a3),17);hc[0]+=p.hx;
+  const ca=Math.cos(a3*D),sa=Math.sin(a3*D),R=(x,y)=>[hc[0]+x*ca-y*sa,hc[1]+x*sa+y*ca],Q=(x,y)=>pt(R(x,y));
+  const poly=(pts,w,c)=>`<polygon points="${pts.map(pt).join(' ')}" stroke-width="${w}" class="${c}"/>`;
+  const torsoPts=[tL,tR,add(mid,P1,mw),add(add(pel,U,3),P1,bw),add(add(pel,U,3),P1,-bw),add(mid,P1,-mw)];
+  let s='';
+  // entorno
+  if(p.chair){
+    if(side)s+=L([70,108],[70,168],6,'ch')+L([68,170],[116,170],6,'ch')+L([92,172],[92,200],5,'ch')+L([78,201],[106,201],5,'ch');
+    else s+=`<rect x="70" y="100" width="60" height="52" rx="14" stroke-width="0" class="ch"/><rect x="68" y="154" width="64" height="9" rx="4" stroke-width="0" class="ch"/>`+L([74,165],[72,199],5,'ch')+L([126,165],[128,199],5,'ch');
+  }
+  if(a.prop==='desk')s+=L([152,118],[198,118],6,'ch')+L([190,121],[190,200],5,'ch');
+  if(a.prop==='wall')s+=L([168,20],[168,202],6,'ch');
+  if(a.prop==='wallb')s+=L([48,20],[48,202],6,'ch');
+  if(a.prop==='deskS')s+=L([120,126],[178,126],6,'ch')+L([170,129],[170,200],5,'ch');
+  s+=L([36,203.5],[164,203.5],2,'fl')+`<ellipse cx="${f((legL[2][0]+legR[2][0])/2)}" cy="203.5" rx="30" ry="4.5" class="shd"/>`;
+  if(a.aura){const bc=add(pel,U,15);s+=C(bc,14+p.br*20,'au')+C(bc,8+p.br*12,'au')}
+  // zona que trabaja: halo suave que late durante el esfuerzo
+  let h='';
+  if(hl.includes('head'))h+=L(nk,hc,16,'halo')+C(hc,HR+7,'halo');
+  if(hl.includes('torso'))h+=poly(torsoPts,26,'halo');
+  if(hl.includes('arms'))for(const A of[armL,armR])h+=L(A[0],A[1],22,'halo')+L(A[1],A[2],20,'halo')+C(A[2],11,'halo');
+  if(hl.includes('legs'))for(const A of[legL,legR])h+=L(A[0],A[1],26,'halo')+L(A[1],A[2],24,'halo');
+  if(h)s+=`<g opacity="${op(p.g)}">${h}</g>`;
+  // cuerpo
+  const arm=A=>L(A[0],A[1],9,'sk')+L(A[1],A[2],8.5,'sk')+C(A[2],5,'sk')+L(A[0],lp(A[0],A[1],.45),12.5,'sh');
+  const leg=(A,sg,toe)=>{let r=L(A[0],A[1],13,'pa')+L(A[1],A[2],11.5,'pa');
+    if(side){const fa=90-45*toe;r+=L(add(A[2],dn(fa),-3),add(A[2],dn(fa),11),8,'so')}
+    else r+=`<ellipse cx="${f(A[2][0]+sg*3)}" cy="${f(A[2][1]+2)}" rx="7.5" ry="4.2" class="so"/>`;
+    return r};
+  const hips=poly([add(add(pel,U,6),P1,-hp),add(add(pel,U,6),P1,hp),add(add(pel,U,-4),P1,hp-1),add(add(pel,U,-4),P1,1-hp)],6,'pa');
+  const neck=L(add(nk,U2,-2),lp(nk,hc,.7),8.5,'sk');
+  const torso=poly(torsoPts,10,'sh');
+  const collar=side?'':`<polygon points="${[add(add(sc,U2,5.5),P2,-5.5),add(add(sc,U2,5.5),P2,5.5),add(sc,U2,-4)].map(pt).join(' ')}" stroke-width="0" class="sk"/>`;
+  const bl=p.blink?.35:2.1;
+  const eye=(x,y)=>{const c=R(x,y);return`<ellipse cx="${f(c[0])}" cy="${f(c[1])}" rx="1.8" ry="${bl}" class="fc" transform="rotate(${f(a3)} ${f(c[0])} ${f(c[1])})"/>`};
+  let head='';
+  if(side){
+    head+=C(R(12.8,2.5),2.8,'sk')+C(hc,HR,'sk')+C(R(-1.5,1.5),3.1,'sk2')+
+      `<path d="M${Q(-13,5.5)} A14.1 14.1 0 0 1 ${Q(9,-11)} Q${Q(2.5,-6.5)} ${Q(-3.5,-6.8)} Q${Q(-7.5,-3)} ${Q(-13,5.5)}Z" class="hr"/>`+
+      eye(6.8,0)+C(R(6,5.6),2.3,'bl')+`<path d="M${Q(8.2,7.6)} Q${Q(10.2,9)} ${Q(11.8,7.2)}" class="ml"/>`;
+  }else{
+    const fx=p.turn*7,fy=p.nod*5;
+    if(Math.abs(p.turn)<.5)head+=C(R(-HR,1.5),3.2,'sk2')+C(R(HR,1.5),3.2,'sk2');
+    head+=C(hc,HR,'sk')+`<path d="M${Q(-14.1,-1)} A14.1 14.1 0 0 1 ${Q(14.1,-1)} Q${Q(8+fx*.4,-9.5)} ${Q(1+fx*.4,-6.8)} Q${Q(-6+fx*.4,-5)} ${Q(-14.1,-1)}Z" class="hr"/>`;
+    for(const g of[-1,1]){const x=g*4.7+fx,bx=g*7.8+fx;if(Math.abs(x)<10)head+=eye(x,.8+fy);if(Math.abs(bx)<11)head+=C(R(bx,5.6+fy),2.4,'bl')}
+    if(Math.abs(fx)<8)head+=`<path d="M${Q(-2.6+fx,6.8+fy)} Q${Q(fx,9+fy)} ${Q(2.6+fx,6.8+fy)}" class="ml"/>`;
+  }
+  if(side)s+=`<g opacity=".55">${arm(armL)}${leg(legL,-1,p.toe2)}</g>`+hips+neck+torso+leg(legR,1,p.toe)+head+arm(armR);
+  else s+=leg(legL,-1,0)+leg(legR,1,0)+hips+neck+torso+collar+head+arm(armL)+arm(armR);
+  return s;
+}
+function drawEye(p,a,sfx){
+  let s='';
+  [[62,1],[138,-1]].forEach(([cx,sg],i)=>{
+    const id='ec'+sfx+i,x=cx+p.ex*13+sg*p.cv*10,y=112+p.ey*8;
+    s+=`<path d="M${cx-24} ${f(77+p.lid*5)} Q${cx} ${f(65+p.lid*5)} ${cx+24} ${f(77+p.lid*5)}" class="brow"/>`+
+      `<clipPath id="${id}"><ellipse cx="${cx}" cy="112" rx="30" ry="20"/></clipPath><ellipse cx="${cx}" cy="112" rx="30" ry="20" class="ew"/>`+
+      `<g clip-path="url(#${id})">${C([x,y],11.5,'hl')}${C([x,y],5,'fc')}${C([x+3.5,y-3.5],1.8,'ew')}<rect x="${cx-32}" y="90" width="64" height="${f(p.lid*44)}" class="lid"/></g>`+
+      `<ellipse cx="${cx}" cy="112" rx="30" ry="20" class="eo"/>`;
+    if(p.palm>.02)s+=`<rect x="${cx-35}" y="80" width="70" height="66" rx="26" stroke-width="0" class="sk" opacity="${f(p.palm)}" transform="rotate(${sg*-12} ${cx} 112)"/>`;
+  });
+  return s;
+}
+function drawHand(p,a){
+  let s;
+  if(a.mode==='side'){
+    const W=[104,128],r=p.w*D,pe=[W[0]+34*Math.cos(r),W[1]-34*Math.sin(r)],r2=(p.w+p.f)*D,fe=[pe[0]+30*Math.cos(r2),pe[1]-30*Math.sin(r2)];
+    const tb=[W[0]+12*Math.cos(r),W[1]-12*Math.sin(r)],r3=(p.w-70)*D,te=[tb[0]+16*Math.cos(r3),tb[1]-16*Math.sin(r3)];
+    s=`<g opacity="${op(p.g)}">${L([44,128],W,30,'halo')}${L(W,pe,28,'halo')}</g>`+
+      L([10,128],W,17,'sk')+L([-8,128],[50,128],24,'sh')+L(tb,te,8,'sk')+L(W,pe,16,'sk')+L(pe,fe,11,'sk');
+    if(p.help>.02){const d=p.w>=0?1:-1;s+=`<g opacity="${f(p.help)}">${L([fe[0]+20,fe[1]+d*26],[fe[0]+44,fe[1]+d*56],19,'sh')}${L([fe[0]+4,fe[1]],[fe[0]+24,fe[1]+d*30],12,'sk2')}${C([fe[0]+4,fe[1]],9.5,'sk2')}</g>`}
+  }else{
+    const B=[[83,122,-13,30],[94,120,-4.5,37],[106,120,4.5,35],[117,122,13,27]];
+    const fing=B.map(([bx,by,an,len],i)=>{const c=Math.max(0,1-Math.abs(p.tt-i))*p.op,l=len*(1-.75*p.curl)*(1-.42*c),g=an*(.4+1.2*p.spread)*D;
+      return[[bx,by],[bx+l*Math.sin(g),by-l*Math.cos(g)]]});
+    const tl=24*(1-.45*p.curl),tg=-(40+35*p.spread)*D,de=[80+tl*Math.sin(tg),150-tl*Math.cos(tg)];
+    const ti=Math.max(0,Math.min(3,p.tt)),i0=Math.floor(ti),i1=Math.min(3,i0+1),tx=B[i0][0]+(B[i1][0]-B[i0][0])*(ti-i0);
+    const th=[de[0]+(tx-de[0])*p.op,de[1]+(104-de[1])*p.op];
+    let hand=`<g opacity="${op(p.g)}">`+fing.map(q=>L(q[0],q[1],21,'halo')).join('')+L([80,150],th,22,'halo')+`<rect x="71" y="112" width="58" height="62" rx="18" class="halo"/></g>`;
+    hand+=fing.map(q=>L(q[0],q[1],9.5,'sk')).join('')+`<rect x="77" y="118" width="46" height="50" rx="14" stroke-width="0" class="sk"/><path d="M86 152 Q100 158 114 147" class="cr"/>`+L([80,150],th,10,'sk');
+    s=`<g transform="translate(0 ${f(p.dy)})">`+L([100,216],[100,180],22,'sk')+L([100,240],[100,204],27,'sh')+
+      `<g transform="rotate(${f(p.rot)} 100 176) translate(100 0) scale(${(+p.flip).toFixed(2)} 1) translate(-100 0)">${hand}</g></g>`;
+  }
+  return p.mir>.5?`<g transform="translate(200 0) scale(-1 1)">${s}</g>`:s;
+}
+const render=(a,p,sfx)=>a.r==='fig'?drawFig(p,a):a.r==='eye'?drawEye(p,a,sfx):drawHand(p,a);
+
+/* ---------- Batería de ejercicios (100) ---------- */
+const F=(b,hl,k,o)=>({r:'fig',b,hl,k,...o});
+const E=(k,o)=>({r:'eye',k,...o});
+const H=(mode,k,o)=>({r:'hand',mode,k,...o});
+const UPL=[-172,-222],UPR=[172,222],NUCA=[150,257];
+const MID={px:100,py:139,lL:[52,-13],lR:[52,-13],sp:28,aR:[75,80],aL:[75,80],h:0};
+const MIDP={px:100,py:139,lL:[52,-13],lR:[52,-13],sp:28,aR:[75,80],aL:[75,80]},UPP={px:122,py:122,lL:[0,0],lR:[0,0],sp:0,aR:[40,60],aL:[40,60]};
+const EX=[
+ // CUELLO (15)
+ {z:'cuello',n:'Inclinación lateral',how:'Lleva la oreja hacia el hombro, sin subir el hombro.',feel:'Tensión suave en el costado del cuello.',
+  a:{r:'fig',b:'ft',hl:['head']},
+  s:{type:'hold',to:{hd:32,shL:-2},say:'Inclina',in:1.5,hold:10,out:1.2,rest:3,sets:2,sides:1}},
+ {z:'cuello',n:'Rotación de cuello',how:'Gira la cabeza lento, como diciendo que no.',rep:'5 por lado, 3 s al final',feel:'Leve tope al final del giro, sin mareo.',
+  a:F('ft',['head'],[{turn:1},{h:.2},{turn:-1},{h:.2}],{h:1.5})},
+ {z:'cuello',n:'Mentón al pecho',how:'Baja el mentón hacia el pecho y suelta los hombros.',rep:'10 s · 3 veces',feel:'Estiramiento en la nuca.',
+  a:F('st',['head'],[{hd:40,h:2.5},{h:.6}])},
+ {z:'cuello',e:'fue',n:'Doble mentón',how:'Lleva la cabeza hacia atrás en línea recta, mirada al frente.',rep:'10 veces, 3 s cada una',feel:'Trabajo profundo del cuello y alivio en la nuca.',
+  a:F('st',['head'],[{hx:-6,hd:3,h:1.5},{hx:3,h:.5}],{m:.9})},
+ {z:'cuello',n:'Medios círculos',how:'Dibuja medio círculo por delante, de hombro a hombro.',rep:'5 idas y vueltas lentas',feel:'Movimiento fluido. No lleves la cabeza hacia atrás.',
+  a:F('ft',['head'],[{hd:24,nod:.2},{nod:1},{hd:-24,nod:.2},{nod:1}],{m:1.2,h:.1})},
+ {z:'cuello',n:'Trapecio con apoyo',how:'Inclina la cabeza y apoya la mano encima, sin tirar.',rep:'15 s por lado',feel:'Estiramiento desde el cuello hasta el hombro.',lados:1,
+  a:F('ft',['head'],[{hd:27,aR:[150,-119],aL:[-10,2]},{h:.3},{hd:-27,aL:[-150,119],aR:[10,-2]},{h:.3}],{h:2.5})},
+ {z:'cuello',e:'fue',n:'Empuje contra la mano',how:'Empuja la frente contra la mano sin mover la cabeza.',rep:'5 s de empuje · 5 veces',feel:'Los músculos del cuello se activan, sin dolor.',
+  a:F('st',['head'],[{hx:1.5,hd:3,h:1.6,m:.5,say:'Empuja'},{h:.8,m:.5,say:'Suelta'}],{all:{aR:[100,216]}})},
+ {z:'cuello',n:'Mirar la axila',how:'Gira la cabeza a medio camino y mira hacia la axila.',rep:'15 s por lado',feel:'Estiramiento atrás y al costado del cuello.',lados:1,
+  a:F('ft',['head'],[{hd:12,turn:.7,nod:.9},{h:.3},{hd:-12,turn:-.7,nod:.9},{h:.3}],{h:2.4})},
+ {z:'cuello',n:'Mirar al techo',how:'Lleva la mirada al techo, sin dejar caer la cabeza.',rep:'5 veces lentas',feel:'Estiramiento delante del cuello, sin mareo.',
+  a:F('st',['head'],[{hd:-22,h:1.2},{h:.6}])},
+ {z:'cuello',e:'fue',n:'Empuje lateral',how:'Mano en la sien: empuja la cabeza contra la mano sin moverla.',rep:'5 s por lado · 3 veces',feel:'Activación al costado del cuello.',lados:1,
+  a:F('ft',['head'],[{hd:3,aR:[150,-95],h:1.8,say:'Empuja'},{h:.4},{hd:-3,aL:[-150,95],h:1.8,say:'Empuja'},{h:.4}],{m:.7})},
+ {z:'cuello',e:'fue',n:'Empuje hacia atrás',how:'Manos en la nuca: empuja la cabeza hacia atrás sin moverla.',rep:'5 s de empuje · 5 veces',feel:'Activación en la nuca.',
+  a:F('st',['head'],[{hx:-1.5,hd:-3,h:1.6,m:.5,say:'Empuja'},{h:.8,m:.5,say:'Suelta'}],{all:{aR:NUCA,aL:NUCA}})},
+ {z:'cuello',e:'fue',n:'Asentir corto',how:'Con el mentón recogido, asiente pequeño como diciendo sí.',rep:'10 veces, 3 s cada una',feel:'Trabajo suave y profundo delante del cuello.',
+  a:F('st',['head'],[{hd:12,hx:-3,h:1.2},{hx:-1,h:.5}],{m:.9})},
+ {z:'cuello',n:'Trapecio con mano fija',how:'Sujeta el asiento con una mano e inclina la cabeza al otro lado.',rep:'15 s por lado',feel:'Estiramiento del cuello al hombro.',lados:1,
+  a:F('ft',['head'],[{hd:26,aL:[-5,-2]},{h:.3},{hd:-26,aR:[5,2]},{h:.3}],{h:2.5})},
+ {z:'cuello',n:'Giro sostenido',how:'Gira la cabeza y sostén mirando sobre el hombro.',rep:'10 s por lado · 2 veces',feel:'Estiramiento al costado del cuello.',lados:1,
+  a:F('ft',['head'],[{turn:1,h:2.6},{h:.3},{turn:-1,h:2.6},{h:.3}])},
+ {z:'cuello',n:'Inclinaciones seguidas',how:'Inclina la cabeza de lado a lado, sin pausa larga.',rep:'10 por lado',feel:'Cuello más suelto.',
+  a:F('ft',['head'],[{hd:22},{hd:-22}],{m:1,h:.25})},
+ // HOMBROS (17)
+ {z:'hombros',n:'Encoger hombros',how:'Sube los hombros hacia las orejas y suelta.',rep:'10 veces, 3 s arriba',feel:'Tensión al subir, alivio al soltar.',
+  a:F('ft',['arms'],[{shL:9,shR:9,h:1.2,m:.7},{h:.6,m:.4}])},
+ {z:'hombros',n:'Círculos de hombros',how:'Rueda los hombros hacia atrás, amplio y lento.',rep:'10 círculos',feel:'Hombros sueltos y pecho abierto.',
+  a:F('ss',['arms'],[{shL:7,shR:7,sx:2},{shL:7,shR:7,sx:-4},{sx:-4},{sx:2}],{m:.55,h:0})},
+ {z:'hombros',n:'Brazo cruzado',how:'Cruza un brazo frente al pecho y sostenlo con el otro.',rep:'15 s por brazo',feel:'Estiramiento detrás del hombro.',lados:1,
+  a:F('fs',['arms'],[{aL:[80,85],aR:[10,-139]},{h:.3},{aR:[-80,-85],aL:[-10,139]},{h:.3}],{h:2.4})},
+ {z:'hombros',e:'fue',n:'De W a Y',how:'Codos abajo en W, luego estira los brazos en Y.',rep:'10 repeticiones lentas',feel:'Trabajo entre las escápulas.',
+  a:F('fs',['arms'],[{aL:[-60,-172],aR:[60,172]},{aL:[-150,-165],aR:[150,165]}],{m:1.3,h:.6})},
+ {z:'hombros',e:'fue',n:'Juntar escápulas',how:'Codos a 90°, llévalos atrás juntando las escápulas.',rep:'10 veces, 5 s cada una',feel:'Contracción entre las escápulas, hombros bajos.',
+  a:F('st',['arms'],[{aR:[-28,80],aL:[-28,80],sx:-3,sp2:-4,h:1.8},{aR:[12,80],aL:[12,80],sx:1,h:.6}])},
+ {z:'hombros',n:'Abrir el pecho',how:'Entrelaza las manos atrás y saca pecho.',rep:'15 s · 2 veces',feel:'Estiramiento en el pecho y delante de los hombros.',
+  a:F('ss',['arms','torso'],[{aR:[-38,-28],aL:[-38,-28],sp2:-7,sx:-2,h:2.5},{aR:[-12,-8],aL:[-12,-8],h:.6}])},
+ {z:'hombros',n:'Círculos de brazos',how:'Brazos en cruz, dibuja círculos pequeños.',rep:'10 adelante y 10 atrás',feel:'Calor en los hombros.',
+  a:F('fs',['arms'],[{aL:[-102,-102],aR:[102,102]},{aL:[-78,-78],aR:[78,78]}],{m:.5,h:0})},
+ {z:'hombros',n:'Tríceps',how:'Codo al techo, mano entre las escápulas.',rep:'15 s por brazo',feel:'Estiramiento detrás del brazo.',lados:1,
+  a:F('fs',['arms'],[{aR:[165,-20]},{h:.3},{aL:[-165,20]},{h:.3}],{h:2.4})},
+ {z:'hombros',n:'Bajar hombros',how:'Empuja los hombros hacia abajo, alargando el cuello.',rep:'5 s · 8 veces',feel:'Espacio entre hombros y orejas.',
+  a:F('ft',['arms'],[{shL:-5,shR:-5,h:1.6},{h:.5}],{m:.8})},
+ {z:'hombros',e:'fue',n:'Elevación al frente',how:'Sube los brazos por delante hasta arriba y baja lento.',rep:'10 repeticiones',feel:'Trabajo en los hombros.',
+  a:F('ss',['arms'],[{aR:[172,176],aL:[172,176],h:.6},{h:.4}],{m:1.5})},
+ {z:'hombros',e:'fue',n:'Elevación lateral',how:'Sube los brazos al lado hasta la altura de los hombros.',rep:'10 repeticiones',feel:'Trabajo en los hombros, sin encogerlos.',
+  a:F('fs',['arms'],[{aL:[-90,-92],aR:[90,92],h:.6},{h:.4}],{m:1.3})},
+ {z:'hombros',e:'fue',n:'Abrir antebrazos',how:'Codos pegados al cuerpo, abre los antebrazos hacia afuera.',rep:'10 veces, 3 s cada una',feel:'Trabajo detrás del hombro.',
+  a:F('fs',['arms'],[{aL:[-4,-88],aR:[4,88],h:1.2},{aL:[-4,-25],aR:[4,25],h:.4}],{m:1})},
+ {z:'hombros',e:'fue',n:'Flexiones en la pared',how:'Manos en la pared, acerca el pecho y empuja de vuelta.',rep:'10 repeticiones',feel:'Trabajo en pecho, hombros y brazos.',
+  a:F('ss',['arms'],[{px:110,py:124,lL:[-12,-12],lR:[-12,-12],sp:12,aR:[88,88],aL:[88,88],h:.4},{px:120,py:126.6,lL:[-20,-20],lR:[-20,-20],sp:20,aR:[50,151],aL:[50,151],h:.4}],{prop:'wall',m:1.1})},
+ {z:'hombros',n:'Círculos de codos',how:'Manos en los hombros, dibuja círculos con los codos.',rep:'10 por sentido',feel:'Hombros sueltos.',
+  a:F('ss',['arms'],[{aR:[40,220],aL:[40,220]},{aR:[100,280],aL:[100,280]},{aR:[150,330],aL:[150,330]},{aR:[100,280],aL:[100,280]}],{m:.55,h:0})},
+ {z:'hombros',n:'Antebrazos arriba y abajo',how:'Brazos en cruz, codos a 90°: sube y baja los antebrazos.',rep:'10 repeticiones',feel:'Movilidad del hombro, sin dolor.',
+  a:F('fs',['arms'],[{aL:[-90,-178],aR:[90,178],h:.6},{aL:[-90,-8],aR:[90,8],h:.6}],{m:1.2})},
+ {z:'hombros',n:'Brazos en V baja',how:'Abre los brazos en V baja, palmas al frente, y junta las escápulas.',rep:'10 s · 3 veces',feel:'Pecho abierto y espalda alta activa.',
+  a:F('fs',['arms','torso'],[{aL:[-32,-34],aR:[32,34],h:2.4},{h:.6}])},
+ {z:'hombros',n:'Abrazo y apertura',how:'Abrázate y luego abre los brazos en cruz.',rep:'10 repeticiones',feel:'Estira la espalda alta y luego el pecho.',
+  a:F('fs',['arms'],[{aL:[55,100],aR:[-55,-100],h:.8},{aL:[-95,-100],aR:[95,100],h:.8}],{m:1.2})},
+ // ESPALDA (18)
+ {z:'espalda',e:'est',n:'Inclinación de tronco',how:'Sube un brazo e inclínate hacia el lado contrario.',rep:'10 s por lado · 2 veces',feel:'Estiramiento en todo el costado.',lados:1,
+  a:F('fs',['torso'],[{sp:10,sp2:14,aL:[-195,-206]},{h:.3},{sp:-10,sp2:-14,aR:[195,206]},{h:.3}],{h:2.2})},
+ {z:'espalda',n:'Giro sentado',how:'Gira el tronco y apóyate en el respaldo.',rep:'10 s por lado · 2 veces',feel:'Estiramiento en la espalda media y baja.',lados:1,
+  a:F('ft',['torso'],[{tw:1,turn:1,aL:[30,70],aR:[25,30]},{h:.3},{tw:-1,turn:-1,aR:[-30,-70],aL:[-25,-30]},{h:.3}],{h:2.2})},
+ {z:'espalda',n:'Gato y camello',how:'Sentado, redondea la espalda y luego saca pecho.',rep:'10 repeticiones lentas',feel:'Toda la columna se mueve.',
+  a:F('st',['torso'],[{sp:12,sp2:24,hd:22,aR:[38,78],aL:[38,78]},{sp:-4,sp2:-12,hd:-12,aR:[2,72],aL:[2,72]}],{m:1.8,h:.5})},
+ {z:'espalda',n:'Extensión de pie',how:'Manos en la cintura, arquea suave hacia atrás.',rep:'8 repeticiones',feel:'Alivio lumbar. Si molesta, reduce el recorrido.',
+  a:F('ss',['torso'],[{sp:-5,sp2:-14,hd:-8,h:1.5},{h:.6}],{all:{aR:[-25,25],aL:[-25,25]}})},
+ {z:'espalda',e:'est',n:'Colgarse sentado',how:'Deja caer el tronco entre las piernas.',rep:'15 s · 2 veces',feel:'Estiramiento lumbar. Sube lento.',
+  a:F('st',['torso'],[{sp:45,sp2:35,hd:30,aR:[5,5],aL:[5,5],h:2.6,m:2},{h:.8,m:2}])},
+ {z:'espalda',e:'est',n:'Alcanzar el techo',how:'Junta las manos arriba y empuja hacia el techo.',feel:'Elongación de espalda y costados.',
+  a:{r:'fig',b:'fs',hl:['torso','arms']},
+  s:{type:'hold',to:{aL:UPL,aR:UPR},say:'Sube los brazos',in:1.6,hold:10,out:1.4,rest:3,sets:3}},
+ {z:'espalda',e:'est',n:'Abrazo al frente',how:'Brazos al frente y redondea la espalda alta.',rep:'15 s · 2 veces',feel:'Estiramiento entre las escápulas.',
+  a:F('st',['torso'],[{aR:[82,88],aL:[82,88],sp2:18,hd:22,sx:3,h:2.5},{h:.6}])},
+ {z:'espalda',n:'Báscula de pelvis',how:'Sentado, rueda la pelvis adelante y atrás.',rep:'10 veces',feel:'Movimiento suave en la zona lumbar.',
+  a:F('st',['torso'],[{sp:8,sp2:-4},{sp:-8,sp2:5}],{m:1.2,h:.4})},
+ {z:'espalda',e:'est',n:'Bisagra en el escritorio',how:'Manos en el escritorio, cadera atrás, espalda larga.',rep:'15 s · 2 veces',feel:'Estiramiento en espalda y hombros.',
+  a:F('ss',['torso'],[{px:66,sp:80,sp2:4,aR:[98,94],aL:[98,94],lL:[5,5],lR:[5,5],h:2.4},{px:72,sp:66,sp2:4,aR:[95,75],aL:[95,75],lL:[0,0],lR:[0,0],h:.5}],{prop:'desk'})},
+ {z:'espalda',n:'Giro de pie',how:'De pie, gira el tronco a cada lado con los brazos sueltos.',rep:'10 por lado',feel:'Espalda más suelta.',
+  a:F('fs',['torso'],[{tw:1,turn:1,aL:[35,75],aR:[30,55]},{tw:-1,turn:-1,aR:[-35,-75],aL:[-30,-55]}],{m:1.1,h:.3})},
+ {z:'espalda',e:'est',n:'Mano al suelo',how:'Sentado, desliza una mano hacia el suelo por el costado.',rep:'10 s por lado · 2 veces',feel:'Estiramiento en el costado y la cintura.',lados:1,
+  a:F('ft',['torso'],[{sp:12,sp2:14,aR:[18,10]},{h:.3},{sp:-12,sp2:-14,aL:[-18,-10]},{h:.3}],{h:2.2})},
+ {z:'espalda',n:'Extensión en el respaldo',how:'Manos en la nuca, arquea la espalda alta sobre el respaldo.',rep:'8 veces lentas',feel:'Apertura de la espalda alta.',
+  a:F('st',['torso'],[{sp:-4,sp2:-18,hd:-10,h:1.6},{h:.6}],{all:{aR:NUCA,aL:NUCA},m:1.3})},
+ {z:'espalda',e:'est',n:'Rodilla al pecho',how:'Sentado, abraza una rodilla hacia el pecho.',rep:'15 s por lado',feel:'Estiramiento en glúteo y zona lumbar.',lados:1,
+  a:F('st',['torso','legs'],[{lR:[130,10],aR:[45,110],aL:[45,110],sp:-2,h:2.5},{h:.5}])},
+ {z:'espalda',n:'Bisagra de cadera',how:'Cadera atrás y tronco al frente, con la espalda recta.',rep:'10 repeticiones',feel:'Trabajo en glúteos y detrás de las piernas.',
+  a:F('ss',['torso','legs'],[{px:84,sp:52,hd:-22,lL:[6,6],lR:[6,6],aR:[5,5],aL:[5,5],h:.8},{h:.5}],{m:1.4})},
+ {z:'espalda',e:'est',n:'Arco con manos arriba',how:'Manos juntas arriba, inclínate a un lado como un arco.',rep:'10 s por lado · 2 veces',feel:'Estiramiento largo en el costado.',lados:1,
+  a:F('fs',['torso'],[{sp:8,sp2:12,aL:[-192,-242],aR:[152,202]},{aL:UPL,aR:UPR,h:.3},{sp:-8,sp2:-12,aL:[-152,-202],aR:[192,242]},{aL:UPL,aR:UPR,h:.3}],{h:2})},
+ {z:'espalda',n:'Giro con brazos cruzados',how:'Brazos cruzados al pecho, gira solo el tronco.',rep:'8 por lado',feel:'Movilidad en la espalda media.',
+  a:F('ft',['torso'],[{tw:1,turn:.6},{tw:-1,turn:-.6}],{all:{aL:[-20,95],aR:[20,-95]},m:1.2,h:.5})},
+ {z:'espalda',n:'Balanceo de pelvis',how:'Sentado, carga el peso en un glúteo y luego en el otro.',rep:'10 veces',feel:'Zona lumbar y caderas más sueltas.',
+  a:F('ft',['torso'],[{sp:7,sp2:-9},{sp:-7,sp2:9}],{m:1,h:.3})},
+ {z:'espalda',e:'est',n:'Rodar hacia abajo',how:'De pie, baja rodando la espalda con las rodillas sueltas.',rep:'10 s · 2 veces',feel:'Estiramiento en toda la espalda. Sube lento.',
+  a:F('ss',['torso'],[{px:86,sp:70,sp2:40,hd:30,lL:[5,5],lR:[5,5],aR:[3,3],aL:[3,3],h:2,m:2.2},{h:.8,m:2.2}])},
+ // MUÑECAS Y MANOS (16)
+ {z:'manos',n:'Flexores de muñeca',how:'Brazo estirado, lleva los dedos hacia atrás con la otra mano.',feel:'Estiramiento en la cara interna del antebrazo.',
+  a:{r:'hand',mode:'side'},
+  s:{type:'hold',to:{w:58,f:12,help:1},say:'Lleva los dedos atrás',in:1.4,hold:15,out:1,rest:3,sets:1,sides:1,sideLabels:['Una mano','La otra mano'],change:'Cambia de mano',per:'por mano'}},
+ {z:'manos',n:'Extensores de muñeca',how:'Brazo estirado, dobla la muñeca hacia abajo con la otra mano.',rep:'15 s por mano',feel:'Estiramiento sobre el antebrazo.',lados:1,
+  a:H('side',[{w:-62,f:-18,help:1,h:2.5},{h:.5}])},
+ {z:'manos',n:'Subir y bajar muñecas',how:'Mueve la muñeca arriba y abajo, sin forzar.',rep:'15 repeticiones',feel:'Movilidad sin dolor.',
+  a:H('side',[{w:45,f:5},{w:-45,f:-10}],{m:.9,h:.2})},
+ {z:'manos',n:'Abrir y cerrar',how:'Abre los dedos al máximo y cierra un puño suave.',rep:'15 veces',feel:'Calor y soltura en los dedos.',
+  a:H('front',[{curl:0,spread:1,h:.8},{curl:1,spread:0,h:.5}],{m:.8})},
+ {z:'manos',n:'Círculos de muñeca',how:'Gira las muñecas en círculos amplios.',rep:'10 por sentido',feel:'Muñecas más sueltas.',
+  a:H('front',[{rot:22,dy:-3},{rot:0,dy:4},{rot:-22,dy:-3},{rot:0,dy:-8}],{m:.45,h:0,all:{curl:.6,spread:.1}})},
+ {z:'manos',e:'ten',n:'Recta, gancho, puño',how:'Mano recta, dobla los dedos en gancho y cierra el puño.',rep:'8 ciclos',feel:'Los dedos se mueven suave, sin trabarse.',
+  a:H('front',[{curl:0,spread:.2},{curl:.5,spread:.1},{curl:1,spread:0},{curl:0,spread:.2,h:.3}],{m:.7,h:.6})},
+ {z:'manos',n:'Sacudir las manos',how:'Sacude las manos sueltas, como secándolas.',rep:'15 s · 2 veces',feel:'Manos livianas y relajadas.',
+  a:H('front',[{rot:9,dy:5},{rot:-9,dy:-5}],{m:.16,h:0,all:{curl:.15,spread:.5}})},
+ {z:'manos',n:'Manos en oración',how:'Palmas juntas frente al pecho, bájalas sin separarlas.',rep:'15 s · 2 veces',feel:'Estiramiento en muñecas y antebrazos.',
+  a:F('ft',['arms'],[{aL:[-15,117],aR:[15,-117],h:1},{aL:[-22,103],aR:[22,-103],h:2.2}])},
+ {z:'manos',n:'Abanico de dedos',how:'Separa los dedos al máximo y júntalos.',rep:'15 veces',feel:'Trabajo entre los dedos.',
+  a:H('front',[{spread:1,h:.7},{spread:0,h:.4}],{m:.7})},
+ {z:'manos',n:'Puño arriba y abajo',how:'Con el puño cerrado, sube y baja la muñeca.',rep:'15 repeticiones',feel:'Trabajo suave en el antebrazo.',
+  a:H('side',[{w:35},{w:-35}],{all:{f:-150},m:.9,h:.2})},
+ {z:'manos',n:'Mano de lado a lado',how:'Mueve la mano de lado a lado, sin mover el antebrazo.',rep:'15 repeticiones',feel:'Movilidad en los bordes de la muñeca.',
+  a:H('front',[{rot:20},{rot:-20}],{all:{spread:.3},m:.9,h:.2})},
+ {z:'manos',n:'Palma arriba y abajo',how:'Codo pegado al cuerpo, gira la palma hacia arriba y hacia abajo.',rep:'15 repeticiones',feel:'Giro suelto del antebrazo.',
+  a:H('front',[{flip:1,h:.6},{flip:-1,h:.6}],{m:.8})},
+ {z:'manos',n:'Presión de palmas',how:'Junta las palmas frente al pecho y empuja una contra la otra.',rep:'5 s · 5 veces',feel:'Activación en antebrazos y pecho.',
+  a:F('ft',['arms'],[{aL:[-15,117],aR:[15,-117],h:1.8,m:.5,say:'Empuja'},{aL:[-17,114],aR:[17,-114],h:.8,m:.5,say:'Suelta'}])},
+ {z:'manos',e:'ten',n:'Pulgar con cada dedo',how:'Toca la yema del pulgar con cada dedo, uno por uno.',rep:'5 rondas por mano',feel:'Coordinación y soltura en los dedos.',
+  a:H('front',[{op:1,tt:0},{op:1,tt:1},{op:1,tt:2},{op:1,tt:3},{op:0,tt:3,h:.3}],{m:.5,h:.4,all:{spread:.3}})},
+ {z:'manos',e:'ten',n:'Gancho de dedos',how:'Dobla solo las puntas de los dedos y vuelve a estirar.',rep:'10 veces',feel:'Movimiento suave en los dedos.',
+  a:H('front',[{curl:.5,h:.8},{curl:0,h:.5}],{m:.7,all:{spread:.2}})},
+ {z:'manos',n:'Palmas al frente',how:'Entrelaza los dedos y empuja las palmas al frente.',rep:'10 s · 3 veces',feel:'Estiramiento en antebrazos y dedos.',
+  a:F('st',['arms'],[{aR:[88,90],aL:[88,90],h:2.4},{h:.6}])},
+ // PIERNAS (20)
+ {z:'piernas',n:'Subir talones',how:'Ponte en punta de pies y baja lento.',rep:'15 repeticiones',feel:'Trabajo en las pantorrillas.',
+  a:F('ss',['legs'],[{py:116,toe:1,toe2:1,h:.8},{h:.5}],{m:.8})},
+ {z:'piernas',n:'Pararse y sentarse',how:'Párate de la silla sin usar las manos y baja lento.',feel:'Trabajo en muslos y glúteos.',
+  a:{r:'fig',b:'st',hl:['legs']},
+  s:{type:'reps',n:10,path:[{to:{sp:22,aR:[60,75],aL:[60,75]},m:.7,say:'Sube'},{to:MIDP,m:.6,say:'Sube'},{to:UPP,m:.7,h:.4,say:'Sube',sayH:'Arriba'},{to:MIDP,m:1.1,say:'Baja lento'},{to:{},m:.6,h:.4,say:'Baja lento',sayH:'Sentado'}]}},
+ {z:'piernas',n:'Marcha en el puesto',how:'Marcha levantando las rodillas y moviendo los brazos.',rep:'30 s a ritmo cómodo',feel:'El cuerpo entra en calor.',
+  a:F('ss',['legs'],[{lR:[70,5],aL:[35,70],aR:[-20,15],m:.4},{m:.3},{lL:[70,5],aR:[35,70],aL:[-20,15],m:.4},{m:.3}],{h:.05})},
+ {z:'piernas',n:'Estirar la rodilla',how:'Sentado, estira una pierna y sostén arriba.',rep:'10 por pierna, 2 s arriba',feel:'Trabajo en el muslo.',lados:1,
+  a:F('st',['legs'],[{lR:[90,84],h:1.2},{h:.5}],{m:1})},
+ {z:'piernas',n:'Bombeo de tobillos',how:'Con la pierna estirada, mueve el pie: punta y talón.',rep:'20 repeticiones',feel:'Pantorrillas activas, piernas menos pesadas.',
+  a:F('st',['legs'],[{toe:1},{toe:-1}],{m:.6,h:.25,all:{lR:[90,42]}})},
+ {z:'piernas',e:'est',n:'Isquiotibiales sentado',how:'Pierna estirada, talón al suelo, inclínate con la espalda recta.',rep:'15 s por pierna',feel:'Estiramiento detrás del muslo.',lados:1,
+  a:F('st',['legs'],[{sp:28,hd:-10,aR:[45,70],aL:[45,70],h:2.5},{h:.6}],{all:{lR:[75,60],toe:-1}})},
+ {z:'piernas',e:'est',n:'Pantorrilla en la pared',how:'Manos en la pared, una pierna atrás con el talón apoyado.',rep:'15 s por pierna',feel:'Estiramiento en la pantorrilla.',lados:1,
+  a:F('ss',['legs'],[{px:112,aR:[85,82],aL:[85,82],h:.6},{px:106,py:132,lR:[-30,-30],lL:[45,0],sp:10,aR:[80,80],aL:[80,80],h:2.6}],{prop:'wall'})},
+ {z:'piernas',n:'Círculos de cadera',how:'Manos en la cintura, dibuja círculos con la cadera.',rep:'8 por sentido',feel:'Caderas y zona lumbar sueltas.',
+  a:F('fs',['legs','torso'],[{px:108,sp:-6,lL:[-10.6,-10.6],lR:[-1.5,-1.5]},{px:92,sp:6,lL:[1.5,1.5],lR:[10.6,10.6]}],{m:.9,h:.1,all:{aL:[-35,47],aR:[35,-47]}})},
+ {z:'piernas',n:'Talón y punta',how:'Mécete de los talones a las puntas de los pies.',rep:'15 veces',feel:'Tobillos y pantorrillas activos.',
+  a:F('ss',['legs'],[{toe:-1,toe2:-1,sp:-2,h:.4},{py:116,toe:1,toe2:1,sp:2,h:.4}],{m:.8})},
+ {z:'piernas',n:'Media sentadilla',how:'Cadera atrás como para sentarte, baja a medio camino y sube.',rep:'10 repeticiones',feel:'Trabajo en muslos y glúteos.',
+  a:F('ss',['legs'],[{px:76,py:132,lL:[40,-12],lR:[40,-12],sp:25,aR:[80,85],aL:[80,85],h:.5},{h:.4}],{m:1.2})},
+ {z:'piernas',n:'Pierna al lado',how:'De pie, separa una pierna al lado sin inclinar el tronco.',rep:'10 por pierna',feel:'Trabajo al costado de la cadera.',
+  a:F('fs',['legs'],[{lR:[26,26],sp:-3,h:.6},{h:.3},{lL:[-26,-26],sp:3,h:.6},{h:.3}],{m:.9})},
+ {z:'piernas',n:'Pierna atrás',how:'De pie, lleva una pierna atrás sin arquear la espalda.',rep:'10 por pierna',feel:'Trabajo en el glúteo.',lados:1,
+  a:F('ss',['legs'],[{lR:[-24,-24],sp:5,h:.6},{h:.3}],{m:.9})},
+ {z:'piernas',n:'Talón al glúteo',how:'De pie, dobla la rodilla llevando el talón hacia atrás.',rep:'10 por pierna',feel:'Trabajo detrás del muslo.',lados:1,
+  a:F('ss',['legs'],[{lR:[0,-95],h:.5},{h:.3}],{m:.8})},
+ {z:'piernas',n:'Marcha sentado',how:'Sentado, levanta las rodillas alternando.',rep:'20 veces',feel:'Activación de caderas y abdomen.',
+  a:F('st',['legs'],[{lR:[110,5]},{},{lL:[110,5]},{}],{m:.5,h:.1})},
+ {z:'piernas',e:'est',n:'Flexores de cadera',how:'Paso largo atrás y empuja la cadera al frente, tronco erguido.',rep:'15 s por lado',feel:'Estiramiento delante de la cadera.',lados:1,
+  a:F('ss',['legs'],[{py:134,lR:[-32,-32],lL:[42,0],sp:-4,h:2.6},{h:.5}],{all:{px:100,aR:[-25,25],aL:[-25,25]}})},
+ {z:'piernas',n:'Caminata corta',how:'Camina por el pasillo o en el lugar, a paso vivo.',rep:'30 s',feel:'Piernas activas y cabeza despejada.',
+  a:F('ss',['legs'],[{lR:[24,4],lL:[-18,-26],aL:[22,34],aR:[-16,2]},{lL:[24,4],lR:[-18,-26],aR:[22,34],aL:[-16,2]}],{m:.55,h:.05})},
+ {z:'piernas',e:'est',n:'Cuádriceps con apoyo',how:'Apóyate en el escritorio y lleva el talón al glúteo con la mano.',rep:'15 s por pierna',feel:'Estiramiento delante del muslo.',lados:1,
+  a:F('ss',['legs'],[{lR:[-12,-150],aR:[-22,-35],h:2.5},{h:.5}],{prop:'desk',all:{px:112,aL:[45,60]}})},
+ {z:'piernas',n:'Puntas y talones sentado',how:'Sentado, levanta las puntas y luego los talones.',rep:'20 veces',feel:'Tobillos y pantorrillas activos.',
+  a:F('st',['legs'],[{toe:-1,toe2:-1,h:.4},{toe:.35,toe2:.35,h:.4}],{m:.6})},
+ {z:'piernas',n:'Círculos de tobillo',how:'Con la pierna estirada, dibuja círculos con el pie.',rep:'10 por sentido, cada pie',feel:'Tobillos sueltos.',
+  a:F('st',['legs'],[{toe:1,lR:[90,45]},{toe:0,lR:[90,38]},{toe:-1,lR:[90,42]},{toe:0,lR:[90,47]}],{m:.4,h:0})},
+ {z:'piernas',n:'Pasos laterales',how:'Da pasos amplios hacia un lado y hacia el otro.',rep:'10 por lado',feel:'Caderas activas.',
+  a:F('fs',['legs'],[{px:110,lR:[8,4],lL:[-18,-16]},{},{px:90,lL:[-8,-4],lR:[18,16]},{}],{m:.6,h:.1})},
+ // OJOS (4)
+ {z:'ojos',n:'Regla 20-20-20',how:'Mira un punto a 6 metros o más, lejos de la pantalla.',rep:'20 s seguidos',feel:'Los ojos descansan del enfoque cercano.',
+  a:E([{ex:.7,ey:-.5,h:4,say:'Mira lejos'},{ex:.55,ey:-.4,h:1,say:'Mira lejos'}],{m:.8})},
+ {z:'ojos',e:'par',n:'Parpadeo completo',how:'Parpadea lento, cerrando bien los ojos.',rep:'10 parpadeos',feel:'Ojos más húmedos, menos ardor.',
+  a:E([{lid:1,h:.5},{lid:0,h:.9}],{m:.5})},
+ {z:'ojos',e:'par',n:'Parpadeo con apretón',how:'Cierra 2 s, abre, cierra 2 s, aprieta 2 s y abre.',rep:'3 ciclos',feel:'Párpados que cierran completo, ojos lubricados.',
+  a:E([{lid:1,h:1.6,say:'Cierra 2 s'},{lid:0,h:.5,say:'Abre'},{lid:1,h:1.6,say:'Cierra 2 s'},{lid:1,h:2,m:0,say:'Aprieta 2 s'},{lid:0,h:1.2,say:'Abre'}],{m:.35})},
+ {z:'ojos',n:'Ojos cerrados',how:'Cierra los ojos y suelta la frente y la mandíbula.',rep:'20 s',feel:'Alivio del ardor y la sequedad.',
+  a:E([{lid:1,h:5,say:'Descansa'},{lid:0,h:.8}],{m:.8})},
+ // RESPIRAR Y POSTURA (10)
+ {z:'respira',n:'Respiración abdominal',how:'Manos en el abdomen. Inhala por la nariz y exhala por la boca.',feel:'El abdomen se infla y baja la tensión.',
+  a:{r:'fig',b:'ft',hl:['torso'],aura:1,all:{aL:[-18,80],aR:[18,-80]}},
+  s:{type:'breath',cycles:3,in:4,out:6,to:{br:1}}},
+ {z:'respira',n:'Respiración cuadrada',d:35,how:'Inhala, sostén, exhala, sostén: 4 segundos cada paso.',rep:'2 ciclos',feel:'Calma y foco.',
+  a:F('ft',['torso'],[{br:1,m:4,h:4,say:'Inhala',sayH:'Sostén'},{br:0,m:4,h:4,say:'Exhala',sayH:'Sostén'}],{aura:1})},
+ {z:'respira',n:'Respirar con brazos',how:'Sube los brazos al inhalar y bájalos al exhalar.',rep:'4 repeticiones lentas',feel:'El tórax se expande.',
+  a:F('fs',['torso'],[{br:1,aL:UPL,aR:UPR,m:3.5,h:0,say:'Inhala'},{br:0,m:3.5,h:0,say:'Exhala'}],{aura:1})},
+ {z:'respira',n:'Suspiro largo',how:'Inhala subiendo los hombros y suelta el aire largo por la boca.',rep:'5 veces',feel:'Los hombros caen y sueltan.',
+  a:F('ft',['torso'],[{br:1,shL:8,shR:8,m:2.5,h:0,say:'Inhala'},{br:0,m:3.5,h:0,say:'Exhala largo'}],{aura:1})},
+ {z:'respira',e:'mov',n:'Reinicio de postura',how:'Pies apoyados, espalda al respaldo, hombros sueltos, pantalla a la altura de los ojos.',rep:'Revisa los 4 puntos',feel:'Postura cómoda, sin rigidez.',
+  a:F('st',['torso','head'],[{sp:10,sp2:20,hd:16,hx:4,h:1.2},{h:3,say:'Postura lista'}],{m:1.6})},
+ {z:'respira',n:'Labios fruncidos',how:'Inhala por la nariz y exhala lento, como soplando una vela.',rep:'5 ciclos: 2 s inhalar, 4 s exhalar',feel:'La exhalación se alarga y calma.',
+  a:F('ft',['torso'],[{br:1,m:2,h:0,say:'Inhala'},{br:0,m:4,h:0,say:'Exhala lento'}],{aura:1})},
+ {z:'respira',n:'Respiración costal',how:'Manos en las costillas: siente cómo se abren al inhalar.',rep:'4 ciclos lentos',feel:'Las costillas se abren hacia los lados.',
+  a:F('ft',['torso'],[{br:1,m:4,h:0,say:'Inhala'},{br:0,m:4,h:0,say:'Exhala'}],{aura:1,all:{aL:[-28,100],aR:[28,-100]}})},
+ {z:'respira',n:'Respiración 5 y 5',how:'Inhala 5 segundos y exhala 5 segundos, por la nariz.',rep:'3 ciclos',feel:'Ritmo lento que calma.',
+  a:F('ft',['torso'],[{br:1,m:5,h:0,say:'Inhala'},{br:0,m:5,h:0,say:'Exhala'}],{aura:1})},
+ {z:'respira',e:'mic',n:'Apretar y soltar',how:'Aprieta puños y hombros, luego suelta todo de una vez.',rep:'5 s de tensión, 10 s de soltar · 2 veces',feel:'Contraste claro entre tensión y relajo.',
+  a:F('ft',['arms','torso'],[{shL:8,shR:8,aL:[-20,40],aR:[20,-40],h:3,m:.8,say:'Aprieta'},{h:5,m:.8,say:'Suelta'}])},
+ {z:'respira',e:'mov',n:'De pie y estírate',how:'Ponte de pie, estira los brazos arriba y vuelve a sentarte.',rep:'5 veces',feel:'El cuerpo sale de la postura sentada.',
+  a:F('st',['torso','legs'],[{sp:8,h:.5},MID,{px:122,py:122,lL:[0,0],lR:[0,0],sp:0,aR:[175,178],aL:[175,178],h:2.2,m:1.2},MID],{m:.8})},
+ // NUEVOS (nov 2026) · CUELLO
+ {z:'cuello',n:'Escalenos con mano en el pecho',how:'Mano en el pecho bajo la clavícula: inclina la cabeza al lado contrario y mira un poco arriba.',rep:'15 s por lado',feel:'Estiramiento delante y al costado del cuello.',lados:1,
+  a:F('ft',['head'],[{hd:-24,nod:-.5,aL:[-10,130]},{h:.3},{hd:24,nod:-.5,aR:[10,-130]},{h:.3}],{h:2.4})},
+ {z:'cuello',n:'Empuje de giro',how:'Mano en la mejilla: intenta girar la cabeza contra la mano sin moverla.',rep:'5 s por lado · 3 veces',feel:'Activación suave del cuello, sin movimiento.',lados:1,
+  a:F('ft',['head'],[{aR:[140,-100],turn:.1,h:1.8,say:'Empuja'},{aR:[140,-100],h:.5,say:'Suelta'},{aL:[-140,100],turn:-.1,h:1.8,say:'Empuja'},{aL:[-140,100],h:.5,say:'Suelta'}],{m:.6})},
+ {z:'cuello',n:'Doble mentón y mirar arriba',how:'Recoge el mentón y luego lleva la mirada al techo despacio; vuelve recogiendo el mentón.',rep:'8 repeticiones lentas',feel:'Movimiento cómodo del cuello, sin mareo.',
+  a:F('st',['head'],[{hx:-5,hd:3,h:.8},{hx:-2,hd:-20,h:.8},{h:.3}],{m:1.1})},
+ {z:'cuello',n:'Rotación asistida',how:'Gira la cabeza y, con la mano en el mentón, acompaña el giro un poco más, sin forzar.',rep:'10 s por lado',feel:'Estiramiento suave al final del giro.',lados:1,
+  a:F('ft',['head'],[{turn:1,aL:[-130,95]},{h:.3},{turn:-1,aR:[130,-95]},{h:.3}],{h:2.4})},
+ {z:'cuello',n:'Automasaje de nuca',how:'Con las yemas de los dedos haz círculos suaves en la nuca y la base del cráneo.',rep:'30 s',feel:'Alivio y calor en la nuca.',
+  a:F('st',['head'],[{aR:[150,257],aL:[150,257],hd:6},{aR:[145,250],aL:[145,250],hd:10}],{m:.6,h:.1})},
+ {z:'cuello',n:'Retracción contra la pared',how:'De espaldas a la pared, lleva la nuca hacia la pared recogiendo el mentón.',rep:'5 s · 8 veces',feel:'Activación profunda del cuello y postura erguida.',
+  a:F('ss',['head'],[{hx:3,hd:4,h:.5},{hx:-3,hd:2,h:1.6,say:'Nuca a la pared'}],{prop:'wallb',all:{px:66},m:.9})},
+ // NUEVOS · HOMBROS
+ {z:'hombros',n:'Remo sentado',how:'Brazos al frente: tira los codos hacia atrás juntando las escápulas.',rep:'12 repeticiones',feel:'Trabajo entre las escápulas.',
+  a:F('st',['arms'],[{aR:[88,90],aL:[88,90],h:.3},{aR:[-25,85],aL:[-25,85],sx:-3,h:.8}],{m:.9})},
+ {z:'hombros',n:'Empujar el techo',how:'Manos a la altura de los hombros: empuja hacia el techo y baja lento.',rep:'10 repeticiones',feel:'Trabajo en hombros y brazos.',
+  a:F('ft',['arms'],[{aL:[-92,-178],aR:[92,178],h:.4},{aL:[-172,-188],aR:[172,188],h:.5}],{m:1.1})},
+ {z:'hombros',n:'Pecho en el respaldo',how:'Toma el respaldo con las manos por detrás, saca pecho y junta las escápulas.',rep:'15 s · 2 veces',feel:'Estiramiento en pecho y delante de los hombros.',
+  a:F('st',['arms','torso'],[{aR:[-40,-10],aL:[-40,-10],sp2:-8,sx:-2,hd:-4,h:2.6},{h:.6}])},
+ {z:'hombros',n:'Elevación alterna sentado',how:'Sube un brazo al frente hasta arriba y bájalo lento; alterna.',rep:'10 por brazo',feel:'Hombros activos, sin encogerlos.',
+  a:F('st',['arms'],[{aR:[172,176]},{},{aL:[172,176]},{}],{m:1,h:.2})},
+ {z:'hombros',n:'Empujar el escritorio',how:'Palmas sobre el escritorio y brazos estirados: empuja hacia abajo sin subir los hombros.',rep:'5 s · 6 veces',feel:'Activación bajo las axilas y en la espalda.',
+  a:F('st',['arms'],[{h:.6},{shL:-3,shR:-3,sp:-2,h:1.8,say:'Empuja'}],{prop:'deskS',all:{aR:[70,90],aL:[70,90]},m:.7})},
+ {z:'hombros',n:'Bolsillos traseros',how:'Lleva los codos hacia los bolsillos traseros, bajando y juntando las escápulas.',rep:'10 veces, 3 s cada una',feel:'Hombros abajo y atrás, pecho abierto.',
+  a:F('st',['arms'],[{aR:[-28,30],aL:[-28,30],sx:-3,shL:-3,shR:-3,h:1.4},{h:.5}],{m:.9})},
+ {z:'hombros',n:'Cactus sostenido',how:'Brazos en cactus con los codos a la altura de los hombros: llévalos atrás y sostén.',rep:'10 s · 3 veces',feel:'Trabajo entre las escápulas y detrás de los hombros.',
+  a:F('ft',['arms'],[{aL:[-90,-180],aR:[90,180],h:2.4},{h:.6}])},
+ {z:'hombros',n:'Péndulo de brazos',how:'Inclina el tronco con las rodillas sueltas y deja colgar los brazos; balancéalos suave.',rep:'20 s',feel:'Hombros sueltos y livianos.',
+  a:F('ss',['arms'],[{aR:[15,15],aL:[-15,-15]},{aR:[-15,-15],aL:[15,15]}],{all:{px:86,sp:40,hd:-20,lL:[4,4],lR:[4,4]},m:.8,h:.05})},
+ {z:'hombros',n:'Empuje lateral en la pared',how:'De lado a la pared: empuja con el dorso de la mano hacia la pared sin mover el brazo.',rep:'5 s por lado · 3 veces',feel:'Activación en el costado del hombro.',lados:1,
+  a:F('fs',['arms'],[{aR:[14,6],h:1.8,say:'Empuja'},{h:.6,say:'Suelta'}],{prop:'wall',all:{px:140},m:.5})},
+ {z:'hombros',n:'Balanceo de brazos',how:'Balancea los brazos adelante y atrás, relajados, con las rodillas sueltas.',rep:'20 s',feel:'Hombros y espalda alta sueltos.',
+  a:F('ss',['arms'],[{aR:[45,55],aL:[-35,-30]},{aR:[-35,-30],aL:[45,55]}],{m:.7,h:.05})},
+ {z:'hombros',n:'Estrella sin salto',how:'Abre las piernas y sube los brazos en diagonal, sin saltar; vuelve al centro.',rep:'10 repeticiones',feel:'Todo el cuerpo se activa.',
+  a:F('fs',['arms','legs'],[{lR:[20,20],lL:[-20,-20],py:126.6,aL:[-140,-148],aR:[140,148],h:.4},{h:.3}],{m:.9})},
+ {z:'hombros',n:'Boxeo suave',how:'Lanza golpes suaves al frente alternando brazos, con las rodillas sueltas.',rep:'20 s',feel:'Calor en hombros y brazos.',
+  a:F('ss',['arms'],[{aR:[88,92],aL:[35,150]},{aR:[35,150],aL:[88,92]}],{m:.35,h:.15})},
+ {z:'hombros',n:'Nado en seco',how:'Haz círculos amplios con los brazos, alternados, como nadando crol.',rep:'10 por brazo',feel:'Hombros con buen rango, sin dolor.',
+  a:F('ss',['arms'],[{aR:[360,360],aL:[540,540],m:.01,h:0},{aR:[270,270],aL:[450,450]},{aR:[180,180],aL:[360,360]},{aR:[90,90],aL:[270,270]},{aR:[0,0],aL:[180,180]}],{m:.55,h:0})},
+ {z:'hombros',n:'Pecho en la pared',how:'Antebrazo en la pared con el codo a la altura del hombro; gira el cuerpo hacia el otro lado.',rep:'15 s por lado',feel:'Estiramiento en el pecho y delante del hombro.',lados:1,
+  a:F('fs',['arms','torso'],[{h:.4},{tw:-.6,turn:-.8,h:2.4}],{prop:'wall',all:{px:122,aR:[90,180]},m:1.2})},
+ // NUEVOS · ESPALDA
+ {z:'espalda',n:'Inclinación con manos en la nuca',how:'Sentado con las manos en la nuca, inclina el tronco a un lado y luego al otro.',rep:'8 por lado',feel:'Estiramiento en los costados.',
+  a:F('ft',['torso'],[{sp:8,sp2:12},{sp:-8,sp2:-12}],{all:{aL:[-140,-260],aR:[140,260]},m:1.3,h:.4})},
+ {z:'espalda',n:'Extensión con manos en la cintura',how:'Sentado al borde de la silla, manos en la cintura: arquea suave la espalda alta.',rep:'8 veces lentas',feel:'Apertura del pecho y la espalda.',
+  a:F('st',['torso'],[{sp:-3,sp2:-14,hd:-8,h:1.4},{h:.5}],{all:{aR:[-25,25],aL:[-25,25],px:92},m:1.2})},
+ {z:'espalda',n:'Codo a la rodilla contraria',how:'Sentado con las manos en la nuca, gira y lleva un codo hacia la rodilla contraria; alterna.',rep:'10 por lado',feel:'Trabajo en abdomen y costados.',
+  a:F('st',['torso','legs'],[{lR:[115,15],sp:18,sp2:18,hd:10,aL:[23,190],aR:[114,221]},{},{lL:[115,15],sp:18,sp2:18,hd:10,aR:[23,190],aL:[114,221]},{}],{all:{aR:NUCA,aL:NUCA},m:.9,h:.25})},
+ {z:'espalda',n:'Giro con mano en la nuca',how:'Sentado con una mano en la nuca: gira el tronco abriendo el codo hacia atrás.',rep:'8 por lado',feel:'Movilidad en la espalda media.',lados:1,
+  a:F('ft',['torso'],[{aR:[140,260],tw:.9,turn:.7},{aR:[140,260],tw:-.2}],{m:1.2,h:.4})},
+ {z:'espalda',n:'Giro con brazos en cruz',how:'De pie con los brazos en cruz, gira el tronco a un lado y al otro, cadera quieta.',rep:'10 por lado',feel:'Espalda media más suelta.',
+  a:F('fs',['torso'],[{tw:1,turn:.8},{tw:-1,turn:-.8}],{all:{aL:[-92,-92],aR:[92,92]},m:1.1,h:.25})},
+ {z:'espalda',n:'Brazo y pierna contrarios',how:'Estira un brazo al frente y la pierna contraria atrás; vuelve y cambia. Apóyate si lo necesitas.',rep:'8 por lado',feel:'Trabajo en espalda baja y glúteos, con equilibrio.',
+  a:F('ss',['torso','legs'],[{aR:[170,175],lL:[-22,-22],sp:4,h:.8},{h:.4},{aL:[170,175],lR:[-22,-22],sp:4,h:.8},{h:.4}],{m:1})},
+ {z:'espalda',n:'Gato y camello de pie',how:'Rodillas flexionadas y manos sobre los muslos: redondea la espalda y luego estírala.',rep:'8 repeticiones lentas',feel:'Toda la columna se mueve.',
+  a:F('ss',['torso'],[{sp:44,sp2:22,hd:25},{sp:38,sp2:-12,hd:-15}],{all:{px:86,py:128,lL:[25,-15],lR:[25,-15],sp:40,aR:[-5,-10],aL:[-5,-10]},m:1.8,h:.5})},
+ {z:'espalda',n:'Plancha en la pared',how:'Antebrazos en la pared y cuerpo en línea recta: aprieta el abdomen y respira normal.',rep:'15 s · 2 veces',feel:'Trabajo en el abdomen y la espalda.',
+  a:F('ss',['torso'],[{hd:-12,h:2.4,say:'Aprieta el abdomen'},{hd:-8,h:.8}],{prop:'wall',all:{px:125,py:133.2,sp:30,lL:[-30,-30],lR:[-30,-30],aR:[45,175],aL:[45,175]},m:.8})},
+ {z:'espalda',n:'Báscula de pie',how:'Manos en la cintura: mueve la pelvis adelante y atrás, suave.',rep:'10 veces',feel:'Movimiento en la zona lumbar.',
+  a:F('ss',['torso'],[{sp:-6,sp2:6,px:95,lL:[-2.3,-2.3],lR:[-2.3,-2.3]},{sp:6,sp2:-6,px:89,lL:[2.3,2.3],lR:[2.3,2.3]}],{all:{aR:[-25,25],aL:[-25,25]},m:1.1,h:.3})},
+ // NUEVOS · MUÑECAS Y MANOS
+ {z:'manos',n:'Pinza con el índice',how:'Junta la yema del pulgar y del índice y aprieta; suelta y repite.',rep:'5 s · 5 veces por mano',feel:'Trabajo en el pulgar y la mano.',
+  a:H('front',[{op:1,tt:0,h:1.8,say:'Aprieta'},{op:0,tt:0,h:.6,say:'Suelta'}],{m:.5,all:{spread:.3}})},
+ {z:'manos',n:'Tocar piano en el aire',how:'Mueve los dedos uno por uno, como tocando piano.',rep:'20 s',feel:'Dedos sueltos y coordinados.',
+  a:H('front',[{op:.7,tt:0},{op:.7,tt:3}],{m:.8,h:0,all:{spread:.35}})},
+ {z:'manos',n:'Sacudir los brazos',how:'Deja caer los brazos a los costados y sacúdelos sueltos.',rep:'15 s',feel:'Brazos livianos y relajados.',
+  a:F('fs',['arms'],[{aL:[-12,-6],aR:[12,6],shL:1,shR:1},{aL:[-4,0],aR:[4,0]}],{m:.12,h:0})},
+ // NUEVOS · PIERNAS
+ {z:'piernas',n:'Abrir y cerrar rodillas',how:'Sentado con los pies apoyados, abre y cierra las rodillas.',rep:'15 veces',feel:'Trabajo en las caderas.',
+  a:F('ft',['legs'],[{lL:[-97,14],lR:[97,-14],th:16,h:.4},{h:.4}],{m:.9})},
+ {z:'piernas',n:'Apretar las rodillas',how:'Aprieta las rodillas como sujetando una pelota imaginaria; sostén y suelta.',rep:'5 s · 6 veces',feel:'Trabajo en la cara interna de los muslos.',
+  a:F('ft',['legs'],[{lL:[-30,-4],lR:[30,4],h:1.8,say:'Aprieta'},{h:.6,say:'Suelta'}],{m:.5})},
+ {z:'piernas',n:'Pierna estirada arriba',how:'Estira una pierna y súbela un poco sin despegar la espalda; baja lento.',rep:'8 por pierna',feel:'Trabajo en el muslo y la cadera.',lados:1,
+  a:F('st',['legs'],[{lR:[90,86],h:.3},{lR:[105,101],h:.8},{lR:[90,86],h:.3},{h:.4}],{m:.9})},
+ {z:'piernas',n:'Apretar glúteos sentado',how:'Aprieta los glúteos y suelta, sin aguantar el aire.',rep:'5 s · 8 veces',feel:'Activación en los glúteos.',
+  a:F('st',['legs'],[{sp:-2,sp2:2,h:1.8,say:'Aprieta'},{h:.8,say:'Suelta'}],{m:.4})},
+ {z:'piernas',n:'Deslizar los pies',how:'Sentado, desliza los pies adelante estirando las rodillas y vuelve.',rep:'15 veces',feel:'Rodillas y tobillos en movimiento.',
+  a:F('st',['legs'],[{lR:[70,49],lL:[70,49]},{lR:[92,-25],lL:[92,-25]}],{m:1,h:.2})},
+ {z:'piernas',n:'Zancada corta',how:'Un pie adelante y otro atrás: baja un poco doblando ambas rodillas y sube.',rep:'8 por lado',feel:'Trabajo en muslos y glúteos.',lados:1,
+  a:F('ss',['legs'],[{h:.4},{lR:[45,-5],lL:[-10,-45],py:136,h:.6}],{all:{lR:[20,20],lL:[-20,-20],py:126.6,toe2:1},m:1.1})},
+ {z:'piernas',n:'Rodilla a la mano',how:'De pie, sube una rodilla y tócala con la mano contraria; alterna.',rep:'10 por lado',feel:'Trabajo en abdomen y caderas.',
+  a:F('ss',['legs','torso'],[{lR:[85,5],aL:[60,40],sp:6},{},{lL:[85,5],aR:[60,40],sp:6},{}],{m:.6,h:.15})},
+ {z:'piernas',n:'Equilibrio en un pie',how:'Sostente en un pie con la otra rodilla arriba; ten un apoyo cerca.',rep:'15 s por lado',feel:'Trabajo de equilibrio en tobillo y cadera.',lados:1,
+  a:F('ss',['legs'],[{lR:[70,5],aR:[30,20],aL:[-20,-10],h:2.6},{h:.4}],{m:1})},
+ {z:'piernas',n:'Sentadilla en la pared',how:'Espalda apoyada en la pared: baja un poco doblando las rodillas y sostén.',rep:'15 s · 2 veces',feel:'Trabajo en los muslos, sin dolor de rodillas.',
+  a:F('ss',['legs'],[{lL:[20,20],lR:[20,20],py:126.6,h:.5},{lL:[50,-5],lR:[50,-5],py:137,h:2.4,say:'Sostén'}],{prop:'wallb',all:{px:66},m:1.4})},
+ {z:'piernas',n:'Estocada lateral suave',how:'Pies separados: lleva el peso a un lado doblando esa rodilla, con la otra pierna estirada.',rep:'8 por lado',feel:'Estiramiento en la cara interna del muslo.',lados:1,
+  a:F('fs',['legs'],[{h:.4},{px:116,py:135,lR:[40,-20],lL:[-35,-35],h:1.2}],{all:{lL:[-22,-22],lR:[22,22],py:127.5},m:1.2})},
+ {z:'piernas',n:'Isquiotibiales de pie',how:'Un talón adelante con la pierna estirada y la otra rodilla flexionada: inclínate con la espalda recta.',rep:'15 s por lado',feel:'Estiramiento detrás del muslo.',lados:1,
+  a:F('ss',['legs'],[{h:.5},{sp:35,hd:-25,aR:[20,20],aL:[20,20],h:2.4}],{all:{py:129,lR:[25,25],lL:[10,-25],toe:-1},m:1.4})},
+ {z:'piernas',n:'Talones en un pie',how:'Con apoyo, sube en la punta de un pie y baja lento.',rep:'10 por pierna',feel:'Trabajo en la pantorrilla.',lados:1,
+  a:F('ss',['legs'],[{h:.3},{py:116,toe:1,h:.8}],{all:{lL:[0,-70]},m:.8})},
+ {z:'piernas',n:'Balanceo de pierna al frente',how:'Con apoyo, balancea una pierna adelante y atrás, suelta.',rep:'10 por pierna',feel:'Cadera suelta.',lados:1,
+  a:F('ss',['legs'],[{lR:[35,30]},{lR:[-25,-25]}],{m:.7,h:.05})},
+ // NUEVOS · OJOS
+ {z:'ojos',n:'Mira lejos y parpadea',how:'Mira un punto lejano y parpadea lento, cerrando bien los ojos.',rep:'20 s',feel:'Ojos húmedos y descansados.',
+  a:E([{ex:.6,ey:-.4,h:.8,say:'Mira lejos'},{ex:.6,ey:-.4,lid:1,m:.3,h:.4,say:'Parpadea'},{ex:.6,ey:-.4,lid:0,m:.3,h:1.2,say:'Mira lejos'}],{m:.6})},
+ // NUEVOS · RESPIRAR Y POSTURA
+ {z:'respira',n:'Respirar con codos abiertos',how:'Manos en la nuca: abre los codos al inhalar y ciérralos al exhalar.',rep:'5 ciclos lentos',feel:'Pecho abierto y respiración amplia.',
+  a:F('ft',['torso'],[{br:1,aL:[-120,-265],aR:[120,265],m:3.5,h:0,say:'Inhala'},{br:0,aL:[-160,-245],aR:[160,245],m:4,h:0,say:'Exhala'}],{aura:1})},
+ {z:'respira',n:'Respiración en 3 tomas',how:'Inhala en tres tomas cortas por la nariz y exhala largo por la boca.',rep:'5 ciclos',feel:'Respiración ordenada y calma.',
+  a:F('ft',['torso'],[{br:.33,m:.8,h:.2,say:'Inhala'},{br:.66,m:.8,h:.2,say:'Inhala'},{br:1,m:.8,h:.2,say:'Inhala'},{br:0,m:4,h:.4,say:'Exhala largo'}],{aura:1})},
+ {z:'respira',n:'Reinicio de postura de pie',how:'De pie: peso en ambos pies, rodillas sueltas, hombros abajo y mirada al frente.',rep:'Revisa los 4 puntos',feel:'Postura cómoda y estable.',
+  a:F('ss',['torso','head'],[{sp:-6,sp2:14,hd:14,hx:4,h:1.2},{h:3,say:'Postura lista'}],{m:1.6})},
+ {z:'respira',n:'Estirarse completo',how:'Inhala subiendo los brazos y en punta de pies; exhala bajando.',rep:'5 veces',feel:'Todo el cuerpo se alarga.',
+  a:F('fs',['torso','arms'],[{br:1,aL:UPL,aR:UPR,py:118,m:3,h:.6,say:'Inhala'},{br:0,m:3,h:.3,say:'Exhala'}],{aura:1})},
+ {z:'respira',n:'Relajar piernas',how:'Estira y tensa las piernas, luego suéltalas por completo.',rep:'5 s de tensión, 10 s de soltar · 2 veces',feel:'Contraste entre tensión y relajo.',
+  a:F('st',['legs'],[{lR:[90,84],lL:[90,84],toe:-1,toe2:-1,h:3,m:.8,say:'Tensa'},{h:5,m:.8,say:'Suelta'}])},
+ {z:'respira',n:'Inhala y crece',how:'Al inhalar crece por la coronilla; al exhalar suelta los hombros sin encorvarte.',rep:'5 ciclos',feel:'Columna larga y hombros relajados.',
+  a:F('st',['torso'],[{br:1,sp:-1,sp2:-4,hd:3,hx:-2,m:4,h:0,say:'Inhala'},{br:0,shL:-2,shR:-2,m:5,h:0,say:'Exhala'}],{aura:1})}
+];
+/* ---------- Textos de cada ejercicio: posición, movimiento, qué sentir, dosis ---------- */
+const TXT={
+// CUELLO
+'Inclinación lateral':['Sentado, espalda apoyada y hombros sueltos.','Lleva la oreja hacia el hombro sin subirlo. Sostén y vuelve lento al centro.','Tirantez suave en el costado del cuello.',''],
+'Rotación de cuello':['Sentado, espalda recta y mirada al frente.','Gira la cabeza hacia un lado, como diciendo que no. Sostén y gira al otro lado.','Leve tirantez al final del giro, sin mareo.','5 veces por lado · sostén 3 s al girar'],
+'Mentón al pecho':['Sentado, espalda apoyada y hombros sueltos.','Baja el mentón hacia el pecho y deja que la cabeza cuelgue suave.','Estiramiento en la nuca.','Sostén 10 s · 3 veces'],
+'Doble mentón':['Sentado, espalda recta y mirada al frente.','Lleva la cabeza hacia atrás en línea recta, sin bajar ni subir la mirada.','Trabajo profundo en el cuello y alivio en la nuca.','10 veces · sostén 3 s cada vez'],
+'Medios círculos':['Sentado, espalda recta y hombros sueltos.','Baja el mentón y llévalo de un hombro al otro, dibujando una sonrisa. No lleves la cabeza hacia atrás.','Movimiento suave y continuo del cuello.','5 idas y vueltas, lento'],
+'Trapecio con apoyo':['Sentado, espalda apoyada.','Inclina la cabeza hacia un lado y apoya sobre ella la mano de ese mismo lado, solo con su peso, sin tirar.','Estiramiento desde el cuello hasta el hombro contrario.','Sostén 15 s por lado'],
+'Empuje contra la mano':['Sentado, espalda recta y una mano en la frente.','Empuja la frente contra la mano con fuerza suave, sin mover la cabeza. Respira normal.','Los músculos del cuello trabajan, sin dolor.','Empuja 5 s · 5 veces'],
+'Mirar la axila':['Sentado, espalda recta y hombros sueltos.','Gira la cabeza a medio camino y baja la mirada hacia la axila.','Estiramiento atrás y al costado del cuello.','Sostén 15 s por lado'],
+'Mirar al techo':['Sentado, espalda apoyada.','Lleva la mirada al techo despacio, sin dejar caer la cabeza hacia atrás, y vuelve.','Estiramiento delante del cuello, sin mareo.','5 veces, lento'],
+'Empuje lateral':['Sentado, una mano apoyada en la sien.','Empuja la cabeza contra la mano con fuerza suave, sin moverla. Respira normal.','Trabajo al costado del cuello, sin dolor.','Empuja 5 s · 3 veces por lado'],
+'Empuje hacia atrás':['Sentado, manos entrelazadas en la nuca.','Empuja la cabeza hacia atrás contra las manos con fuerza suave, sin moverla.','Trabajo en la nuca, sin dolor.','Empuja 5 s · 5 veces'],
+'Asentir corto':['Sentado, espalda recta y mentón un poco recogido.','Asiente pequeño, como diciendo que sí, sin mover los hombros.','Trabajo suave delante del cuello.','10 veces · sostén 3 s abajo'],
+'Trapecio con mano fija':['Sentado, una mano sujeta el borde del asiento.','Inclina la cabeza hacia el lado contrario a esa mano.','Estiramiento del cuello al hombro.','Sostén 15 s por lado'],
+'Giro sostenido':['Sentado, espalda recta.','Gira la cabeza y mira por encima del hombro. Sostén y gira al otro lado.','Estiramiento al costado del cuello.','Sostén 10 s · 2 veces por lado'],
+'Inclinaciones seguidas':['Sentado, hombros sueltos.','Inclina la cabeza de un lado a otro, sin pausa y sin subir los hombros.','Cuello más suelto.','10 veces por lado'],
+'Escalenos con mano en el pecho':['Sentado, una mano en el pecho, bajo la clavícula del lado contrario al que inclinas.','Inclina la cabeza alejándola de esa mano y lleva la mirada un poco arriba.','Estiramiento delante y al costado del cuello.','Sostén 15 s por lado'],
+'Empuje de giro':['Sentado, una mano apoyada en la mejilla.','Intenta girar la cabeza hacia la mano con fuerza suave, pero sin moverla.','Trabajo suave en el cuello, sin movimiento.','Empuja 5 s · 3 veces por lado'],
+'Doble mentón y mirar arriba':['Sentado, espalda apoyada.','Lleva la cabeza hacia atrás en línea recta, luego mira al techo despacio y vuelve.','Movimiento cómodo del cuello, sin mareo.','8 veces, lento'],
+'Rotación asistida':['Sentado, espalda recta.','Gira la cabeza y, con la mano en el mentón, acompaña el giro un poco más, sin forzar.','Estiramiento suave al final del giro.','Sostén 10 s por lado'],
+'Automasaje de nuca':['Sentado, codos relajados.','Con las yemas de los dedos haz círculos suaves en la nuca y en la base del cráneo.','Alivio y calor en la nuca.','30 s seguidos'],
+'Retracción contra la pared':['De pie, espalda y talones cerca de la pared.','Lleva la nuca hacia la pared en línea recta, con la mirada al frente.','Trabajo profundo del cuello y postura erguida.','8 veces · sostén 5 s cada vez'],
+// HOMBROS
+'Encoger hombros':['Sentado, brazos sueltos.','Sube los hombros hacia las orejas, sostén y déjalos caer.','Tensión al subir y alivio al soltar.','10 veces · sostén 3 s arriba'],
+'Círculos de hombros':['De pie, brazos sueltos.','Dibuja círculos grandes con los hombros, hacia atrás.','Hombros sueltos y pecho abierto.','10 círculos lentos'],
+'Brazo cruzado':['De pie o sentado, espalda recta.','Cruza un brazo por delante del pecho y acércalo con la otra mano, tomándolo por encima del codo. El hombro queda abajo.','Estiramiento detrás del hombro.','Sostén 15 s por brazo'],
+'De W a Y':['De pie, codos doblados y cerca del cuerpo, formando una W.','Estira los brazos hacia arriba en forma de Y y vuelve a la W.','Trabajo entre las escápulas.','10 veces, lento'],
+'Juntar escápulas':['Sentado, codos doblados a 90°.','Lleva los codos hacia atrás juntando las escápulas, sin subir los hombros.','Trabajo entre las escápulas.','10 veces · sostén 5 s cada vez'],
+'Abrir el pecho':['De pie, manos entrelazadas detrás de la espalda.','Estira los brazos hacia atrás y abajo, y saca pecho sin arquear la zona lumbar.','Estiramiento en el pecho y delante de los hombros.','Sostén 15 s · 2 veces'],
+'Círculos de brazos':['De pie, brazos abiertos en cruz.','Dibuja círculos pequeños con los brazos estirados.','Calor en los hombros.','10 hacia adelante y 10 hacia atrás'],
+'Tríceps':['De pie o sentado, espalda recta.','Sube un codo hacia el techo y deja caer la mano entre las escápulas. Con la otra mano empuja suave el codo.','Estiramiento detrás del brazo.','Sostén 15 s por brazo'],
+'Bajar hombros':['Sentado, brazos sueltos.','Empuja los hombros hacia abajo, alejándolos de las orejas.','Espacio entre los hombros y las orejas.','8 veces · sostén 5 s cada vez'],
+'Elevación al frente':['De pie, brazos a los costados.','Sube los brazos estirados por delante hasta arriba y baja lento.','Trabajo en los hombros.','10 veces'],
+'Elevación lateral':['De pie, brazos a los costados.','Sube los brazos por los lados hasta la altura de los hombros, sin encogerlos.','Trabajo en los hombros.','10 veces'],
+'Abrir antebrazos':['De pie, codos pegados al cuerpo y doblados a 90°.','Abre los antebrazos hacia afuera sin despegar los codos.','Trabajo detrás del hombro.','10 veces · sostén 3 s abiertos'],
+'Flexiones en la pared':['De pie frente a la pared, manos apoyadas a la altura del pecho y cuerpo recto.','Dobla los codos acercando el pecho a la pared y empuja de vuelta, sin hundir la cadera.','Trabajo en pecho, hombros y brazos.','10 veces'],
+'Círculos de codos':['De pie, manos sobre los hombros.','Dibuja círculos grandes con los codos.','Hombros sueltos.','10 hacia adelante y 10 hacia atrás'],
+'Antebrazos arriba y abajo':['De pie, brazos en cruz con los codos doblados a 90°.','Gira los antebrazos hacia arriba y luego hacia abajo, sin bajar los codos.','Movilidad del hombro, sin dolor. Si molesta, haz menos recorrido.','10 veces'],
+'Brazos en V baja':['De pie, brazos abiertos en V hacia abajo y palmas al frente.','Lleva los brazos un poco atrás juntando las escápulas.','Pecho abierto y espalda alta activa.','Sostén 10 s · 3 veces'],
+'Abrazo y apertura':['De pie, espalda recta.','Abrázate y luego abre los brazos en cruz, sacando pecho.','Estiramiento en la espalda alta y luego en el pecho.','10 veces'],
+'Remo sentado':['Sentado, brazos estirados al frente.','Tira los codos hacia atrás juntando las escápulas, sin subir los hombros, y vuelve.','Trabajo entre las escápulas.','12 veces'],
+'Empujar el techo':['Sentado, manos a la altura de los hombros.','Empuja las manos hacia el techo y baja lento. Si molesta el hombro, sube solo hasta donde no duela.','Trabajo en hombros y brazos, sin dolor.','10 veces'],
+'Pecho en el respaldo':['Sentado, manos atrás tomando el respaldo.','Saca pecho y junta las escápulas, sin arquear la zona lumbar.','Estiramiento en el pecho y delante de los hombros.','Sostén 15 s · 2 veces'],
+'Elevación alterna sentado':['Sentado, espalda apoyada.','Sube un brazo estirado por delante hasta arriba y bájalo lento. Luego el otro.','Hombros activos, sin encogerlos.','10 veces con cada brazo'],
+'Empujar el escritorio':['Sentado frente al escritorio, palmas apoyadas y brazos estirados.','Empuja la mesa hacia abajo sin subir los hombros.','Trabajo bajo las axilas y en la espalda.','Empuja 5 s · 6 veces'],
+'Bolsillos traseros':['Sentado, brazos sueltos.','Lleva los codos hacia los bolsillos traseros, bajando y juntando las escápulas.','Hombros abajo y atrás, pecho abierto.','10 veces · sostén 3 s cada vez'],
+'Cactus sostenido':['Sentado, brazos en cactus: codos a la altura de los hombros y manos hacia arriba.','Lleva los codos un poco hacia atrás y sostén, sin subir los hombros.','Trabajo entre las escápulas, sin dolor en los hombros.','Sostén 10 s · 3 veces'],
+'Péndulo de brazos':['De pie, tronco inclinado al frente y rodillas sueltas.','Deja colgar los brazos y balancéalos suave adelante y atrás.','Hombros sueltos y livianos.','20 s seguidos'],
+'Empuje lateral en la pared':['De pie, de lado a la pared y con el brazo pegado al cuerpo.','Empuja la pared con el dorso de la mano, sin mover el brazo.','Trabajo en el costado del hombro.','Empuja 5 s · 3 veces por lado'],
+'Balanceo de brazos':['De pie, rodillas sueltas.','Balancea los brazos adelante y atrás, relajados.','Hombros y espalda alta sueltos.','20 s seguidos'],
+'Estrella sin salto':['De pie, pies juntos y brazos abajo.','Abre las piernas y sube los brazos en diagonal, sin saltar. Vuelve al centro.','Todo el cuerpo se activa.','10 veces'],
+'Boxeo suave':['De pie, puños a la altura de la cara y rodillas sueltas.','Lanza golpes suaves al frente, alternando los brazos.','Calor en hombros y brazos.','20 s seguidos'],
+'Nado en seco':['De pie, espalda recta.','Haz círculos grandes con los brazos, uno tras otro, como nadando crol.','Hombros con buen rango, sin dolor.','10 círculos con cada brazo'],
+'Pecho en la pared':['De pie junto a la pared, antebrazo apoyado con el codo a la altura del hombro o un poco más abajo.','Gira el cuerpo hacia el lado contrario a la pared.','Estiramiento en el pecho y delante del hombro.','Sostén 15 s por lado'],
+// ESPALDA
+'Inclinación de tronco':['De pie, pies separados al ancho de las caderas.','Sube un brazo e inclina el tronco hacia el lado contrario.','Estiramiento en todo el costado.','Sostén 10 s · 2 veces por lado'],
+'Giro sentado':['Sentado, pies apoyados y espalda recta.','Gira el tronco y apóyate con las manos en el respaldo.','Estiramiento en la espalda media y baja.','Sostén 10 s · 2 veces por lado'],
+'Gato y camello':['Sentado al borde de la silla, manos en las rodillas.','Redondea la espalda mirando al ombligo y luego saca pecho mirando al frente.','Toda la columna se mueve.','10 veces, lento'],
+'Extensión de pie':['De pie, manos en la cintura.','Arquea suave la espalda hacia atrás y vuelve.','Alivio en la zona lumbar. Si molesta, haz menos recorrido.','8 veces'],
+'Alcanzar el techo':['De pie, pies separados al ancho de las caderas.','Junta las manos arriba y empuja hacia el techo, sin arquear la espalda.','Elongación de la espalda y los costados.',''],
+'Colgarse sentado':['Sentado, piernas separadas.','Deja caer el tronco entre las piernas con los brazos sueltos. Sube lento, enrollando la espalda.','Estiramiento en la zona lumbar. Sube despacio para no marearte.','Sostén 15 s · 2 veces'],
+'Abrazo al frente':['Sentado, brazos al frente con las manos juntas.','Empuja las manos al frente y redondea la espalda alta.','Estiramiento entre las escápulas.','Sostén 15 s · 2 veces'],
+'Báscula de pelvis':['Sentado al borde de la silla, pies apoyados.','Rueda la pelvis hacia adelante arqueando la zona lumbar y luego hacia atrás redondeándola.','Movimiento suave en la zona lumbar.','10 veces'],
+'Bisagra en el escritorio':['De pie frente al escritorio, manos apoyadas en el borde.','Lleva la cadera atrás con la espalda larga, hasta tener los brazos estirados.','Estiramiento en la espalda y los hombros.','Sostén 15 s · 2 veces'],
+'Giro de pie':['De pie, brazos sueltos.','Gira el tronco hacia un lado y al otro, dejando que los brazos sigan el movimiento.','Espalda más suelta.','10 veces por lado'],
+'Mano al suelo':['Sentado, espalda recta.','Desliza una mano hacia el suelo por el costado de la silla, inclinando el tronco.','Estiramiento en el costado y la cintura.','Sostén 10 s · 2 veces por lado'],
+'Extensión en el respaldo':['Sentado, manos en la nuca y espalda apoyada.','Arquea la espalda alta sobre el respaldo, abriendo los codos.','Apertura de la espalda alta.','8 veces, lento'],
+'Rodilla al pecho':['Sentado, espalda recta.','Abraza una rodilla y llévala hacia el pecho.','Estiramiento en el glúteo y la zona lumbar.','Sostén 15 s por lado'],
+'Bisagra de cadera':['De pie, rodillas un poco flexionadas.','Lleva la cadera atrás e inclina el tronco al frente con la espalda recta. Vuelve apretando los glúteos.','Trabajo en los glúteos y detrás de las piernas.','10 veces'],
+'Arco con manos arriba':['De pie, manos juntas arriba.','Inclina el tronco hacia un lado formando un arco.','Estiramiento largo en el costado.','Sostén 10 s · 2 veces por lado'],
+'Giro con brazos cruzados':['Sentado, brazos cruzados sobre el pecho.','Gira solo el tronco hacia un lado y al otro, con la cadera quieta.','Movilidad en la espalda media.','8 veces por lado'],
+'Balanceo de pelvis':['Sentado, pies apoyados.','Carga el peso en un glúteo y luego en el otro.','Zona lumbar y caderas más sueltas.','10 veces'],
+'Rodar hacia abajo':['De pie, rodillas sueltas.','Baja el mentón y enrolla la espalda hacia el suelo, de a poco. Sube lento de la misma forma.','Estiramiento en toda la espalda. Sube despacio para no marearte.','Sostén 10 s abajo · 2 veces'],
+'Inclinación con manos en la nuca':['Sentado, manos en la nuca y codos abiertos.','Inclina el tronco hacia un lado y luego hacia el otro.','Estiramiento en los costados.','8 veces por lado'],
+'Extensión con manos en la cintura':['Sentado al borde de la silla, manos en la cintura.','Saca pecho y arquea suave la espalda alta.','Apertura del pecho y la espalda.','8 veces, lento'],
+'Codo a la rodilla contraria':['Sentado, manos en la nuca.','Gira y lleva un codo hacia la rodilla contraria. Luego hacia el otro lado.','Trabajo en el abdomen y los costados.','10 veces por lado'],
+'Giro con mano en la nuca':['Sentado, una mano en la nuca.','Gira el tronco abriendo el codo hacia atrás y vuelve.','Movilidad en la espalda media.','8 veces por lado'],
+'Giro con brazos en cruz':['De pie, brazos en cruz.','Gira el tronco hacia un lado y al otro, con la cadera quieta.','Espalda media más suelta.','10 veces por lado'],
+'Brazo y pierna contrarios':['De pie, con un apoyo cerca si lo necesitas.','Estira un brazo al frente y la pierna contraria hacia atrás. Vuelve y cambia.','Trabajo en la espalda baja y los glúteos, con equilibrio.','5 veces por lado'],
+'Gato y camello de pie':['De pie, rodillas flexionadas y manos sobre los muslos.','Redondea la espalda mirando al ombligo y luego estírala mirando al frente.','Toda la columna se mueve.','8 veces, lento'],
+'Plancha en la pared':['De pie frente a la pared, antebrazos apoyados y pies un paso atrás.','Mantén el cuerpo en línea recta y aprieta el abdomen. Respira normal.','Trabajo en el abdomen y la espalda.','Sostén 15 s · 2 veces'],
+'Báscula de pie':['De pie, manos en la cintura y rodillas sueltas.','Mueve la pelvis hacia adelante y hacia atrás, suave.','Movimiento en la zona lumbar.','10 veces'],
+// MUÑECAS Y MANOS
+'Flexores de muñeca':['Brazo estirado al frente, palma hacia afuera, como haciendo un "alto".','Con la otra mano lleva los dedos hacia ti, suave.','Estiramiento en la cara interna del antebrazo.',''],
+'Extensores de muñeca':['Brazo estirado al frente, palma hacia abajo.','Dobla la muñeca hacia abajo y, con la otra mano, acércala suave hacia ti.','Estiramiento sobre el antebrazo.','Sostén 15 s por mano'],
+'Subir y bajar muñecas':['Brazos al frente o apoyados en la mesa, manos abiertas.','Sube y baja las manos moviendo solo la muñeca, sin forzar.','Movilidad de la muñeca, sin dolor.','15 veces'],
+'Abrir y cerrar':['Manos al frente.','Abre los dedos al máximo y luego cierra un puño suave.','Calor y soltura en los dedos.','15 veces'],
+'Círculos de muñeca':['Manos al frente, dedos sueltos.','Dibuja círculos amplios con las muñecas.','Muñecas más sueltas.','10 círculos hacia cada lado'],
+'Recta, gancho, puño':['Mano al frente con los dedos estirados.','Dobla las puntas de los dedos en gancho, luego cierra el puño y vuelve a estirar.','Los dedos se mueven suave, sin trabarse.','8 veces'],
+'Sacudir las manos':['Brazos relajados.','Sacude las manos sueltas, como secándolas.','Manos livianas y relajadas.','15 s · 2 veces'],
+'Manos en oración':['Sentado, palmas juntas frente al pecho.','Baja las manos sin separar las palmas, hasta sentir el estiramiento.','Estiramiento en las muñecas y los antebrazos.','Sostén 15 s · 2 veces'],
+'Abanico de dedos':['Mano al frente.','Separa los dedos lo más que puedas y vuelve a juntarlos.','Trabajo entre los dedos.','15 veces'],
+'Puño arriba y abajo':['Brazo al frente, puño cerrado sin apretar.','Sube y baja el puño moviendo solo la muñeca.','Trabajo suave en el antebrazo.','15 veces'],
+'Mano de lado a lado':['Brazo al frente, palma hacia abajo.','Mueve la mano hacia el lado del pulgar y luego hacia el meñique, sin mover el antebrazo.','Movilidad en los bordes de la muñeca.','15 veces'],
+'Palma arriba y abajo':['Codo pegado al cuerpo y doblado a 90°.','Gira la mano para dejar la palma hacia arriba y luego hacia abajo.','El antebrazo gira suelto.','15 veces'],
+'Presión de palmas':['Sentado, palmas juntas frente al pecho y codos abiertos.','Empuja una palma contra la otra con fuerza moderada, sin subir los hombros. Respira normal.','Trabajo en los antebrazos y el pecho.','Empuja 5 s · 5 veces'],
+'Pulgar con cada dedo':['Mano al frente con los dedos estirados.','Toca la yema del pulgar con la de cada dedo, uno por uno.','Coordinación y soltura en los dedos.','5 vueltas, con las dos manos a la vez'],
+'Gancho de dedos':['Mano al frente con los dedos estirados.','Dobla solo las puntas de los dedos y vuelve a estirarlos.','Movimiento suave en los dedos.','10 veces'],
+'Palmas al frente':['Sentado, dedos entrelazados al frente.','Estira los brazos girando las palmas hacia afuera.','Estiramiento en los antebrazos y los dedos.','Sostén 10 s · 3 veces'],
+'Pinza con el índice':['Mano al frente.','Junta la yema del pulgar con la del índice y aprieta. Suelta y repite.','Trabajo en el pulgar y la mano.','Aprieta 5 s · 5 veces, con las dos manos a la vez'],
+'Tocar piano en el aire':['Manos al frente, dedos sueltos.','Mueve los dedos uno por uno, como tocando piano.','Dedos sueltos y coordinados.','20 s seguidos'],
+'Sacudir los brazos':['De pie, brazos a los costados.','Sacude los brazos completos, sueltos, desde los hombros hasta las manos.','Brazos livianos y relajados.','15 s seguidos'],
+// PIERNAS
+'Subir talones':['De pie, pies al ancho de las caderas, con un apoyo cerca.','Sube en la punta de los pies y baja lento.','Trabajo en las pantorrillas.','15 veces'],
+'Pararse y sentarse':['Sentado al borde de la silla, pies apoyados.','Inclínate un poco y párate sin usar las manos. Baja lento hasta sentarte.','Trabajo en los muslos y los glúteos.',''],
+'Marcha en el puesto':['De pie, espalda recta.','Marcha en el lugar subiendo las rodillas y moviendo los brazos.','El cuerpo entra en calor.','30 s a ritmo cómodo'],
+'Estirar la rodilla':['Sentado, espalda apoyada.','Estira una pierna hasta dejarla recta, sostén y bájala.','Trabajo en el muslo.','8 veces por pierna · sostén 2 s arriba'],
+'Bombeo de tobillos':['Sentado, una pierna estirada.','Lleva la punta del pie hacia ti y luego hacia adelante.','Pantorrillas activas y piernas menos pesadas.','20 veces'],
+'Isquiotibiales sentado':['Sentado al borde de la silla, una pierna estirada con el talón en el suelo y la punta del pie hacia arriba.','Inclina el tronco al frente con la espalda recta.','Estiramiento detrás del muslo.','Sostén 15 s por pierna'],
+'Pantorrilla en la pared':['De pie frente a la pared, manos apoyadas y una pierna atrás con el pie apuntando al frente.','Empuja la pared con el talón de atrás en el suelo y la rodilla de adelante flexionada.','Estiramiento en la pantorrilla de atrás.','Sostén 15 s por pierna'],
+'Círculos de cadera':['De pie, manos en la cintura y rodillas sueltas.','Dibuja círculos con la cadera.','Caderas y zona lumbar sueltas.','8 círculos hacia cada lado'],
+'Talón y punta':['De pie, con un apoyo cerca.','Pasa el peso a los talones levantando las puntas, y luego sube a las puntas.','Tobillos y pantorrillas activos.','15 veces'],
+'Media sentadilla':['De pie, pies al ancho de las caderas.','Lleva la cadera atrás como para sentarte, baja a medio camino y sube. Las rodillas apuntan hacia los pies.','Trabajo en los muslos y los glúteos.','10 veces'],
+'Pierna al lado':['De pie, con un apoyo cerca.','Separa una pierna hacia el lado sin inclinar el tronco y vuelve.','Trabajo al costado de la cadera.','10 veces por pierna'],
+'Pierna atrás':['De pie, con un apoyo cerca.','Lleva una pierna estirada hacia atrás sin arquear la espalda y vuelve.','Trabajo en el glúteo.','10 veces por pierna'],
+'Talón al glúteo':['De pie, con un apoyo cerca.','Dobla la rodilla llevando el talón hacia el glúteo y baja.','Trabajo detrás del muslo.','10 veces por pierna'],
+'Marcha sentado':['Sentado, espalda recta.','Sube una rodilla y luego la otra, como marchando.','Caderas y abdomen activos.','10 veces con cada pierna'],
+'Flexores de cadera':['De pie, un paso largo atrás con el talón de atrás levantado.','Aprieta el glúteo de la pierna de atrás y lleva la cadera hacia adelante, con el tronco erguido.','Estiramiento delante de la cadera de atrás.','Sostén 15 s por lado'],
+'Caminata corta':['De pie.','Camina por el pasillo o en el lugar, a paso vivo.','Piernas activas y cabeza despejada.','30 s seguidos'],
+'Cuádriceps con apoyo':['De pie, una mano en el escritorio.','Toma el pie con la otra mano y lleva el talón al glúteo, con las rodillas juntas y sin arquear la espalda.','Estiramiento delante del muslo.','Sostén 15 s por pierna'],
+'Puntas y talones sentado':['Sentado, pies apoyados.','Levanta las puntas de los pies y luego los talones.','Tobillos y pantorrillas activos.','20 veces'],
+'Círculos de tobillo':['Sentado, una pierna estirada.','Dibuja círculos con el pie.','Tobillos sueltos.','10 círculos con cada pie'],
+'Pasos laterales':['De pie, rodillas sueltas.','Da un paso amplio hacia un lado y luego hacia el otro.','Caderas activas.','10 pasos por lado'],
+'Abrir y cerrar rodillas':['Sentado, pies apoyados.','Abre las rodillas hacia afuera y vuelve a juntarlas.','Trabajo en las caderas.','15 veces'],
+'Apretar las rodillas':['Sentado, pies apoyados.','Aprieta las rodillas una contra otra, como sujetando una pelota.','Trabajo en la cara interna de los muslos.','Aprieta 5 s · 6 veces'],
+'Pierna estirada arriba':['Sentado, espalda apoyada y una pierna estirada.','Sube un poco la pierna estirada, sin despegar la espalda, y baja lento.','Trabajo en el muslo y la cadera.','5 veces por pierna'],
+'Apretar glúteos sentado':['Sentado, espalda recta.','Aprieta los glúteos y suelta. No aguantes el aire.','Trabajo en los glúteos.','Aprieta 5 s · 6 veces'],
+'Deslizar los pies':['Sentado, pies apoyados.','Desliza los pies hacia adelante estirando las rodillas y vuelve.','Rodillas y tobillos en movimiento.','15 veces'],
+'Zancada corta':['De pie, un pie adelante y el otro atrás.','Baja un poco doblando ambas rodillas y sube. La rodilla de adelante queda sobre el tobillo.','Trabajo en los muslos y los glúteos.','5 veces por lado'],
+'Rodilla a la mano':['De pie, espalda recta.','Sube una rodilla y tócala con la mano contraria. Cambia de lado.','Trabajo en el abdomen y las caderas.','10 veces por lado'],
+'Equilibrio en un pie':['De pie, con un apoyo cerca.','Sube una rodilla y mantén el equilibrio en el otro pie.','Trabajo de equilibrio en el tobillo y la cadera.','Sostén 15 s por lado'],
+'Sentadilla en la pared':['De pie, espalda apoyada en la pared y pies un paso adelante.','Baja deslizando la espalda hasta doblar un poco las rodillas y sostén. Las rodillas quedan sobre los tobillos.','Trabajo en los muslos, sin dolor de rodillas.','Sostén 15 s · 2 veces'],
+'Estocada lateral suave':['De pie, pies bien separados.','Lleva el peso hacia un lado doblando esa rodilla, con la otra pierna estirada.','Estiramiento en la cara interna del muslo.','6 veces por lado'],
+'Isquiotibiales de pie':['De pie, un talón adelante con esa pierna estirada.','Dobla la otra rodilla e inclínate al frente con la espalda recta.','Estiramiento detrás del muslo.','Sostén 15 s por lado'],
+'Talones en un pie':['De pie en un pie, con un apoyo cerca.','Sube en la punta del pie y baja lento.','Trabajo en la pantorrilla.','10 veces por pierna'],
+'Balanceo de pierna al frente':['De pie en un pie, con un apoyo cerca.','Balancea la otra pierna hacia adelante y hacia atrás, suelta.','Cadera suelta.','10 veces por pierna'],
+// OJOS
+'Regla 20-20-20':['Sentado, aleja la vista de la pantalla.','Mira un punto a 6 metros o más, como una ventana o el fondo de la oficina.','Los ojos descansan del enfoque cercano.','Mira lejos 20 s'],
+'Parpadeo completo':['Sentado, mirada al frente.','Cierra los ojos por completo, lento, y vuelve a abrirlos.','Ojos más húmedos y menos ardor.','10 parpadeos lentos'],
+'Parpadeo con apretón':['Sentado, mirada al frente.','Cierra 2 s y abre. Cierra otra vez 2 s, aprieta suave los párpados 2 s y abre.','Párpados que cierran completo y ojos lubricados.','3 veces'],
+'Ojos cerrados':['Sentado, espalda apoyada y manos sobre los muslos.','Cierra los ojos sin apretar. Suelta la frente y deja los dientes un poco separados, con los labios juntos.','La cara se afloja y los ojos descansan.','Mantén 20 s'],
+'Mira lejos y parpadea':['Sentado, aleja la vista de la pantalla.','Mira un punto lejano y parpadea lento, cerrando bien los ojos.','Ojos húmedos y descansados.','20 s seguidos'],
+// RESPIRAR Y POSTURA
+'Respiración abdominal':['Sentado, manos sobre el abdomen.','Inhala por la nariz inflando el abdomen y exhala lento por la boca.','El abdomen sube y baja, y la tensión baja.',''],
+'Respiración cuadrada':['Sentado, espalda recta y hombros sueltos.','Inhala 4 s, sostén 4 s, exhala 4 s y sostén 4 s. Si te incomoda sostener el aire, acorta los tiempos.','Calma y foco.','2 vueltas completas'],
+'Respirar con brazos':['De pie, brazos a los costados.','Sube los brazos por los lados al inhalar y bájalos al exhalar.','El tórax se expande.','4 veces, lento'],
+'Suspiro largo':['Sentado, hombros sueltos.','Inhala subiendo un poco los hombros y suelta el aire largo por la boca, dejándolos caer.','Los hombros se sueltan.','5 veces'],
+'Reinicio de postura':['Sentado frente al computador.','Revisa: pies apoyados, espalda en el respaldo, hombros sueltos y pantalla a la altura de los ojos.','Postura cómoda, sin rigidez.','Revisa los 4 puntos'],
+'Labios fruncidos':['Sentado, hombros sueltos.','Inhala por la nariz 2 s y bota el aire lento por la boca, como soplando una vela, durante 4 s.','La exhalación se alarga y calma.','5 veces'],
+'Respiración costal':['Sentado, manos a los lados de las costillas.','Inhala por la nariz abriendo las costillas hacia las manos y exhala lento.','Las costillas se abren hacia los lados.','4 veces, lento'],
+'Respiración 5 y 5':['Sentado, espalda recta.','Inhala por la nariz durante 5 s y exhala por la nariz durante 5 s.','Un ritmo lento que calma.','3 veces'],
+'Apretar y soltar':['Sentado, espalda apoyada.','Aprieta los puños y sube los hombros 5 s. Luego suelta todo y quédate 10 s relajado.','Contraste claro entre tensión y relajo.','2 veces'],
+'De pie y estírate':['Sentado al borde de la silla.','Ponte de pie, estira los brazos hacia arriba y vuelve a sentarte.','El cuerpo sale de la postura sentada.','5 veces'],
+'Respirar con codos abiertos':['Sentado, manos en la nuca.','Manos en la nuca: abre los codos al inhalar y júntalos al frente al exhalar.','Pecho abierto y respiración amplia.','4 veces, lento'],
+'Respiración en 3 tomas':['Sentado, hombros sueltos.','Inhala por la nariz en tres tomas cortas seguidas y exhala largo por la boca.','Respiración ordenada y calma.','4 veces'],
+'Reinicio de postura de pie':['De pie.','Revisa: peso en ambos pies, rodillas sueltas, hombros abajo y mirada al frente.','Postura cómoda y estable.','Revisa los 4 puntos'],
+'Estirarse completo':['De pie, brazos a los costados.','Inhala subiendo los brazos y poniéndote en punta de pies. Exhala bajando.','Todo el cuerpo se alarga.','4 veces'],
+'Relajar piernas':['Sentado, espalda apoyada.','Estira y tensa las piernas 5 s. Luego suéltalas por completo durante 10 s.','Contraste entre tensión y relajo.','2 veces'],
+'Inhala y crece':['Sentado, espalda recta.','Al inhalar crece por la coronilla. Al exhalar suelta los hombros sin encorvarte.','Columna larga y hombros relajados.','4 veces']
+};
+
+/* ---------- Animación guiada: la figura sigue la dosis real ---------- */
+function basePose(e,over){
+  const a=e.a;
+  if(a.r==='fig')return{...DEF,...BASE[a.b],...(a.all||{}),...(over||{})};
+  if(a.r==='hand')return{...HDEF,...(a.all||{}),...(over||{})};
+  return{...EDEF,...(over||{})};
+}
+function mirrorPose(e,p){
+  if(e.a.r==='hand')return{...p,mir:1};
+  if(e.a.r!=='fig')return p;
+  const q={...p,shL:p.shR,shR:p.shL};
+  if(p.v==='f'){
+    q.aL=[-p.aR[0],-p.aR[1]];q.aR=[-p.aL[0],-p.aL[1]];q.lL=[-p.lR[0],-p.lR[1]];q.lR=[-p.lL[0],-p.lL[1]];
+    for(const k of['sp','sp2','hd','turn','tw','sx','hx'])q[k]=-p[k];
+    q.px=200-p.px;
+  }else{q.aL=p.aR;q.aR=p.aL;q.lL=p.lR;q.lR=p.lL;q.toe=p.toe2;q.toe2=p.toe}
+  return q;
+}
+function buildTL(e){
+  const s=e.s,N=basePose(e),segs=[];let t=0;
+  if(s.type==='loop'){prep(e.a);s.path=e.a._k.map(k=>({to:k.p,m:k.m,h:k.h,say:k.say||''}));s.type='reps'}
+  const push=(d,from,to,label,kind,x)=>{segs.push({t0:t,d,from,to,label,kind,...x});t+=d};
+  const sideV=e.a.r==='fig'&&BASE[e.a.b].v==='s';
+  const SL=s.sideLabels||(sideV?['Un lado','El otro lado']:['Hacia la derecha','Hacia la izquierda']);
+  const side=(p,sd)=>sd&&!s.noMirror?mirrorPose(e,p):p;
+  if(s.type==='breath'){
+    const T=basePose(e,s.to);
+    for(let c=1;c<=s.cycles;c++){
+      const sub=`Ciclo ${c} de ${s.cycles}`;
+      push(s.in,N,T,s.inLabel||'Inhala','in',{sub,cd:1});
+      if(s.hin)push(s.hin,T,T,'Sostén el aire','hold',{sub,cd:1});
+      push(s.out,T,N,s.outLabel||'Exhala','out',{sub,cd:1});
+      if(s.hout)push(s.hout,N,N,'Sostén','hold',{sub,cd:1});
+    }
+  }else{
+    const sets=(s.type==='hold'||s.type==='timed')?(s.sets||1):1,blocks=[];
+    for(let set=1;set<=sets;set++)for(const sd of(s.sides?[0,1]:[0]))blocks.push({set,sd});
+    blocks.forEach((b,i)=>{
+      const n0=side(N,b.sd);
+      const sub=[sets>1?`Serie ${b.set} de ${sets}`:'',s.sides?SL[b.sd]:''].filter(Boolean).join(' · ');
+      if(s.type==='timed'){
+        push(s.secs,n0,n0,s.label||'','loop',{sub,cd:1,loop:1});
+      }else if(s.type==='hold'){
+        const T=side(basePose(e,s.to),b.sd);
+        push(s.in,n0,T,s.say||'Estira','go',{sub});
+        push(s.hold,T,T,s.holdLabel||'Sostén','hold',{sub,cd:1});
+        push(s.out,T,n0,s.backLabel||'Vuelve','back',{sub});
+      }else{
+        let prev=n0;
+        for(let r=1;r<=s.n;r++){
+          s.path.forEach((st,j)=>{const to=side(basePose(e,st.to),b.sd);
+            push(st.m,prev,to,st.say,'move',{sub,rep:r,n:s.n,first:j===0});
+            if(st.h)push(st.h,to,to,st.sayH||st.say,'hold',{sub,rep:r,n:s.n});
+            prev=to});
+        }
+        if(Object.keys(s.path[s.path.length-1].to).length)push(.8,prev,n0,'Vuelve','back',{sub});
+      }
+      const nx=blocks[i+1];
+      if(nx){const nn=side(N,nx.sd),ch=nx.sd!==b.sd;
+        push(s.rest||3,nn,nn,ch?(s.change||'Cambia de lado'):(s.restLabel||'Descansa'),'rest',{sub:ch?'Ahora: '+SL[nx.sd]:'Sigue: serie '+nx.set,cd:1})}
+    });
+    if(s.tail)push(s.tail,N,N,s.restLabel||'Descansa','rest',{cd:1});
+  }
+  e.tl=segs;e.d=Math.round(t*10)/10;
+}
+function repText(s){
+  const per=s.per||'por lado';
+  if(s.type==='hold')return s.sets>1?`Sostén ${s.hold} s · ${s.sets} veces${s.sides?' '+per:''}`:`Sostén ${s.hold} s${s.sides?' '+per:''}`;
+  if(s.type==='reps')return`${s.n} veces${s.sides?' '+per:''}`;
+  return`${s.cycles} ciclos: inhala ${s.in} s y exhala ${s.out} s`;
+}
+/* ---------- Ejercicios con animación guiada (la figura sigue la dosis) ---------- */
+const ARM2=['Un brazo','El otro brazo'],LEG2=['Una pierna','La otra pierna'],HAND2=['Una mano','La otra mano'];
+const GUIDE={
+// CUELLO
+'Rotación de cuello':{s:{type:'reps',n:5,path:[{to:{turn:1},m:1.2,h:3,say:'Gira',sayH:'Sostén'},{to:{},m:1,say:'Al centro'},{to:{turn:-1},m:1.2,h:3,say:'Gira',sayH:'Sostén'},{to:{},m:1,say:'Al centro'}]}},
+'Mentón al pecho':{s:{type:'hold',to:{hd:40},say:'Baja el mentón',in:1.6,hold:10,out:1.4,rest:3,sets:3}},
+'Doble mentón':{s:{type:'reps',n:10,path:[{to:{hx:-6,hd:3},m:.8,h:3,say:'Cabeza atrás',sayH:'Sostén'},{to:{},m:.8,h:.4,say:'Suelta'}]}},
+'Empuje contra la mano':{s:{type:'hold',to:{hx:1.5,hd:3},say:'Empuja',holdLabel:'Empuja',backLabel:'Suelta',in:.6,hold:5,out:.5,rest:2,sets:5}},
+'Mirar la axila':{s:{type:'hold',to:{hd:12,turn:.7,nod:.9},say:'Mira la axila',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1}},
+'Empuje lateral':{s:{type:'hold',to:{hd:3,aR:[150,-95]},say:'Empuja',holdLabel:'Empuja',backLabel:'Suelta',in:.7,hold:5,out:.5,rest:2,sets:3,sides:1}},
+'Giro sostenido':{s:{type:'hold',to:{turn:1},say:'Gira',in:1.2,hold:10,out:1,rest:3,sets:2,sides:1}},
+'Escalenos con mano en el pecho':{s:{type:'hold',to:{hd:24,nod:-.5,aL:[-10,130]},say:'Inclina y mira arriba',in:1.6,hold:15,out:1.2,rest:3,sets:1,sides:1}},
+'Retracción contra la pared':{s:{type:'reps',n:8,path:[{to:{hx:-3,hd:2},m:.8,h:5,say:'Nuca a la pared',sayH:'Sostén'},{to:{hx:3,hd:4},m:.8,h:.4,say:'Suelta'}]}},
+// HOMBROS
+'Encoger hombros':{s:{type:'reps',n:10,path:[{to:{shL:9,shR:9},m:.7,h:3,say:'Sube',sayH:'Sostén'},{to:{},m:.5,h:.4,say:'Suelta'}]}},
+'Brazo cruzado':{s:{type:'hold',to:{aL:[80,85],aR:[10,-139]},say:'Cruza el brazo',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:ARM2,change:'Cambia de brazo',per:'por brazo'}},
+'Juntar escápulas':{all:{aR:[12,80],aL:[12,80]},s:{type:'reps',n:10,path:[{to:{aR:[-28,80],aL:[-28,80],sx:-3,sp2:-4},m:.9,h:5,say:'Junta',sayH:'Sostén'},{to:{},m:.8,h:.4,say:'Suelta'}]}},
+'Abrir el pecho':{all:{aR:[-12,-8],aL:[-12,-8]},s:{type:'hold',to:{aR:[-38,-28],aL:[-38,-28],sp2:-7,sx:-2},say:'Abre el pecho',in:1.4,hold:15,out:1.2,rest:3,sets:2}},
+'Tríceps':{s:{type:'hold',to:{aR:[165,-20]},say:'Codo arriba',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:ARM2,change:'Cambia de brazo',per:'por brazo'}},
+'Bajar hombros':{s:{type:'reps',n:8,path:[{to:{shL:-5,shR:-5},m:.8,h:5,say:'Baja',sayH:'Sostén'},{to:{},m:.6,h:.4,say:'Suelta'}]}},
+'Abrir antebrazos':{all:{aL:[-4,-25],aR:[4,25]},s:{type:'reps',n:10,path:[{to:{aL:[-4,-88],aR:[4,88]},m:.8,h:3,say:'Abre',sayH:'Sostén'},{to:{},m:.8,h:.3,say:'Cierra'}]}},
+'Brazos en V baja':{s:{type:'hold',to:{aL:[-32,-34],aR:[32,34]},say:'Abre en V',in:1.2,hold:10,out:1,rest:3,sets:3}},
+'Empujar el escritorio':{s:{type:'hold',to:{shL:-3,shR:-3,sp:-2},say:'Empuja',holdLabel:'Empuja',backLabel:'Suelta',in:.6,hold:5,out:.5,rest:2,sets:6}},
+'Pecho en el respaldo':{s:{type:'hold',to:{aR:[-40,-10],aL:[-40,-10],sp2:-8,sx:-2,hd:-4},say:'Saca pecho',in:1.4,hold:15,out:1.2,rest:3,sets:2}},
+'Cactus sostenido':{s:{type:'hold',to:{aL:[-90,-180],aR:[90,180]},say:'Brazos en cactus',in:1.2,hold:10,out:1,rest:3,sets:3}},
+'Bolsillos traseros':{s:{type:'reps',n:10,path:[{to:{aR:[-28,30],aL:[-28,30],sx:-3,shL:-3,shR:-3},m:.9,h:3,say:'Codos atrás',sayH:'Sostén'},{to:{},m:.7,h:.3,say:'Suelta'}]}},
+// ESPALDA
+'Inclinación de tronco':{s:{type:'hold',to:{sp:10,sp2:14,aL:[-195,-206]},say:'Inclina',in:1.5,hold:10,out:1.2,rest:3,sets:2,sides:1}},
+'Giro sentado':{s:{type:'hold',to:{tw:1,turn:1,aL:[30,70],aR:[25,30]},say:'Gira',in:1.5,hold:10,out:1.2,rest:3,sets:2,sides:1}},
+'Colgarse sentado':{s:{type:'hold',to:{sp:45,sp2:35,hd:30,aR:[5,5],aL:[5,5]},say:'Baja el tronco',backLabel:'Sube lento',in:2,hold:15,out:2,rest:3,sets:2}},
+'Abrazo al frente':{s:{type:'hold',to:{aR:[82,88],aL:[82,88],sp2:18,hd:22,sx:3},say:'Redondea',in:1.4,hold:15,out:1.2,rest:3,sets:2}},
+'Mano al suelo':{s:{type:'hold',to:{sp:12,sp2:14,aR:[18,10]},say:'Baja la mano',in:1.5,hold:10,out:1.2,rest:3,sets:2,sides:1}},
+'Rodilla al pecho':{s:{type:'hold',to:{lR:[130,10],aR:[45,110],aL:[45,110],sp:-2},say:'Abraza la rodilla',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:LEG2,change:'Cambia de pierna'}},
+'Plancha en la pared':{all0:{px:110},s:{type:'hold',to:{px:125,py:133.2,sp:30,lL:[-30,-30],lR:[-30,-30],aR:[45,175],aL:[45,175],hd:-12},say:'Apóyate',holdLabel:'Aprieta el abdomen',in:1.5,hold:15,out:1.5,rest:3,sets:2}},
+'Gato y camello':{s:{type:'reps',n:10,path:[{to:{sp:12,sp2:24,hd:22,aR:[38,78],aL:[38,78]},m:1.8,h:.4,say:'Redondea'},{to:{sp:-4,sp2:-12,hd:-12,aR:[2,72],aL:[2,72]},m:1.8,h:.4,say:'Saca pecho'}]}},
+// MUÑECAS Y MANOS
+'Extensores de muñeca':{s:{type:'hold',to:{w:-62,f:-18,help:1},say:'Dobla la muñeca',in:1.4,hold:15,out:1,rest:3,sets:1,sides:1,sideLabels:HAND2,change:'Cambia de mano',per:'por mano'}},
+'Manos en oración':{all:{aL:[-15,117],aR:[15,-117]},s:{type:'hold',to:{aL:[-22,103],aR:[22,-103]},say:'Baja las manos',in:1.4,hold:15,out:1.2,rest:3,sets:2}},
+'Presión de palmas':{all:{aL:[-15,117],aR:[15,-117]},s:{type:'hold',to:{aL:[-14,119],aR:[14,-119],shL:-1,shR:-1},say:'Empuja',holdLabel:'Empuja',backLabel:'Suelta',in:.6,hold:5,out:.5,rest:2,sets:5}},
+'Pinza con el índice':{s:{type:'hold',to:{op:1,tt:0},say:'Junta los dedos',holdLabel:'Aprieta',backLabel:'Suelta',in:.6,hold:5,out:.5,rest:2,sets:5}},
+'Palmas al frente':{s:{type:'hold',to:{aR:[88,90],aL:[88,90]},say:'Estira los brazos',in:1.2,hold:10,out:1,rest:3,sets:3}},
+// PIERNAS
+'Subir talones':{s:{type:'reps',n:15,path:[{to:{py:116,toe:1,toe2:1},m:.8,h:.4,say:'Sube'},{to:{},m:1.2,h:.2,say:'Baja lento'}]}},
+'Estirar la rodilla':{s:{type:'reps',n:8,sides:1,sideLabels:LEG2,change:'Cambia de pierna',per:'por pierna',rest:3,path:[{to:{lR:[90,84]},m:.8,h:2,say:'Estira',sayH:'Sostén'},{to:{},m:.8,h:.3,say:'Baja'}]}},
+'Isquiotibiales sentado':{s:{type:'hold',to:{sp:28,hd:-10,aR:[45,70],aL:[45,70]},say:'Inclínate',in:1.6,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:LEG2,change:'Cambia de pierna'}},
+'Pantorrilla en la pared':{all:{px:112,aR:[85,82],aL:[85,82]},s:{type:'hold',to:{px:106,py:132,lR:[-30,-30],lL:[45,0],sp:10,aR:[80,80],aL:[80,80]},say:'Pierna atrás',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:LEG2,change:'Cambia de pierna'}},
+'Media sentadilla':{s:{type:'reps',n:10,path:[{to:{px:76,py:132,lL:[40,-12],lR:[40,-12],sp:25,aR:[80,85],aL:[80,85]},m:1.2,h:.4,say:'Baja'},{to:{},m:1,h:.3,say:'Sube'}]}},
+'Flexores de cadera':{s:{type:'hold',to:{py:134,lR:[-32,-32],lL:[42,0],sp:-4},say:'Paso atrás',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:LEG2,change:'Cambia de pierna'}},
+'Cuádriceps con apoyo':{s:{type:'hold',to:{lR:[-12,-150],aR:[-22,-35]},say:'Talón al glúteo',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:LEG2,change:'Cambia de pierna'}},
+'Sentadilla en la pared':{all:{lL:[20,20],lR:[20,20],py:126.6},s:{type:'hold',to:{lL:[50,-5],lR:[50,-5],py:137},say:'Baja',in:1.6,hold:15,out:1.4,rest:3,sets:2}},
+'Equilibrio en un pie':{s:{type:'hold',to:{lR:[70,5],aR:[30,20],aL:[-20,-10]},say:'Sube la rodilla',in:1.2,hold:15,out:1,rest:3,sets:1,sides:1,sideLabels:LEG2,change:'Cambia de pierna'}},
+'Isquiotibiales de pie':{s:{type:'hold',to:{sp:35,hd:-25,aR:[20,20],aL:[20,20]},say:'Inclínate',in:1.6,hold:15,out:1.2,rest:3,sets:1,sides:1,sideLabels:LEG2,change:'Cambia de pierna'}},
+// OJOS
+'Parpadeo completo':{s:{type:'reps',n:10,path:[{to:{lid:1},m:.5,h:.5,say:'Cierra'},{to:{},m:.5,h:1,say:'Abre'}]}},
+'Regla 20-20-20':{s:{type:'hold',to:{ex:.7,ey:-.5},say:'Mira lejos',holdLabel:'Mira lejos',backLabel:'Vuelve',in:.8,hold:20,out:.6,sets:1}},
+'Ojos cerrados':{s:{type:'hold',to:{lid:1},say:'Cierra los ojos',holdLabel:'Descansa',backLabel:'Abre',in:1,hold:20,out:.8,sets:1}},
+// RESPIRAR Y POSTURA
+'Respiración cuadrada':{s:{type:'breath',cycles:2,in:4,hin:4,out:4,hout:4,to:{br:1}}},
+'Labios fruncidos':{s:{type:'breath',cycles:5,in:2,out:4,to:{br:1},outLabel:'Sopla lento'}},
+'Respiración 5 y 5':{s:{type:'breath',cycles:3,in:5,out:5,to:{br:1}}},
+'Respiración costal':{s:{type:'breath',cycles:4,in:4,out:4,to:{br:1}}},
+// revisión kinésica: sostenidos y empujes que antes eran animación en bucle
+'Trapecio con apoyo':{s:{type:'hold',to:{hd:27,aR:[150,-119]},say:'Inclina y apoya la mano',in:1.6,hold:15,out:1.2,rest:3,sets:1,sides:1}},
+'Trapecio con mano fija':{s:{type:'hold',to:{hd:26,aL:[-5,-2]},say:'Inclina',in:1.5,hold:15,out:1.2,rest:3,sets:1,sides:1}},
+'Rotación asistida':{s:{type:'hold',to:{turn:1,aL:[-130,95]},say:'Gira y acompaña',in:1.5,hold:10,out:1.2,rest:3,sets:1,sides:1}},
+'Empuje hacia atrás':{s:{type:'hold',to:{hx:-1.5,hd:-3},say:'Empuja',holdLabel:'Empuja',backLabel:'Suelta',in:.6,hold:5,out:.5,rest:2,sets:5}},
+'Empuje de giro':{s:{type:'hold',to:{aR:[140,-100],turn:.1},say:'Empuja',holdLabel:'Empuja',backLabel:'Suelta',in:.8,hold:5,out:.6,rest:2,sets:3,sides:1}},
+'Asentir corto':{s:{type:'reps',n:10,path:[{to:{hd:12,hx:-3},m:.8,h:3,say:'Asiente',sayH:'Sostén'},{to:{hx:-1},m:.6,h:.3,say:'Suelta'}]}},
+'Empuje lateral en la pared':{s:{type:'hold',to:{aR:[14,6]},say:'Empuja',holdLabel:'Empuja',backLabel:'Suelta',in:.5,hold:5,out:.5,rest:2,sets:3,sides:1,noMirror:1,sideLabels:ARM2,change:'Cambia de brazo'}},
+'Pecho en la pared':{s:{type:'hold',to:{tw:-.6,turn:-.8},say:'Gira el cuerpo',in:1.4,hold:15,out:1.2,rest:3,sets:1,sides:1,noMirror:1,sideLabels:ARM2,change:'Cambia de brazo'}},
+'Arco con manos arriba':{s:{type:'hold',to:{sp:8,sp2:12,aL:[-192,-242],aR:[152,202]},say:'Arco',in:1.8,hold:10,out:1.4,rest:3,sets:2,sides:1}},
+'Bisagra en el escritorio':{s:{type:'hold',to:{px:66,sp:80,sp2:4,aR:[98,94],aL:[98,94],lL:[5,5],lR:[5,5]},say:'Cadera atrás',in:1.8,hold:15,out:1.6,rest:3,sets:2}},
+'Rodar hacia abajo':{s:{type:'hold',to:{px:86,sp:70,sp2:40,hd:30,lL:[5,5],lR:[5,5],aR:[3,3],aL:[3,3]},say:'Baja de a poco',backLabel:'Sube lento',in:3,hold:10,out:3,rest:3,sets:2}},
+'Apretar las rodillas':{s:{type:'hold',to:{lL:[-30,-4],lR:[30,4]},say:'Aprieta',holdLabel:'Aprieta',backLabel:'Suelta',in:.5,hold:5,out:.5,rest:2,sets:6}},
+'Apretar glúteos sentado':{s:{type:'hold',to:{sp:-2,sp2:2},say:'Aprieta',holdLabel:'Aprieta',backLabel:'Suelta',in:.5,hold:5,out:.5,rest:2,sets:6}},
+'Relajar piernas':{s:{type:'hold',to:{lR:[90,84],lL:[90,84],toe:-1,toe2:-1},say:'Tensa',holdLabel:'Tensa',backLabel:'Suelta',restLabel:'Relájate',in:.8,hold:5,out:.8,rest:10,tail:10,sets:2}},
+'Respirar con brazos':{s:{type:'breath',cycles:4,in:3.5,out:3.5,to:{br:1,aL:UPL,aR:UPR}}},
+'Suspiro largo':{s:{type:'breath',cycles:5,in:2.5,out:3.5,to:{br:1,shL:8,shR:8},outLabel:'Suelta el aire'}},
+'Inhala y crece':{s:{type:'breath',cycles:4,in:3,out:4,to:{br:1,sp:-1,sp2:-4,hd:3,hx:-2},outLabel:'Suelta los hombros'}},
+'Respirar con codos abiertos':{all:{aL:[-160,-245],aR:[160,245]},s:{type:'breath',cycles:4,in:3.5,out:4,to:{br:1,aL:[-120,-265],aR:[120,265]}}},
+'Estirarse completo':{s:{type:'breath',cycles:4,in:3,out:3,to:{br:1,aL:UPL,aR:UPR,py:118}}},
+'Apretar y soltar':{s:{type:'hold',to:{shL:8,shR:8,aL:[-20,40],aR:[20,-40]},say:'Aprieta',holdLabel:'Aprieta',backLabel:'Suelta',restLabel:'Relájate',in:.8,hold:5,out:.8,rest:10,tail:10,sets:2}}
+};
+// Resto de la batería: la animación de siempre, pero contando repeticiones o segundos según la dosis
+// r = repeticiones (un ciclo = una vez), rs = repeticiones por lado (la figura cambia de lado), t = segundos seguidos
+const SENT=['Hacia adelante','Hacia atrás'],LADO=['Hacia un lado','Hacia el otro lado'];
+const LOOPG={
+'Medios círculos':['r',5],'Mirar al techo':['r',5],'Inclinaciones seguidas':['r',10],'Doble mentón y mirar arriba':['r',8],'Automasaje de nuca':['t',30],
+'Círculos de hombros':['r',10],'De W a Y':['r',10],'Círculos de brazos':['rs',10,{noMirror:1,sideLabels:SENT,change:'Cambia de sentido',rest:2}],
+'Elevación al frente':['r',10],'Elevación lateral':['r',10],'Flexiones en la pared':['r',10],'Círculos de codos':['rs',10,{noMirror:1,sideLabels:SENT,change:'Cambia de sentido',rest:2}],
+'Antebrazos arriba y abajo':['r',10],'Abrazo y apertura':['r',10],'Remo sentado':['r',12],'Empujar el techo':['r',10],'Elevación alterna sentado':['r',10],
+'Péndulo de brazos':['t',20],'Balanceo de brazos':['t',20],'Estrella sin salto':['r',10],'Boxeo suave':['t',20],'Nado en seco':['r',10],
+'Extensión de pie':['r',8],'Báscula de pelvis':['r',10],'Giro de pie':['r',10],'Extensión en el respaldo':['r',8],'Bisagra de cadera':['r',10],
+'Giro con brazos cruzados':['r',8],'Balanceo de pelvis':['r',10],'Inclinación con manos en la nuca':['r',8],'Extensión con manos en la cintura':['r',8],
+'Codo a la rodilla contraria':['r',10],'Giro con mano en la nuca':['rs',8],'Giro con brazos en cruz':['r',10],'Brazo y pierna contrarios':['r',5],
+'Gato y camello de pie':['r',8],'Báscula de pie':['r',10],
+'Subir y bajar muñecas':['r',15],'Abrir y cerrar':['r',15],'Círculos de muñeca':['rs',10,{noMirror:1,sideLabels:LADO,change:'Cambia de sentido',rest:2}],
+'Recta, gancho, puño':['r',8],'Sacudir las manos':['t',15,{sets:2}],'Abanico de dedos':['r',15],'Puño arriba y abajo':['r',15],'Mano de lado a lado':['r',15],
+'Palma arriba y abajo':['r',15],'Pulgar con cada dedo':['r',5],'Gancho de dedos':['r',10],'Tocar piano en el aire':['t',20],'Sacudir los brazos':['t',15],
+'Marcha en el puesto':['t',30],'Bombeo de tobillos':['r',20],'Círculos de cadera':['rs',8,{noMirror:1,sideLabels:LADO,change:'Cambia de sentido',rest:2}],
+'Talón y punta':['r',15],'Pierna al lado':['r',10],'Pierna atrás':['rs',10,{sideLabels:LEG2,change:'Cambia de pierna'}],
+'Talón al glúteo':['rs',10,{sideLabels:LEG2,change:'Cambia de pierna'}],'Marcha sentado':['r',10],'Caminata corta':['t',30],'Puntas y talones sentado':['r',20],
+'Círculos de tobillo':['rs',10,{sideLabels:['Un pie','El otro pie'],change:'Cambia de pie'}],'Pasos laterales':['r',10],'Abrir y cerrar rodillas':['r',15],
+'Pierna estirada arriba':['rs',5,{sideLabels:LEG2,change:'Cambia de pierna'}],'Deslizar los pies':['r',15],'Zancada corta':['rs',5,{sideLabels:LEG2,change:'Cambia de pierna'}],
+'Rodilla a la mano':['r',10],'Estocada lateral suave':['rs',6],'Talones en un pie':['rs',10,{sideLabels:LEG2,change:'Cambia de pierna'}],
+'Balanceo de pierna al frente':['rs',10,{sideLabels:LEG2,change:'Cambia de pierna'}],
+'Parpadeo con apretón':['r',3],'Mira lejos y parpadea':['t',20],
+'Reinicio de postura':['t',20],'Reinicio de postura de pie':['t',20],'De pie y estírate':['r',5],'Respiración en 3 tomas':['r',4]
+};
+Object.entries(LOOPG).forEach(([n,[k,v,x]])=>{if(!GUIDE[n])GUIDE[n]={s:k==='t'?{type:'timed',secs:v,sets:1,rest:3,...(x||{})}:{type:'loop',n:v,sides:k==='rs'?1:0,rest:3,...(x||{})}}});
+EX.forEach(e=>{const g=GUIDE[e.n];if(!g)return;e.s=g.s;if(g.all0)e.a.all=g.all0;else if(g.all)e.a.all={...(e.a.all||{}),...g.all};delete e.lados});
+EX.forEach((e,i)=>{e.id=i;e.e=e.e||zOf(e.z).e;if(e.s){buildTL(e);e.rep=repText(e.s)}else e.d=e.d||30});
+EX.forEach(e=>{const t=TXT[e.n];if(t){e.pos=t[0];e.mov=t[1];e.feel=t[2];if(t[3])e.rep=t[3]}});
+function tlAt(e,t){
+  const S=e.tl;let i=0;while(i<S.length-1&&t>=S[i].t0+S[i].d)i++;
+  const g=S[i],u=Math.max(0,Math.min(1,(t-g.t0)/g.d));
+  if(g.loop){const fr=frame(e.a,Math.max(0,t-g.t0));return{i,g,u,rem:g.t0+g.d-t,pose:fr.p,say:fr.say}}
+  return{i,g,u,rem:g.t0+g.d-t,pose:g.from===g.to?g.from:mix(g.from,g.to,ease(u))};
+}
+function thumbPose(e){
+  if(e.s){const g=e.tl.find(x=>(x.kind==='hold'||x.kind==='in')&&x.to)||e.tl[0];if(g.to)return g.to}
+  prep(e.a);return e.a._k[0].p;
+}
+
+/* ---------- Enlace de pausa compartida ---------- */
+// Cada ejercicio tiene un código fijo derivado de su nombre, así el enlace sigue sirviendo aunque se agreguen ejercicios.
+const APP_URL=/^https?:$/.test(location.protocol)?location.origin+location.pathname:'https://kinefranciscozu.github.io/pausa-viva/';
+const codeOf=e=>{let h=2166136261;for(const ch of e.n){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return(h>>>0).toString(36).slice(-4).padStart(4,'0')};
+const BYCODE={};EX.forEach(e=>{e.code=codeOf(e);BYCODE[e.code]=e});
+const pauseHash=(type,plan)=>'p-'+(type==='micro'?'m':'l')+'-'+plan.map(e=>e.code).join('-');
+function readHash(h){const m=/^#p-(m|l)-([a-z0-9-]+)$/.exec(h||'');if(!m)return null;const plan=m[2].split('-').map(c=>BYCODE[c]).filter(Boolean);return plan.length?{type:m[1]==='m'?'micro':'larga',plan}:null}
+
+/* ---------- Armado de la pausa ---------- */
+const LIM={micro:180,larga:300},PREP=5;
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const total=p=>p.reduce((s,e)=>s+e.d+PREP,0);
+let RECENT=new Set();
+const fresh=a=>{a=shuffle(a);return a.filter(e=>!RECENT.has(e.code)).concat(a.filter(e=>RECENT.has(e.code)))};
+const STANDUP=['Pararse y sentarse','De pie y estírate'];
+const seated=e=>e.a.r!=='fig'||(!!BASE[e.a.b].chair&&!STANDUP.includes(e.n));
+function build(type,zone){
+  const ok=zone==='sentado'?seated:()=>true;
+  const pick=(z,n,not=[])=>fresh(EX.filter(e=>e.z===z&&ok(e)&&!not.includes(e))).slice(0,n);
+  let pool;
+  if(zone==='all'||zone==='sentado'){
+    if(type==='micro')pool=[...pick('cuello',1),...pick('hombros',1),...pick('espalda',1),...pick(rnd(['manos','manos','ojos']),1),...pick(rnd(['piernas','piernas','respira']),1)];
+    else{pool=Z.flatMap(z=>pick(z.id,1));pool.push(...pick(rnd(['cuello','hombros','espalda','piernas']),1,pool))}
+    const ord=Z.map(z=>z.id);pool.sort((a,b)=>ord.indexOf(a.z)-ord.indexOf(b.z));
+  }else{
+    pool=[...pick(zone,9),...fresh(EX.filter(e=>e.z!==zone&&['cuello','hombros','espalda','respira'].includes(e.z)))];
+  }
+  const out=[];let t=0;
+  for(const e of pool)if(t+e.d+PREP<=LIM[type]){out.push(e);t+=e.d+PREP}
+  return out;
+}
+function swapOne(plan,i,type,zone){
+  const ok=zone==='sentado'?seated:()=>true;
+  const rest=total(plan)-plan[i].d,fits=e=>ok(e)&&!plan.includes(e)&&rest+e.d<=LIM[type];
+  let c=EX.filter(e=>e.z===plan[i].z&&fits(e));
+  if(!c.length)c=EX.filter(fits);
+  if(c.length){const f=c.filter(e=>!RECENT.has(e.code));plan[i]=rnd(f.length?f:c)}
+}
+const mmss=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+
+/* ---------- Interfaz ---------- */
+function init(){
+  const $=s=>document.querySelector(s);
+  let type='micro',zone='all',plan=[],P=null,AC=null,sound=true,wl=null,shared=false;
+  const ICON={play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',pause:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
+    son:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M17 8.5a5 5 0 0 1 0 7"/></svg>',
+    soff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg>',
+    mus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/></svg>',
+    moff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/><path d="M3 3l18 18"/></svg>',
+    swap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"/></svg>',
+    sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>',
+    moon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>'};
+
+  // tema claro / oscuro
+  const root=document.documentElement;
+  const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  const themeBtn=()=>{$('#bTheme').innerHTML=isDark()?ICON.sun:ICON.moon};
+  try{const t=localStorage.getItem('pv-theme');if(t==='dark'||t==='light')root.dataset.theme=t}catch(e){}
+  themeBtn();
+  $('#bTheme').onclick=()=>{const t=isDark()?'light':'dark';root.dataset.theme=t;try{localStorage.setItem('pv-theme',t)}catch(e){}themeBtn()};
+
+  // contador del día
+  const today=new Date().toDateString();
+  let cnt=0;try{const c=JSON.parse(localStorage.getItem('pv-count')||'{}');if(c.d===today)cnt=c.n||0}catch(e){}
+  const showCount=()=>{$('#count').textContent='Hoy: '+cnt+(cnt===1?' pausa':' pausas')};
+  showCount();
+  try{RECENT=new Set(JSON.parse(localStorage.getItem('pv-recent')||'[]'))}catch(e){}
+  const remember=pl=>{const arr=[...RECENT].filter(c=>!pl.some(e=>e.code===c));pl.forEach(e=>arr.push(e.code));RECENT=new Set(arr.slice(-75));try{localStorage.setItem('pv-recent',JSON.stringify([...RECENT]))}catch(e){}};
+
+  $('#chips').innerHTML=`<button class="chip" data-zone="all" aria-pressed="true" style="--zc:var(--brand)"><i></i>Cuerpo completo</button><button class="chip" data-zone="sentado" aria-pressed="false" style="--zc:var(--accent)"><i></i>Sentado</button>`+
+    Z.filter(z=>z.id!=='ojos').map(z=>`<button class="chip" data-zone="${z.id}" aria-pressed="false" style="--zc:${z.c}"><i></i>${z.n}</button>`).join('');
+
+  const glowFor=(g,now)=>!g?.5:g.kind==='hold'?.62+.3*Math.sin(now/1000*Math.PI*1.4):g.kind==='rest'?.1:g.kind==='back'?.3:.5;
+  const blinkAt=now=>(now/1000)%4.3<.14?1:0;
+
+  function renderPlan(){
+    $('#planTitle').textContent=shared?'Pausa compartida':'Pausa de hoy';
+    $('#meta').textContent=plan.length+' ejercicios · '+mmss(total(plan))+' min';
+    $('#list').innerHTML=plan.map((e,i)=>{const z=zOf(e.z);
+      return `<li class="row" style="--zc:${z.c}"><svg class="pv thumb" viewBox="0 12 200 200" aria-hidden="true">${render(e.a,{...thumbPose(e),g:.6},'t'+i)}</svg>
+      <div class="tx"><div class="nm">${e.n}${e.s?'<span class="tag-g">Guiado</span>':''}</div><div class="mt"><b>${z.n}</b> · ${e.rep}</div></div>
+      <button class="ib" data-swap="${i}" aria-label="Cambiar ${e.n} por otro ejercicio">${ICON.swap}</button></li>`}).join('');
+    $('#copyBox').hidden=true;
+  }
+  function regen(){shared=false;plan=build(type,zone);renderPlan()}
+  regen();
+  // abre la pausa exacta que llega en el enlace
+  function loadShared(r){
+    r=r||readHash(location.hash);if(!r)return false;
+    type=r.type;zone='all';plan=r.plan;shared=true;
+    document.querySelectorAll('.type').forEach(x=>x.setAttribute('aria-pressed',x.dataset.type===type));
+    document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.zone==='all'));
+    renderPlan();toast('Te compartieron esta pausa');
+    setTimeout(()=>{try{document.querySelector('.plan').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}},300);
+    return true;
+  }
+
+  document.querySelectorAll('.type').forEach(b=>b.onclick=()=>{type=b.dataset.type;document.querySelectorAll('.type').forEach(x=>x.setAttribute('aria-pressed',x===b));regen()});
+  $('#chips').onclick=ev=>{const b=ev.target.closest('.chip');if(!b)return;zone=b.dataset.zone;document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));regen()};
+  $('#bShuffle').onclick=regen;
+  $('#list').onclick=ev=>{const b=ev.target.closest('[data-swap]');if(!b)return;swapOne(plan,+b.dataset.swap,type,zone);shared=false;renderPlan()};
+
+  let toastT;
+  function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,1800)}
+  function shareText(){const link=APP_URL+'#'+pauseHash(type,plan);
+    return{link,short:`Hagamos esta pausa activa: ${type==='micro'?'micro pausa':'pausa larga'} de ${mmss(total(plan))} min. Si se abre otra pausa, pega el link en "¿Te compartieron una pausa?".`,msg:`Hagamos esta pausa activa: ${type==='micro'?'micro pausa':'pausa larga'} de ${mmss(total(plan))} min.\n${link}\n\nSi se abre otra pausa, pega este mensaje en Pausa Viva, en "¿Te compartieron una pausa?".`}}
+  $('#bCopy').onclick=()=>{
+    const t=shareText();
+    $('#shList').innerHTML=plan.map(e=>`<li>${e.n}</li>`).join('');
+    $('#shLink').value=t.link;
+    $('#shWa').href='https://teams.microsoft.com/share?href='+encodeURIComponent(t.link)+'&msgText='+encodeURIComponent(t.short)+'&preview=false';
+    $('#shareSheet').hidden=false;
+  };
+  const closeShare=()=>{$('#shareSheet').hidden=true;try{$('#bCopy').focus()}catch(e){}};
+  $('#shClose').onclick=closeShare;
+  $('#shareSheet').addEventListener('click',ev=>{if(ev.target.id==='shareSheet')closeShare()});
+  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!$('#shareSheet').hidden)closeShare()});
+  $('#shCopy').onclick=()=>{const l=shareText().msg,fb=()=>{const x=$('#shLink');x.focus();x.select();toast('Selecciona y copia el link')};
+    try{navigator.clipboard.writeText(l).then(()=>toast('Mensaje copiado. Pégalo en el chat de Teams'),fb)}catch(e){fb()}};
+  // abrir una pausa compartida pegando el mensaje o el código (por si el link no la trae)
+  function openFromText(t){
+    const m=/p-[ml](?:-[a-z0-9]{4})+/.exec(String(t||'').toLowerCase()),r=m&&readHash('#'+m[0]);
+    if(!r){toast('No encontré una pausa en ese texto');return false}
+    loadShared(r);$('#shareIn').value='';$('#sharedBox').open=false;return true;
+  }
+  $('#shareGo').onclick=()=>openFromText($('#shareIn').value);
+  $('#shareIn').addEventListener('keydown',ev=>{if(ev.key==='Enter')openFromText($('#shareIn').value)});
+  $('#shareIn').addEventListener('paste',ev=>{const t=ev.clipboardData&&ev.clipboardData.getData('text');if(t&&/p-[ml]-/i.test(t)){ev.preventDefault();openFromText(t)}});
+
+
+  // sonido
+  function beep(fr,d,delay){if(!sound||!AC)return;try{const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+(delay||0);o.frequency.value=fr;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.2,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.03)}catch(e){}}
+  // música de fondo original, generada en el navegador (sin archivos ni derechos de terceros)
+  let musicOn=false,MU=null;
+  try{musicOn=localStorage.getItem('pv-music')==='1'}catch(e){}
+  const mtof=m=>440*Math.pow(2,(m-69)/12),SPB=60/80/2;
+  const CHORDS=[[48,[60,64,67,71]],[45,[57,60,64,67]],[41,[57,60,64,65]],[43,[55,59,62,64]]];
+  const ARP=[0,2,1,3,2,1,3,2];
+  function mkBus(){
+    const bus=AC.createGain();bus.gain.value=.0001;
+    const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3200;
+    bus.connect(lp);lp.connect(AC.destination);
+    const nb=AC.createBuffer(1,Math.floor(AC.sampleRate*.5),AC.sampleRate),d=nb.getChannelData(0);
+    for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+    return{bus,nb,timer:0,next:0,step:0};
+  }
+  function note(type,f,t,peak,att,dec,det){
+    const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(det)o.detune.setValueAtTime(det,t);
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+att);g.gain.exponentialRampToValueAtTime(.0001,t+att+dec);
+    o.connect(g);g.connect(MU.bus);o.start(t);o.stop(t+att+dec+.05);
+  }
+  function hat(t,v){
+    const s=AC.createBufferSource(),fl=AC.createBiquadFilter(),g=AC.createGain();s.buffer=MU.nb;fl.type='highpass';fl.frequency.value=7000;
+    g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+.05);s.connect(fl);fl.connect(g);g.connect(MU.bus);s.start(t);s.stop(t+.06);
+  }
+  function kick(t){
+    const o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(45,t+.18);
+    g.gain.setValueAtTime(.22,t);g.gain.exponentialRampToValueAtTime(.0001,t+.3);o.connect(g);g.connect(MU.bus);o.start(t);o.stop(t+.32);
+  }
+  function musicStep(i,t){
+    const[root,ch]=CHORDS[Math.floor(i/16)%4],s=i%16;
+    if(s===0)ch.forEach(n=>{note('triangle',mtof(n),t,.03,1.2,SPB*16,-6);note('sine',mtof(n),t,.03,1.2,SPB*16,6)});
+    if(s===0||s===10)note('sine',mtof(root),t,.16,.02,SPB*(s?6:9));
+    if(s%8===0)kick(t);
+    if(s%2===1)hat(t,s%4===3?.045:.022);
+    if(Math.random()>.28){const n=ch[ARP[s%8]]+12;note('sine',mtof(n),t,.05,.008,.7);note('triangle',mtof(n)*2,t,.008,.008,.3)}
+  }
+  function musicTick(){while(MU.next<AC.currentTime+.3){musicStep(MU.step,MU.next);MU.next+=SPB;MU.step++}}
+  function musicStart(){
+    if(!musicOn||!AC||(MU&&MU.timer))return;
+    try{if(!MU)MU=mkBus();MU.bus.gain.cancelScheduledValues(AC.currentTime);MU.bus.gain.setTargetAtTime(.28,AC.currentTime,.6);
+      MU.next=AC.currentTime+.08;MU.timer=setInterval(musicTick,80);musicTick()}catch(e){}
+  }
+  function musicStop(){
+    if(!MU||!MU.timer)return;clearInterval(MU.timer);MU.timer=0;
+    try{MU.bus.gain.cancelScheduledValues(AC.currentTime);MU.bus.gain.setTargetAtTime(.0001,AC.currentTime,.25)}catch(e){}
+  }
+  function cueSeg(g){
+    if(g.rep){if(g.first)beep(620,.07);return}
+    if(g.kind==='hold')beep(880,.15);
+    else if(g.kind==='go')beep(600,.08);
+    else if(g.kind==='rest'){if(/Cambia/.test(g.label)){beep(740,.1);beep(740,.1,.16)}else beep(440,.12)}
+    else if(g.kind==='in')beep(560,.18);
+    else if(g.kind==='out')beep(420,.18);
+  }
+  const soundBtn=()=>{$('#bSound').innerHTML=sound?ICON.son:ICON.soff;$('#bSound').setAttribute('aria-pressed',sound)};
+  soundBtn();
+  $('#bSound').onclick=()=>{sound=!sound;soundBtn()};
+  const musicBtn=()=>{const b=$('#bMusic');b.innerHTML=ICON.mus+(musicOn?'<span>Música</span>':'<span>Poner música</span>');b.classList.toggle('off',!musicOn);b.classList.toggle('on',musicOn);b.setAttribute('aria-pressed',musicOn);b.setAttribute('aria-label',musicOn?'Apagar la música':'Poner música')};
+  musicBtn();
+  $('#bMusic').onclick=()=>{musicOn=!musicOn;try{localStorage.setItem('pv-music',musicOn?'1':'0')}catch(e){}musicBtn();if(P&&!P.paused)musicOn?musicStart():musicStop()};
+
+  // reproductor
+  const cache={};
+  const setTxt=(id,v)=>{if(cache[id]!==v){cache[id]=v;$(id).textContent=v}};
+  function setEx(){
+    const e=plan[P.i],z=zOf(e.z);
+    $('#player').style.setProperty('--zc',z.c);
+    setTxt('#xZone',z.n);setTxt('#xCount',(P.i+1)+' de '+plan.length);
+    setTxt('#xName',e.n);setTxt('#xRep',e.rep);setTxt('#xPos',e.pos);setTxt('#xMov',e.mov);setTxt('#xFeel',e.feel);
+    setTxt('#xNext',P.i+1<plan.length?'Sigue: '+plan[P.i+1].n:'Último ejercicio');
+  }
+  function playBtn(){$('#bPlay').innerHTML=P&&P.paused?ICON.play:ICON.pause;$('#bPlay').setAttribute('aria-label',P&&P.paused?'Continuar':'Pausar')}
+  function start(){
+    if(!plan.length)return;
+    remember(plan);
+    try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch(e){}
+    try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(l=>wl=l).catch(()=>{})}catch(e){}
+    P={i:0,phase:'prep',left:PREP,paused:false,cued:false,cue:0,t:0,seg:-1,last:performance.now()};
+    $('#segs').innerHTML=plan.map(()=>'<div class="seg"><i></i></div>').join('');
+    $('#plRun').hidden=false;$('#plCtrl').hidden=false;$('#plDone').hidden=true;
+    $('#player').hidden=false;document.body.style.overflow='hidden';
+    setEx();playBtn();beep(520,.1);musicStart();requestAnimationFrame(loop);
+  }
+  function go(i){
+    if(!P)return;
+    if(i>=plan.length){finish();return}
+    P.i=Math.max(0,i);P.phase='prep';P.left=PREP;P.t=0;P.seg=-1;P.cued=false;P.cue=0;setEx();beep(520,.1);
+  }
+  function advance(){
+    const e=plan[P.i];
+    if(P.phase==='prep'){P.phase='run';P.t=0;P.left=e.d;P.seg=-1;if(!e.s)beep(880,.14)}
+    else{beep(660,.1);go(P.i+1)}
+  }
+  function finish(){
+    P=null;cnt++;try{localStorage.setItem('pv-count',JSON.stringify({d:today,n:cnt}))}catch(e){}
+    musicStop();showCount();beep(660,.14);beep(880,.14,.16);beep(1100,.3,.32);
+    try{wl&&wl.release();wl=null}catch(e){}
+    $('#plRun').hidden=true;$('#plCtrl').hidden=true;$('#plDone').hidden=false;
+    $('#player').style.setProperty('--zc','var(--brand)');
+    document.querySelectorAll('.seg i').forEach(s=>s.style.width='100%');
+    $('#dMsg').textContent=`Llevas ${cnt} ${cnt===1?'pausa':'pausas'} hoy. Toma agua y vuelve con calma.`;
+    $('#dNext').textContent=new Date(Date.now()+36e5).toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+  }
+  function close(){P=null;musicStop();try{wl&&wl.release();wl=null}catch(e){}$('#player').hidden=true;document.body.style.overflow=''}
+  function loop(now){
+    if(!P)return;
+    const dt=Math.min(.25,(now-P.last)/1000);P.last=now;
+    if(!P.paused){
+      P.t+=dt;P.left-=dt;if(P.cue>0)P.cue-=dt;
+      const e=plan[P.i];
+      if(!e.s&&P.phase==='run'&&e.lados&&!P.cued&&P.left<=e.d/2){P.cued=true;P.cue=3;beep(740,.12)}
+      if(P.left<=0)advance();
+    }
+    if(!P)return;
+    const e=plan[P.i],run=P.phase==='run',sec=Math.ceil(Math.max(0,P.left));
+    let pose,pill,clock,step='',rest=false,big=false;
+    if(e.s){
+      const r=tlAt(e,run?P.t:0);
+      pose={...r.pose,g:run?glowFor(r.g,now):.2};
+      if(run){
+        if(r.i!==P.seg){P.seg=r.i;cueSeg(r.g)}
+        const g=r.g,s2=String(Math.max(1,Math.ceil(r.rem-1e-6)));pill=r.say||g.label;rest=g.kind==='rest';big=true;
+        step=[g.sub,g.rep?`Repetición ${g.rep} de ${g.n}`:''].filter(Boolean).join(' · ');
+        clock=g.rep?(g.kind==='hold'&&g.d>=2?s2:g.rep+'/'+g.n):g.cd?s2:g.kind==='go'?String(e.s.hold):'✓';
+      }else{pill='Prepárate';clock=String(sec);big=true;const s0=e.tl[0].sub;step=s0?'Empieza: '+s0:''}
+      if(e.a.r==='fig'&&(!run||/hold|rest/.test(r.g.kind))){const w=.5*Math.sin(now/1000*2.4);pose.shL+=w;pose.shR+=w}
+    }else{
+      const fr=frame(e.a,P.t);pose={...fr.p,g:.5};
+      pill=run?(P.cue>0?'Cambia de lado':(fr.say||'')):'Prepárate · '+sec;
+      clock=mmss(sec);
+    }
+    pose.blink=blinkAt(now);
+    $('#fig').innerHTML=render(e.a,pose,'m');
+    const prog=run?1-P.left/e.d:0;
+    $('#ring').setAttribute('stroke-dashoffset',f(100-100*Math.max(0,Math.min(1,prog))));
+    setTxt('#clock',clock);$('#clock').classList.toggle('big',big);
+    setTxt('#pill',pill);$('#pill').classList.toggle('rest',rest);
+    setTxt('#xStep',step);
+    document.querySelectorAll('.seg i').forEach((s,i)=>s.style.width=(i<P.i?100:i===P.i?prog*100:0)+'%');
+    requestAnimationFrame(loop);
+  }
+  $('#bStart').onclick=start;
+  $('#bAgain').onclick=start;
+  $('#bHome').onclick=()=>{close();regen()};
+  $('#bClose').onclick=close;
+  $('#bPlay').onclick=()=>{if(P){P.paused=!P.paused;playBtn();P.paused?musicStop():musicStart()}};
+  $('#bNext').onclick=()=>go(P.i+1);
+  $('#bPrev').onclick=()=>go(P.i-1);
+  // ---------- Recordatorios opcionales: cada persona los activa en su navegador ----------
+  const DAYS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],DAYS2=['Do','Lu','Ma','Mi','Ju','Vi','Sá'];
+  let REM={on:false,start:'09:00',end:'18:00',days:[1,2,3,4,5]};
+  try{REM={...REM,...JSON.parse(localStorage.getItem('pv-rem')||'{}')}}catch(e){}
+  let firedKey='',snoozeAt=0,lastType='micro';
+  try{firedKey=localStorage.getItem('pv-rem-fired')||''}catch(e){}
+  const saveRem=()=>{try{localStorage.setItem('pv-rem',JSON.stringify(REM))}catch(e){}};
+  const toMin=s=>{const[h,m]=String(s||'0:0').split(':').map(Number);return(h||0)*60+(m||0)};
+  const hhmm=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+  const slotsOf=()=>{const a=toMin(REM.start),b=toMin(REM.end),out=[];for(let k=1;a+k*60<=b;k++)out.push({m:a+k*60,type:k%2?'micro':'larga'});return out};
+  function nextSlot(){
+    const now=new Date(),sl=slotsOf();if(!sl.length||!REM.days.length)return null;
+    for(let d=0;d<8;d++){const day=new Date(now);day.setDate(now.getDate()+d);if(!REM.days.includes(day.getDay()))continue;
+      const nm=d?-1:now.getHours()*60+now.getMinutes(),s=sl.find(x=>x.m>nm);
+      if(s)return{d,day:day.getDay(),m:s.m,type:s.type}}
+    return null;
+  }
+  function remLine(){
+    const b=$('#bBell');b.classList.toggle('on',!!REM.on);b.setAttribute('aria-pressed',!!REM.on);
+    const n=REM.on?nextSlot():null,txt=n?`Próximo aviso: ${n.d===0?'':n.d===1?'mañana ':DAYS[n.day]+' '}${hhmm(n.m)} · ${n.type==='micro'?'micro pausa':'pausa larga'}`:'';
+    $('#remLine').hidden=!n;$('#remLine').textContent=txt;
+    $('#remNext').textContent=REM.on?(n?txt:'Revisa el horario: no queda ninguna pausa dentro de él.'):'Los avisos están apagados.';
+  }
+  function chime(){
+    try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume();const t=AC.currentTime;
+      [[660,0],[880,.18],[1046,.36],[880,.95],[1046,1.13],[1318,1.31]].forEach(([fr,dl])=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=fr;
+        g.gain.setValueAtTime(.0001,t+dl);g.gain.exponentialRampToValueAtTime(.25,t+dl+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dl+.5);o.connect(g);g.connect(AC.destination);o.start(t+dl);o.stop(t+dl+.55)})}catch(e){}
+  }
+  function fire(tp){
+    lastType=tp;
+    $('#alTitle').textContent=tp==='micro'?'Hora de tu micro pausa':'Hora de tu pausa larga';
+    $('#alSub').textContent=tp==='micro'?'3 minutos para soltar el cuerpo.':'5 minutos para moverte un poco más.';
+    $('#alarm').hidden=false;chime();remLine();
+    try{if('Notification' in window&&Notification.permission==='granted'&&(document.hidden||!document.hasFocus())){const n=new Notification($('#alTitle').textContent,{body:$('#alSub').textContent,tag:'pausa-viva'});n.onclick=()=>{try{window.focus()}catch(e){}n.close()}}}catch(e){}
+  }
+  function remTick(){
+    if(!REM.on)return;
+    const now=new Date();
+    if(snoozeAt&&Date.now()>=snoozeAt){snoozeAt=0;fire(lastType);return}
+    if(!REM.days.includes(now.getDay()))return;
+    const nm=now.getHours()*60+now.getMinutes(),s=slotsOf().filter(x=>x.m<=nm).pop();
+    if(!s||nm-s.m>3)return;
+    const key=now.toDateString()+' '+s.m;if(key===firedKey)return;
+    firedKey=key;try{localStorage.setItem('pv-rem-fired',key)}catch(e){}
+    fire(s.type);
+  }
+  setInterval(()=>{remTick();remLine()},10000);
+  document.addEventListener('pointerdown',()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch(e){}},{once:true});
+
+  // panel
+  $('#remDays').innerHTML=[1,2,3,4,5,6,0].map(d=>`<button type="button" data-day="${d}" aria-pressed="false" aria-label="${DAYS[d]}">${DAYS2[d]}</button>`).join('');
+  function fillRem(){
+    $('#remOn').checked=!!REM.on;$('#remStart').value=REM.start;$('#remEnd').value=REM.end;
+    document.querySelectorAll('#remDays button').forEach(b=>b.setAttribute('aria-pressed',REM.days.includes(+b.dataset.day)));
+    remLine();
+  }
+  const openRem=()=>{fillRem();$('#remSheet').hidden=false;setTimeout(()=>{try{$('#remOn').focus()}catch(e){}},50)};
+  const closeRem=()=>{$('#remSheet').hidden=true;try{$('#bBell').focus()}catch(e){}};
+  $('#bBell').onclick=openRem;
+  $('#remClose').onclick=closeRem;
+  $('#remSheet').addEventListener('click',ev=>{if(ev.target.id==='remSheet')closeRem()});
+  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!$('#remSheet').hidden)closeRem()});
+  $('#remOn').onchange=()=>{REM.on=$('#remOn').checked;if(REM.on){try{if('Notification' in window&&Notification.permission==='default')Notification.requestPermission().catch(()=>{})}catch(e){}try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch(e){}}saveRem();remLine();toast(REM.on?'Recordatorios activados':'Recordatorios apagados')};
+  const setTimes=()=>{const a=$('#remStart').value||'09:00',b=$('#remEnd').value||'18:00';REM.start=a;REM.end=b;saveRem();remLine()};
+  $('#remStart').onchange=setTimes;$('#remEnd').onchange=setTimes;
+  $('#remDays').onclick=ev=>{const b=ev.target.closest('[data-day]');if(!b)return;const d=+b.dataset.day;
+    REM.days=REM.days.includes(d)?REM.days.filter(x=>x!==d):[...REM.days,d];b.setAttribute('aria-pressed',REM.days.includes(d));saveRem();remLine()};
+  $('#remTest').onclick=()=>{closeRem();fire('micro')};
+
+  // aviso
+  $('#alGo').onclick=()=>{$('#alarm').hidden=true;if(P)close();type=lastType;
+    document.querySelectorAll('.type').forEach(x=>x.setAttribute('aria-pressed',x.dataset.type===type));regen();start()};
+  $('#alSnooze').onclick=()=>{$('#alarm').hidden=true;snoozeAt=Date.now()+10*60*1000;toast('Te aviso de nuevo en 10 minutos')};
+  $('#alNo').onclick=()=>{$('#alarm').hidden=true};
+  remLine();
+  document.addEventListener('keydown',ev=>{
+    if(!P)return;
+    if(ev.key==='Escape')close();
+    else if(ev.key==='ArrowRight')go(P.i+1);
+    else if(ev.key==='ArrowLeft')go(P.i-1);
+    else if(ev.key===' '&&ev.target.tagName!=='BUTTON'){ev.preventDefault();P.paused=!P.paused;playBtn();P.paused?musicStop():musicStart()}
+  });
+  loadShared();
+  window.addEventListener('hashchange',()=>{if(!P)loadShared()});
+}
+if(typeof document!=='undefined')init();
+</script>
+
+</body>
+</html>
