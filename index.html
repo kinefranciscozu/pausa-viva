@@ -15,7 +15,7 @@ body{margin:0}
 img{max-width:100%}
 /* Layout: inicio en una columna tipo app (máx. 600px) con tarjeta "mar Caribe" arriba; reproductor a pantalla completa con escenario circular y anillo de tiempo, dos columnas en pantallas anchas para proyectar al equipo */
 :root{
-  --bg:#E9F8FA;--surface:#FFFFFF;--ink:#06313D;--muted:#4A7380;--line:#CBE7EC;
+  --sil:0;--bg:#E9F8FA;--surface:#FFFFFF;--ink:#06313D;--muted:#4A7380;--line:#CBE7EC;
   --brand:#007F90;--brand-ink:#FFFFFF;--accent:#DE4526;--accent-ink:#FFFFFF;
   --hero1:#66E6DB;--hero2:#23B9DD;--hero-ink:#03303B;
   --fig:#0A3D4A;--chair:#BCE0E6;--zc:#0FB5A6;
@@ -27,12 +27,12 @@ img{max-width:100%}
   --bg:#041E27;--surface:#0A2C38;--ink:#E4F7FA;--muted:#86B3BD;--line:#17414E;
   --brand:#2FD3DE;--brand-ink:#03262E;--accent:#FF8F7A;--accent-ink:#2B0D05;
   --hero1:#0C6C7C;--hero2:#0B4573;--hero-ink:#E8FCFE;
-  --fig:#D9F3F6;--chair:#1F4B58;--hair:#7A5240;--shirt:#2EC4D2;--pants:#7F9DB8;color-scheme:dark}}
+  --fig:#D9F3F6;--chair:#1F4B58;--hair:#7A5240;--shirt:#2EC4D2;--pants:#7F9DB8;--sil:1;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#041E27;--surface:#0A2C38;--ink:#E4F7FA;--muted:#86B3BD;--line:#17414E;
   --brand:#2FD3DE;--brand-ink:#03262E;--accent:#FF8F7A;--accent-ink:#2B0D05;
   --hero1:#0C6C7C;--hero2:#0B4573;--hero-ink:#E8FCFE;
-  --fig:#D9F3F6;--chair:#1F4B58;--hair:#7A5240;--shirt:#2EC4D2;--pants:#7F9DB8;color-scheme:dark}
+  --fig:#D9F3F6;--chair:#1F4B58;--hair:#7A5240;--shirt:#2EC4D2;--pants:#7F9DB8;--sil:1;color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -217,22 +217,130 @@ a.btn{text-decoration:none}
 @media (prefers-reduced-motion:no-preference){.mus-btn.off{animation:musPulse 1.8s ease-out 3}}
 @keyframes musPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 50%,transparent)}70%{box-shadow:0 0 0 12px transparent}100%{box-shadow:0 0 0 0 transparent}}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-weight:600;font-size:14px;z-index:60}
+/* elegir por zona o por momento */
+.pick-h{display:flex;align-items:center;justify-content:space-between;gap:10px 12px;flex-wrap:wrap;margin-bottom:12px}
+.pick-h .lbl{margin:0}
+.seg2{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:3px}
+.seg2 button{border-radius:99px;padding:7px 15px;font-weight:700;font-size:14.5px;color:var(--muted)}
+.seg2 button[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
+.themes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.th{display:flex;flex-direction:column;align-items:flex-start;gap:9px;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:18px;padding:12px 12px 13px;min-width:0}
+.th-ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--tc) 17%,var(--surface));color:var(--tc)}
+.th-ic svg{width:22px;height:22px}
+.th b{display:block;font-family:var(--display);font-size:17px;line-height:1.15}
+.th .d{display:block;font-size:14px;line-height:1.35;color:var(--muted);margin-top:3px}
+.th[aria-pressed="true"]{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 9%,var(--surface))}
+.plan-d{margin:6px 0 0;color:var(--muted);font-size:15px}
+
+/* voz guía */
+.vo-btn{flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:99px;font-weight:700;font-size:14.5px;white-space:nowrap;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+.vo-btn svg{width:18px;height:18px}
+.vo-btn.on{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+@media (max-width:600px){.pl-top{flex-wrap:wrap;row-gap:12px}.pl-top #bClose{margin-right:auto}.segs{order:9;flex:1 1 100%}}
+@media (max-width:400px){.pl-top{gap:8px}.vx{display:none}.mus-btn,.vo-btn{padding:0 12px}}
+@media (max-width:380px){.pl-top{gap:6px}.pl-top .ib{width:36px;height:36px}.mus-btn,.vo-btn{padding:0 10px;gap:6px}}
+
+/* racha y premios */
+.stk{flex:none;display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 13px 0 11px;border-radius:99px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-size:15.5px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.stk svg{width:19px;height:19px;color:var(--accent)}
+.stk.zero svg{color:var(--muted)}
+.gapcard{border:1.5px solid var(--brand);border-radius:18px;padding:14px;background:color-mix(in srgb,var(--brand) 7%,var(--surface));display:flex;flex-direction:column;gap:12px;text-align:left}
+.gapcard p{margin:0;font-size:15.5px;line-height:1.45;color:var(--ink)}
+.gapcard .acts{margin:0}
+.gapcard .btn.pri{font-size:16px;padding:12px}
+.lnk{color:var(--brand);font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:2px 0}
+.pet{display:block;overflow:visible}
+.pet .ey,.pet .pe,.pet .yh{transform-box:fill-box;transform-origin:50% 50%}
+.pet .yh{opacity:0}
+.pet.happy .yh{opacity:1}
+.pet.happy .ey{opacity:0}
+.pet.blink .ey{animation:pBlink .22s ease-in-out}
+@keyframes pBlink{50%{transform:scaleY(.1)}}
+@media (prefers-reduced-motion:no-preference){.pet.bob{animation:pBob .6s ease-in-out}}
+@keyframes pBob{40%{transform:translateY(-8%) rotate(-4deg)}75%{transform:translateY(0) rotate(3deg)}}
+.st-top{display:flex;align-items:center;gap:14px}
+.st-big{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+.st-big svg{width:34px;height:34px;color:var(--accent)}
+.st-tx{min-width:0}
+.st-tx b{display:block;font-size:16.5px;line-height:1.25}
+.st-tx span{display:block;font-size:14px;color:var(--muted)}
+.st-week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.wd{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--muted)}
+.wd i{width:40px;height:40px;max-width:100%;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:var(--accent)}
+.wd i svg{width:20px;height:20px}
+.wd.done i{background:color-mix(in srgb,var(--accent) 15%,var(--surface));border-color:var(--accent)}
+.wd.ok i{border-style:dashed;border-color:var(--brand);color:var(--brand)}
+.wd.today{color:var(--ink)}
+.wd.today i{border-color:var(--ink)}
+.wd.fut i{opacity:.55}
+.st-bar{display:flex;gap:6px}
+.st-bar i{flex:1;height:10px;border-radius:99px;background:var(--line)}
+.st-bar i.on{background:linear-gradient(90deg,var(--hero1),var(--hero2))}
+.st-next p{margin:8px 0 0;font-size:15px;font-weight:600}
+.st-col-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.st-col-h b{font-family:var(--display);font-size:19px}
+.st-col-h span{font-size:14px;color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums}
+.st-col{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.pz{position:relative;aspect-ratio:1;min-width:0;border-radius:14px;background:color-mix(in srgb,var(--brand) 11%,var(--surface));border:1px solid var(--line);display:grid;place-items:center;padding:0}
+.pz .pet{width:82%;height:82%}
+.pz.lock{background:var(--bg)}
+.pz.lock .pet{filter:brightness(0) invert(var(--sil));opacity:.14}
+.pz.next{border:1.5px dashed var(--accent)}
+.pz small{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);font-size:10.5px;font-weight:700;color:var(--accent);white-space:nowrap}
+.st-stars{margin:0;font-weight:700;color:var(--brand)}
+@media (max-width:380px){.st-col{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.dst{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:6px}
+.dst-row{display:flex;align-items:center;gap:10px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px;width:100%}
+.dst-row svg{flex:none;width:22px;height:22px;color:var(--accent)}
+.dst-row b{display:block;color:var(--ink);font-size:16px}
+.dst-row span{display:block;color:var(--muted);font-size:14.5px}
+.prize{display:flex;flex-direction:column;align-items:center;gap:4px}
+.prize-art{position:relative;width:150px;height:150px;display:grid;place-items:center}
+.prize-art::before{content:"";position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--hero1) 55%,transparent) 0 42%,transparent 70%)}
+.prize-art .pet{position:relative;width:106px;height:106px}
+.prize-art .star{position:relative;width:86px;height:86px;color:var(--accent)}
+.prize h3{font-size:25px;margin-top:2px}
+.prize p{margin:0;color:var(--muted)}
+.prize p b{color:var(--ink)}
+.spk{position:absolute;width:16px;height:16px;opacity:0;color:var(--accent)}
+.spk.b{color:var(--brand)}
+@media (prefers-reduced-motion:no-preference){
+  .prize-art .pet,.prize-art .star{animation:petIn .8s cubic-bezier(.2,1.35,.4,1) both}
+  .prize-art::before{animation:glowIn 1.1s ease-out both}
+  .spk{animation:spk 1.9s ease-out both}
+}
+@media (prefers-reduced-motion:reduce){.spk{display:none}}
+@keyframes petIn{from{opacity:0;transform:scale(.5) translateY(16px)}}
+@keyframes glowIn{from{opacity:0;transform:scale(.6)}}
+@keyframes spk{0%{opacity:0;transform:scale(.3) rotate(0)}25%{opacity:1}100%{opacity:0;transform:scale(1) rotate(50deg) translateY(-8px)}}
 </style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <filter id="clay" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="4.2" result="b"/>
+    <feDiffuseLighting in="b" surfaceScale="4" diffuseConstant="1" lighting-color="#fff" result="d"><feDistantLight azimuth="228" elevation="50"/></feDiffuseLighting>
+    <feComposite in="SourceGraphic" in2="d" operator="arithmetic" k1=".5" k2=".7" k3="0" k4="0" result="lit"/>
+    <feSpecularLighting in="b" surfaceScale="4" specularConstant=".6" specularExponent="20" lighting-color="#fff" result="s"><feDistantLight azimuth="228" elevation="55"/></feSpecularLighting>
+    <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+    <feComposite in="lit" in2="s2" operator="arithmetic" k1="0" k2="1" k3=".75" k4="0"/>
+  </filter>
+</defs></svg>
 <div class="wrap" id="home">
   <header class="top">
     <div class="logo"><span class="mark" aria-hidden="true"><i></i><i></i></span>Pausa Viva</div>
     <span class="count" id="count">Hoy: 0 pausas</span>
+    <button class="stk zero" id="bStreak" aria-label="Racha y premios"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.6" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.6" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="14.4" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="18.4" cy="10.4" rx="2.2" ry="2.8"/></g></svg><span id="stkN">0</span></button>
     <button class="ib" id="bBell" aria-label="Recordatorios" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg></button>
     <button class="ib" id="bTheme" aria-label="Cambiar entre fondo claro y oscuro"></button>
   </header>
   <p class="remline" id="remLine" hidden></p>
+  <div class="gapcard" id="gapCard" hidden></div>
 
   <section class="hero">
     <h1>¿Qué pausa toca ahora?</h1>
-    <p>Elige el tipo y la zona. Con más de 150 ejercicios, cada pausa sale distinta.</p>
+    <p>Elige el tipo y la zona, o una pausa pensada para el momento del día. Con más de 150 ejercicios, cada pausa sale distinta.</p>
   </section>
 
 
@@ -246,12 +354,15 @@ a.btn{text-decoration:none}
   </section>
 
   <section>
-    <div class="lbl">Zona a trabajar hoy</div>
-    <div class="chips" id="chips"></div>
+    <div class="pick-h"><div class="lbl">Qué trabajar hoy</div>
+      <div class="seg2" role="tablist" aria-label="Elegir la pausa por zona o por momento"><button role="tab" id="tabZ" aria-selected="true" aria-controls="chips">Por zona</button><button role="tab" id="tabT" aria-selected="false" aria-controls="themes">Por momento</button></div></div>
+    <div class="chips" id="chips" role="tabpanel" aria-labelledby="tabZ"></div>
+    <div class="themes" id="themes" role="tabpanel" aria-labelledby="tabT" hidden></div>
   </section>
 
   <section class="plan">
     <div class="plan-h"><h2 id="planTitle">Pausa de hoy</h2><span id="meta"></span></div>
+    <p class="plan-d" id="planDesc" hidden></p>
     <ol class="list" id="list"></ol>
     <div class="acts">
       <button class="btn pri" id="bStart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Comenzar pausa</button>
@@ -274,7 +385,8 @@ a.btn{text-decoration:none}
       <li>Si tienes una lesión, una cirugía reciente, estás embarazada o tienes una indicación médica, consulta antes con tu kinesiólogo o médico.</li>
     </ul>
     <p class="note">Guía general de pausas activas. No reemplaza la evaluación de un profesional de salud.</p>
-    <p class="note"><b>Privacidad:</b> esta app no pide ni guarda datos personales. Lo que recuerda (tu contador, los últimos ejercicios, los recordatorios y tus preferencias) queda solo en este navegador.</p>
+    <p class="note"><b>Privacidad:</b> esta app no pide ni guarda datos personales. Lo que recuerda (tu contador, tu racha y tus premios, los últimos ejercicios, los recordatorios y tus preferencias) queda solo en este navegador.</p>
+    <p class="note" id="stHidNote" hidden>Ocultaste la racha y los premios. <button class="lnk" id="stShow">Mostrarlos de nuevo</button></p>
   </section>
 
   <section class="dev"><b>App en desarrollo.</b> Pausa Viva sigue creciendo y se aceptan sugerencias: si tienes una idea para mejorarla o algo no funciona bien, cuéntaselo a quien te compartió la app.</section>
@@ -286,6 +398,7 @@ a.btn{text-decoration:none}
     <button class="ib" id="bClose" aria-label="Cerrar pausa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="segs" id="segs"></div>
     <button class="mus-btn off" id="bMusic" aria-pressed="false" aria-label="Poner música"></button>
+    <button class="vo-btn" id="bVoice" aria-pressed="false" aria-label="Activar la voz guía"></button>
     <button class="ib" id="bSound" aria-label="Sonido" aria-pressed="true"></button>
   </div>
 
@@ -329,6 +442,7 @@ a.btn{text-decoration:none}
     <h2>Pausa lista</h2>
     <p id="dMsg"></p>
     <p>Próxima pausa sugerida: <b id="dNext"></b></p>
+    <div class="dst" id="dStreak" hidden></div>
     <div class="acts">
       <button class="btn pri" id="bHome">Volver al inicio</button>
       <button class="btn sec" id="bAgain">Repetir esta pausa</button>
@@ -360,6 +474,22 @@ a.btn{text-decoration:none}
     <input id="shLink" class="sh-link" readonly aria-label="Link de la pausa">
     <div class="acts"><a class="btn pri" id="shWa" href="https://teams.microsoft.com/" target="_blank" rel="noopener">Compartir en Teams</a><button class="btn sec" id="shCopy">Copiar mensaje</button></div>
     <p class="sheet-note">Si al abrirlo aparece otra pausa, pega el link en «¿Te compartieron una pausa?», debajo de la pausa.</p>
+  </div>
+</div>
+<div class="sheet" id="stSheet" hidden role="dialog" aria-modal="true" aria-labelledby="stH">
+  <div class="sheet-card">
+    <div class="sheet-h"><h2 id="stH">Tu racha</h2><button class="ib" id="stClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="st-top"><div class="st-big"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.6" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.6" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="14.4" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="18.4" cy="10.4" rx="2.2" ry="2.8"/></g></svg><b id="stNum">0</b></div><div class="st-tx"><b id="stDays">días hábiles seguidos</b><span id="stBest"></span></div></div>
+    <div class="st-week" id="stWeek"></div>
+    <div class="st-next"><div class="st-bar" id="stBar" aria-hidden="true"></div><p id="stNext"></p></div>
+    <div class="gapcard" id="stGap" hidden></div>
+    <div class="st-col-h"><b>Tu colección</b><span id="stColN"></span></div>
+    <div class="st-col" id="stCol"></div>
+    <p class="st-stars" id="stStars" hidden></p>
+    <p class="sheet-note">Cuenta cada día hábil (lunes a viernes) en que terminas al menos una pausa. Hay premio el día 1, 2, 4 y 5 de racha, y después cada 3 días.</p>
+    <label class="sw"><input type="checkbox" id="stPause"><span class="track"><i></i></span><span>Estoy de vacaciones o con licencia</span></label>
+    <p class="sheet-note" id="stPauseTx"></p>
+    <label class="sw"><input type="checkbox" id="stHide"><span class="track"><i></i></span><span>Ocultar la racha y los premios</span></label>
   </div>
 </div>
 <div class="toast" id="toast" hidden></div>
@@ -427,9 +557,12 @@ function drawFig(p,a){
   const tL=side?[sc[0]-P2[0]*6,sc[1]-P2[1]*6-p.shL]:sL,tR=side?[sc[0]+P2[0]*6,sc[1]+P2[1]*6-p.shR]:sR;
   const mw=side?8:12,bw=side?8:11,hp=side?8:13;
   const J=(st,ang,l1,l2)=>{const e=add(st,dn(ang[0]),l1);return[st,e,add(e,dn(ang[1]),l2)]};
-  const armL=J(side?sc:sL,p.aL,26,24),armR=J(side?[sc[0],sc[1]-p.shR]:sR,p.aR,26,24);
+  let armL=J(side?sc:sL,p.aL,26,24),armR=J(side?[sc[0],sc[1]-p.shR]:sR,p.aR,26,24);
   const legL=J([pel[0]-hw,pel[1]],p.lL,p.th,38),legR=J([pel[0]+hw,pel[1]],p.lR,p.th,38);
   const a3=a2+p.hd,hc=add(nk,up(a3),17);hc[0]+=p.hx;
+  if(p.nape!=null&&!side){const t=Math.max(0,Math.min(1,p.nape));
+    armL=[sL,lp([hc[0]-5.8,hc[1]+7.5],[sL[0]-24,sL[1]-9],t),[hc[0]-13,hc[1]-1.5]];
+    armR=[sR,lp([hc[0]+5.8,hc[1]+7.5],[sR[0]+24,sR[1]-9],t),[hc[0]+13,hc[1]-1.5]]}
   const ca=Math.cos(a3*D),sa=Math.sin(a3*D),R=(x,y)=>[hc[0]+x*ca-y*sa,hc[1]+x*sa+y*ca],Q=(x,y)=>pt(R(x,y));
   const poly=(pts,w,c)=>`<polygon points="${pts.map(pt).join(' ')}" stroke-width="${w}" class="${c}"/>`;
   const torsoPts=[tL,tR,add(mid,P1,mw),add(add(pel,U,3),P1,bw),add(add(pel,U,3),P1,-bw),add(mid,P1,-mw)];
@@ -453,7 +586,8 @@ function drawFig(p,a){
   if(hl.includes('legs'))for(const A of[legL,legR])h+=L(A[0],A[1],26,'halo')+L(A[1],A[2],24,'halo');
   if(h)s+=`<g opacity="${op(p.g)}">${h}</g>`;
   // cuerpo
-  const arm=A=>L(A[0],A[1],9,'sk')+L(A[1],A[2],8.5,'sk')+C(A[2],5,'sk')+L(A[0],lp(A[0],A[1],.45),12.5,'sh');
+  const nz=p.nape!=null&&!side?1-Math.max(0,Math.min(1,p.nape)):0;
+  const arm=A=>L(A[0],A[1],9,'sk')+L(A[1],A[2],8.5,'sk')+C(A[2],5,'sk')+L(A[0],lp(A[0],A[1],.45-.2*nz),12.5,'sh')+(nz>.05?C(A[1],5.5+1.4*nz,'sk2',f(nz))+C(A[1],4.6+1.4*nz,'sk'):'');
   const leg=(A,sg,toe)=>{let r=L(A[0],A[1],13,'pa')+L(A[1],A[2],11.5,'pa');
     if(side){const fa=90-45*toe;r+=L(add(A[2],dn(fa),-3),add(A[2],dn(fa),11),8,'so')}
     else r+=`<ellipse cx="${f(A[2][0]+sg*3)}" cy="${f(A[2][1]+2)}" rx="7.5" ry="4.2" class="so"/>`;
@@ -516,7 +650,7 @@ function drawHand(p,a){
 }
 const render=(a,p,sfx)=>a.r==='fig'?drawFig(p,a):a.r==='eye'?drawEye(p,a,sfx):drawHand(p,a);
 
-/* ---------- Batería de ejercicios (100) ---------- */
+/* ---------- Batería de ejercicios ---------- */
 const F=(b,hl,k,o)=>({r:'fig',b,hl,k,...o});
 const E=(k,o)=>({r:'eye',k,...o});
 const H=(mode,k,o)=>({r:'hand',mode,k,...o});
@@ -836,7 +970,7 @@ const EX=[
   a:E([{ex:.6,ey:-.4,h:.8,say:'Mira lejos'},{ex:.6,ey:-.4,lid:1,m:.3,h:.4,say:'Parpadea'},{ex:.6,ey:-.4,lid:0,m:.3,h:1.2,say:'Mira lejos'}],{m:.6})},
  // NUEVOS · RESPIRAR Y POSTURA
  {z:'respira',n:'Respirar con codos abiertos',how:'Manos en la nuca: abre los codos al inhalar y ciérralos al exhalar.',rep:'5 ciclos lentos',feel:'Pecho abierto y respiración amplia.',
-  a:F('ft',['torso'],[{br:1,aL:[-120,-265],aR:[120,265],m:3.5,h:0,say:'Inhala'},{br:0,aL:[-160,-245],aR:[160,245],m:4,h:0,say:'Exhala'}],{aura:1})},
+  a:F('ft',['torso','arms'],[{br:1,nape:1,m:3.5,h:0,say:'Inhala'},{br:0,nape:0,m:4,h:0,say:'Exhala'}],{aura:1,all:{nape:0}})},
  {z:'respira',n:'Respiración en 3 tomas',how:'Inhala en tres tomas cortas por la nariz y exhala largo por la boca.',rep:'5 ciclos',feel:'Respiración ordenada y calma.',
   a:F('ft',['torso'],[{br:.33,m:.8,h:.2,say:'Inhala'},{br:.66,m:.8,h:.2,say:'Inhala'},{br:1,m:.8,h:.2,say:'Inhala'},{br:0,m:4,h:.4,say:'Exhala largo'}],{aura:1})},
  {z:'respira',n:'Reinicio de postura de pie',how:'De pie: peso en ambos pies, rodillas sueltas, hombros abajo y mirada al frente.',rep:'Revisa los 4 puntos',feel:'Postura cómoda y estable.',
@@ -846,7 +980,16 @@ const EX=[
  {z:'respira',n:'Relajar piernas',how:'Estira y tensa las piernas, luego suéltalas por completo.',rep:'5 s de tensión, 10 s de soltar · 2 veces',feel:'Contraste entre tensión y relajo.',
   a:F('st',['legs'],[{lR:[90,84],lL:[90,84],toe:-1,toe2:-1,h:3,m:.8,say:'Tensa'},{h:5,m:.8,say:'Suelta'}])},
  {z:'respira',n:'Inhala y crece',how:'Al inhalar crece por la coronilla; al exhalar suelta los hombros sin encorvarte.',rep:'5 ciclos',feel:'Columna larga y hombros relajados.',
-  a:F('st',['torso'],[{br:1,sp:-1,sp2:-4,hd:3,hx:-2,m:4,h:0,say:'Inhala'},{br:0,shL:-2,shR:-2,m:5,h:0,say:'Exhala'}],{aura:1})}
+  a:F('st',['torso'],[{br:1,sp:-1,sp2:-4,hd:3,hx:-2,m:4,h:0,say:'Inhala'},{br:0,shL:-2,shR:-2,m:5,h:0,say:'Exhala'}],{aura:1})},
+ // NUEVOS · OJOS (v18)
+ {z:'ojos',n:'Palmas sobre los ojos',how:'Cubre los ojos cerrados con las manos ahuecadas, sin presionar.',rep:'20 s',feel:'Oscuridad y calor suave que relajan la vista.',
+  a:E([{lid:1,palm:1,h:5,say:'Descansa'},{lid:0,palm:0,h:.8}],{m:1})},
+ {z:'ojos',n:'Cerca y lejos',how:'Enfoca la uña del pulgar y luego un punto lejano.',rep:'8 veces',feel:'Los ojos cambian de foco sin esfuerzo.',
+  a:E([{cv:1,h:1.6,say:'Mira cerca'},{ex:.5,ey:-.3,h:1.6,say:'Mira lejos'}],{m:.6})},
+ {z:'ojos',n:'Mirada a los lados',how:'Sin mover la cabeza, mira a un lado y luego al otro.',rep:'5 veces por lado',feel:'Ojos sueltos, sin tirantez.',
+  a:E([{ex:-1,h:.7,say:'A un lado'},{ex:1,h:.7,say:'Al otro lado'}],{m:1.1})},
+ {z:'ojos',n:'Mirada arriba y abajo',how:'Sin mover la cabeza, mira al techo y luego al suelo.',rep:'5 veces',feel:'Ojos sueltos, sin tirantez.',
+  a:E([{ey:-1,h:.7,say:'Arriba'},{ey:1,h:.7,say:'Abajo'}],{m:1.1})}
 ];
 /* ---------- Textos de cada ejercicio: posición, movimiento, qué sentir, dosis ---------- */
 const TXT={
@@ -1008,7 +1151,11 @@ const TXT={
 'Reinicio de postura de pie':['De pie.','Revisa: peso en ambos pies, rodillas sueltas, hombros abajo y mirada al frente.','Postura cómoda y estable.','Revisa los 4 puntos'],
 'Estirarse completo':['De pie, brazos a los costados.','Inhala subiendo los brazos y poniéndote en punta de pies. Exhala bajando.','Todo el cuerpo se alarga.','4 veces'],
 'Relajar piernas':['Sentado, espalda apoyada.','Estira y tensa las piernas 5 s. Luego suéltalas por completo durante 10 s.','Contraste entre tensión y relajo.','2 veces'],
-'Inhala y crece':['Sentado, espalda recta.','Al inhalar crece por la coronilla. Al exhalar suelta los hombros sin encorvarte.','Columna larga y hombros relajados.','4 veces']
+'Inhala y crece':['Sentado, espalda recta.','Al inhalar crece por la coronilla. Al exhalar suelta los hombros sin encorvarte.','Columna larga y hombros relajados.','4 veces'],
+'Palmas sobre los ojos':['Sentado, codos apoyados en el escritorio.','Frota las palmas, cierra los ojos y cúbrelos con las manos ahuecadas, sin apretar. Respira tranquilo.','Oscuridad y calor suave que relajan la vista.','Mantén 20 s'],
+'Cerca y lejos':['Sentado, con el pulgar arriba frente a la cara, a unos 25 cm.','Enfoca la uña del pulgar 2 s y luego un punto lejano 2 s. Alterna sin mover la cabeza.','Los ojos cambian de foco sin esfuerzo.','8 veces'],
+'Mirada a los lados':['Sentado, cabeza quieta y mirada al frente.','Sin mover la cabeza, lleva la mirada lento hacia un lado y luego hacia el otro.','Los ojos se mueven sueltos, sin tirantez. Si te mareas, detente.','5 veces por lado'],
+'Mirada arriba y abajo':['Sentado, cabeza quieta y mirada al frente.','Sin mover la cabeza, mira lento hacia el techo y luego hacia el suelo.','Los ojos se mueven sueltos, sin tirantez. Si te mareas, detente.','5 veces']
 };
 
 /* ---------- Animación guiada: la figura sigue la dosis real ---------- */
@@ -1085,6 +1232,10 @@ function repText(s){
 /* ---------- Ejercicios con animación guiada (la figura sigue la dosis) ---------- */
 const ARM2=['Un brazo','El otro brazo'],LEG2=['Una pierna','La otra pierna'],HAND2=['Una mano','La otra mano'];
 const GUIDE={
+'Palmas sobre los ojos':{s:{type:'hold',to:{lid:1,palm:1},say:'Cubre los ojos',holdLabel:'Descansa',backLabel:'Abre lento',in:1.2,hold:20,out:1,sets:1}},
+'Cerca y lejos':{s:{type:'reps',n:8,path:[{to:{cv:1},m:.6,h:1.6,say:'Mira cerca'},{to:{ex:.5,ey:-.3},m:.6,h:1.6,say:'Mira lejos'}]}},
+'Mirada a los lados':{s:{type:'reps',n:5,path:[{to:{ex:-1},m:1,h:.7,say:'A un lado'},{to:{ex:1},m:1.5,h:.7,say:'Al otro lado'}]}},
+'Mirada arriba y abajo':{s:{type:'reps',n:5,path:[{to:{ey:-1},m:1,h:.7,say:'Arriba'},{to:{ey:1},m:1.5,h:.7,say:'Abajo'}]}},
 // CUELLO
 'Rotación de cuello':{s:{type:'reps',n:5,path:[{to:{turn:1},m:1.2,h:3,say:'Gira',sayH:'Sostén'},{to:{},m:1,say:'Al centro'},{to:{turn:-1},m:1.2,h:3,say:'Gira',sayH:'Sostén'},{to:{},m:1,say:'Al centro'}]}},
 'Mentón al pecho':{s:{type:'hold',to:{hd:40},say:'Baja el mentón',in:1.6,hold:10,out:1.4,rest:3,sets:3}},
@@ -1161,7 +1312,7 @@ const GUIDE={
 'Respirar con brazos':{s:{type:'breath',cycles:4,in:3.5,out:3.5,to:{br:1,aL:UPL,aR:UPR}}},
 'Suspiro largo':{s:{type:'breath',cycles:5,in:2.5,out:3.5,to:{br:1,shL:8,shR:8},outLabel:'Suelta el aire'}},
 'Inhala y crece':{s:{type:'breath',cycles:4,in:3,out:4,to:{br:1,sp:-1,sp2:-4,hd:3,hx:-2},outLabel:'Suelta los hombros'}},
-'Respirar con codos abiertos':{all:{aL:[-160,-245],aR:[160,245]},s:{type:'breath',cycles:4,in:3.5,out:4,to:{br:1,aL:[-120,-265],aR:[120,265]}}},
+'Respirar con codos abiertos':{all:{nape:0},s:{type:'breath',cycles:4,in:3.5,out:4,to:{br:1,nape:1},inLabel:'Inhala y abre los codos',outLabel:'Exhala y júntalos'}},
 'Estirarse completo':{s:{type:'breath',cycles:4,in:3,out:3,to:{br:1,aL:UPL,aR:UPR,py:118}}},
 'Apretar y soltar':{s:{type:'hold',to:{shL:8,shR:8,aL:[-20,40],aR:[20,-40]},say:'Aprieta',holdLabel:'Aprieta',backLabel:'Suelta',restLabel:'Relájate',in:.8,hold:5,out:.8,rest:10,tail:10,sets:2}}
 };
@@ -1211,8 +1362,8 @@ function thumbPose(e){
 const APP_URL=/^https?:$/.test(location.protocol)?location.origin+location.pathname:'https://kinefranciscozu.github.io/pausa-viva/';
 const codeOf=e=>{let h=2166136261;for(const ch of e.n){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return(h>>>0).toString(36).slice(-4).padStart(4,'0')};
 const BYCODE={};EX.forEach(e=>{e.code=codeOf(e);BYCODE[e.code]=e});
-const pauseHash=(type,plan)=>'p-'+(type==='micro'?'m':'l')+'-'+plan.map(e=>e.code).join('-');
-function readHash(h){const m=/^#p-(m|l)-([a-z0-9-]+)$/.exec(h||'');if(!m)return null;const plan=m[2].split('-').map(c=>BYCODE[c]).filter(Boolean);return plan.length?{type:m[1]==='m'?'micro':'larga',plan}:null}
+const pauseHash=(type,plan,th)=>'p-'+(type==='micro'?'m':'l')+'-'+(th?th.code+'-':'')+plan.map(e=>e.code).join('-');
+function readHash(h){const m=/^#p-(m|l)-([a-z0-9-]+)$/.exec(h||'');if(!m)return null;const parts=m[2].split('-'),plan=parts.map(c=>BYCODE[c]).filter(Boolean);return plan.length?{type:m[1]==='m'?'micro':'larga',plan,theme:THCODE[parts[0]]||null}:null}
 
 /* ---------- Armado de la pausa ---------- */
 const LIM={micro:180,larga:300},PREP=5;
@@ -1246,11 +1397,147 @@ function swapOne(plan,i,type,zone){
   if(c.length){const f=c.filter(e=>!RECENT.has(e.code));plan[i]=rnd(f.length?f:c)}
 }
 const mmss=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+/* ---------- Pausas por momento: colecciones armadas desde la batería ---------- */
+// Cada momento es una secuencia de "tramos". Se toma un ejercicio por tramo (al azar, evitando los recientes) y,
+// si sobra tiempo, se suman más de los tramos que lo permiten. Los tramos "o" entran en la micro pausa solo si alcanza.
+const BYNAME={};EX.forEach(e=>{BYNAME[e.n]=e});
+const TI={
+  dia:'<path d="M3 18.5h18M6.5 18.5a5.5 5.5 0 0 1 11 0M12 5v3M5 10.2l1.9 1.6M19 10.2l-1.9 1.6"/>',
+  alm:'<path d="M7.5 3v7.5M5 3v4.8a2.5 2.5 0 0 0 5 0V3M7.5 10.5V21M17.5 3c-2.2 1.4-3.2 4-3.2 7.5h3.2V21"/>',
+  tar:'<rect x="2.5" y="7" width="16.5" height="10" rx="2.2"/><path d="M21.5 10.5v3M11.5 8.6l-2.6 3.8h3.4l-2.6 3.8"/>',
+  reu:'<circle cx="12" cy="12" r="8.8"/><path d="M12 7v5l3.2 2"/>',
+  tec:'<rect x="2.5" y="6.5" width="19" height="11" rx="2.2"/><path d="M6.5 10.2h0M10 10.2h0M13.5 10.2h0M17 10.2h0M8 14h8" stroke-width="2.4"/>',
+  ojo:'<path d="M2.5 12s3.6-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.6 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
+  est:'<path d="M3 9.5c3-3 6 3 9 0s6 3 9 0M3 15.5c3-3 6 3 9 0s6 3 9 0"/>',
+  fin:'<path d="M6 21V4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21M3.5 21h17M14.5 12.5h0" />'
+};
+const THEMES=[
+ {id:'dia',code:'qdia',n:'Para partir el día',d:'Despierta las articulaciones de la cabeza a los pies.',c:'#E8961C',s:[
+  {p:['Medios círculos','Inclinaciones seguidas','Rotación de cuello','Mirar al techo','Doble mentón y mirar arriba']},
+  {p:['Círculos de hombros','Círculos de brazos','Círculos de codos','Péndulo de brazos','Balanceo de brazos','Antebrazos arriba y abajo'],x:1},
+  {p:['Gato y camello','Gato y camello de pie','Giro de pie','Giro con brazos cruzados','Balanceo de pelvis','Báscula de pelvis','Inclinación con manos en la nuca'],x:1},
+  {p:['Círculos de muñeca','Abrir y cerrar','Subir y bajar muñecas','Mano de lado a lado'],o:1},
+  {p:['Círculos de cadera','Círculos de tobillo','Talón y punta','Subir talones','Marcha en el puesto','Bombeo de tobillos'],x:1},
+  {p:['Estirarse completo','Inhala y crece','Respirar con brazos'],o:1}]},
+ {id:'alm',code:'qalm',n:'Antes de almorzar',d:'Suelta la mañana de pantalla: espalda, hombros y piernas.',c:'#E0567F',s:[
+  {p:['Marcha en el puesto','Caminata corta','Subir talones','Media sentadilla','Talón y punta']},
+  {p:['Extensión de pie','Extensión en el respaldo','Extensión con manos en la cintura','Arco con manos arriba','Alcanzar el techo'],x:1},
+  {p:['Abrir el pecho','Pecho en la pared','Juntar escápulas','De W a Y','Remo sentado','Bolsillos traseros'],x:1},
+  {p:['Giro de pie','Giro sentado','Giro con brazos en cruz','Giro con mano en la nuca'],o:1},
+  {p:['Inclinación lateral','Doble mentón','Trapecio con apoyo','Mirar la axila']},
+  {p:['Suspiro largo','Respiración abdominal','Respiración 5 y 5'],o:1}]},
+ {id:'tar',code:'qtar',n:'Bajón de la tarde',d:'Sube un poco el pulso y despierta, sin llegar a transpirar.',c:'#DE4526',s:[
+  {p:['Marcha en el puesto','Caminata corta','Boxeo suave','Estrella sin salto','Pasos laterales','Rodilla a la mano']},
+  {p:['Media sentadilla','Pararse y sentarse','Sentadilla en la pared','Subir talones','Zancada corta','Talones en un pie'],x:1},
+  {p:['Flexiones en la pared','De W a Y','Elevación lateral','Nado en seco','Empujar el techo','Abrir antebrazos'],x:1},
+  {p:['Codo a la rodilla contraria','Brazo y pierna contrarios','Giro con brazos en cruz','Plancha en la pared','Bisagra de cadera'],o:1},
+  {p:['Respiración en 3 tomas','Estirarse completo','Respirar con brazos']}]},
+ {id:'reu',code:'qreu',n:'Después de una reunión larga',d:'Mucho rato sentado: párate, mueve las piernas y endereza la espalda.',c:'#0FA596',s:[
+  {p:['Pararse y sentarse','De pie y estírate','Caminata corta','Marcha en el puesto']},
+  {p:['Extensión de pie','Arco con manos arriba','Bisagra en el escritorio','Rodar hacia abajo','Inclinación de tronco','Alcanzar el techo'],x:1},
+  {p:['Flexores de cadera','Pantorrilla en la pared','Cuádriceps con apoyo','Isquiotibiales de pie','Círculos de cadera','Talón al glúteo'],x:1},
+  {p:['Doble mentón','Inclinación lateral','Mirar la axila','Trapecio con mano fija','Giro sostenido']},
+  {p:['Regla 20-20-20','Mira lejos y parpadea','Cerca y lejos'],o:1},
+  {p:['Suspiro largo','Inhala y crece'],o:1}]},
+ {id:'tec',code:'qtec',n:'Mucho teclado y mouse',d:'Muñecas, dedos y antebrazos, y de paso hombros y cuello.',c:'#8B6CF0',s:[
+  {p:['Flexores de muñeca','Extensores de muñeca','Manos en oración','Palmas al frente']},
+  {p:['Recta, gancho, puño','Abanico de dedos','Pulgar con cada dedo','Gancho de dedos','Abrir y cerrar','Pinza con el índice'],x:1},
+  {p:['Círculos de muñeca','Subir y bajar muñecas','Mano de lado a lado','Palma arriba y abajo','Puño arriba y abajo'],x:1},
+  {p:['Bajar hombros','Encoger hombros','Juntar escápulas','Círculos de hombros','Bolsillos traseros','Remo sentado'],x:1},
+  {p:['Doble mentón','Trapecio con apoyo','Inclinación lateral','Escalenos con mano en el pecho'],o:1},
+  {p:['Sacudir las manos','Sacudir los brazos','Tocar piano en el aire'],o:1}]},
+ {id:'ojo',code:'qojo',n:'Ojos cansados',d:'Descansa la vista de la pantalla y suelta la cara y el cuello.',c:'#1E9BD8',s:[
+  {p:['Regla 20-20-20','Mira lejos y parpadea','Cerca y lejos'],x:1},
+  {p:['Parpadeo completo','Parpadeo con apretón'],x:1},
+  {p:['Mirada a los lados','Mirada arriba y abajo'],x:1},
+  {p:['Palmas sobre los ojos','Ojos cerrados']},
+  {p:['Doble mentón','Mentón al pecho','Inclinación lateral','Automasaje de nuca'],x:1},
+  {p:['Respiración abdominal','Suspiro largo','Respiración 5 y 5'],o:1}]},
+ {id:'est',code:'qest',n:'Bajar el estrés',d:'Respiración lenta y estiramientos suaves para soltar la tensión.',c:'#3FB27F',s:[
+  {p:['Respiración abdominal','Suspiro largo','Respiración 5 y 5','Labios fruncidos']},
+  {p:['Inclinación lateral','Trapecio con apoyo','Mentón al pecho','Bajar hombros','Encoger hombros','Automasaje de nuca'],x:1},
+  {p:['Colgarse sentado','Gato y camello','Abrazo al frente','Rodar hacia abajo','Giro sentado'],x:1},
+  {p:['Apretar y soltar','Relajar piernas','Ojos cerrados','Palmas sobre los ojos'],o:1},
+  {p:['Respiración cuadrada','Respirar con codos abiertos','Respiración costal','Inhala y crece']}]},
+ {id:'fin',code:'qfin',n:'Antes de irte',d:'Cierra la jornada estirando lo que trabajó todo el día.',c:'#3B7BE0',s:[
+  {p:['Mentón al pecho','Mirar la axila','Trapecio con mano fija','Inclinación lateral','Giro sostenido']},
+  {p:['Brazo cruzado','Tríceps','Abrir el pecho','Pecho en el respaldo','Brazos en V baja'],x:1},
+  {p:['Inclinación de tronco','Mano al suelo','Rodilla al pecho','Giro sentado','Colgarse sentado'],x:1},
+  {p:['Isquiotibiales sentado','Pantorrilla en la pared','Cuádriceps con apoyo','Flexores de cadera','Isquiotibiales de pie'],x:1},
+  {p:['Flexores de muñeca','Extensores de muñeca'],o:1},
+  {p:['Respiración 5 y 5','Suspiro largo','Respiración abdominal'],o:1}]}
+];
+THEMES.forEach(t=>t.s.forEach(sl=>{sl.pool=sl.p.map(n=>BYNAME[n]).filter(Boolean)}));
+const thOf=id=>THEMES.find(t=>t.id===id);
+const THCODE={};THEMES.forEach(t=>{THCODE[t.code]=t});
+function buildTheme(type,th){
+  const lim=LIM[type],used=new Set(),got=th.s.map(()=>[]);let t=0;
+  const minD=sl=>{const c=sl.pool.filter(e=>!used.has(e));return c.length?Math.min(...c.map(e=>e.d))+PREP:0};
+  const pick=(sl,budget)=>fresh(sl.pool.filter(e=>!used.has(e)&&e.d+PREP<=budget))[0];
+  const take=(i,e)=>{used.add(e);got[i].push(e);t+=e.d+PREP};
+  // 1) un ejercicio por tramo, guardando tiempo para los tramos que vienen
+  const first=th.s.map((sl,i)=>i).filter(i=>!(th.s[i].o&&type==='micro'));
+  first.forEach((i,k)=>{
+    const reserve=first.slice(k+1).reduce((a,j)=>a+minD(th.s[j]),0);
+    const e=pick(th.s[i],lim-t-reserve);if(e)take(i,e);
+  });
+  // 2) si sobra tiempo: primero los tramos opcionales que quedaron fuera, después más de los que se pueden repetir
+  th.s.forEach((sl,i)=>{if(!got[i].length){const e=pick(sl,lim-t);if(e)take(i,e)}});
+  for(let added=true;added;){added=false;
+    th.s.forEach((sl,i)=>{if(!sl.x||got[i].length>=2)return;const e=pick(sl,lim-t);if(e){take(i,e);added=true}})}
+  return got.flat();
+}
+function swapTheme(plan,i,type,th){
+  const rest=total(plan)-plan[i].d,fits=e=>!plan.includes(e)&&rest+e.d<=LIM[type];
+  const sl=th.s.find(s=>s.pool.includes(plan[i]));
+  let c=sl?sl.pool.filter(fits):[];
+  if(!c.length)c=th.s.flatMap(s=>s.pool).filter(fits);
+  if(c.length){const f=c.filter(e=>!RECENT.has(e.code));plan[i]=rnd(f.length?f:c)}
+}
+/* ---------- Compañeros de Huellitas Puzzles (dibujos originales, solo como premios) ---------- */
+const HUE=(()=>{
+const INK='#2b1d14';
+const OL=`stroke="${INK}" stroke-width="3" stroke-linejoin="round"`;
+const cheeks=(a,b,y,r=4.6)=>`<circle cx="${a}" cy="${y}" r="${r}" fill="#ff8fa3" opacity=".5"/><circle cx="${b}" cy="${y}" r="${r}" fill="#ff8fa3" opacity=".5"/>`;
+const line=(d,w=2.6)=>`<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const maneCircles=(stroke)=>Array.from({length:12},(_,k)=>{const a=k/12*Math.PI*2;return `<circle cx="${(50+31*Math.cos(a)).toFixed(1)}" cy="${(52+31*Math.sin(a)).toFixed(1)}" r="12" fill="#cf7a2e" ${stroke?OL:''}/>`;}).join('');
+const eyeN=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${INK}"/><circle cx="${(x+r*.32).toFixed(2)}" cy="${(y-r*.36).toFixed(2)}" r="${(r*.32).toFixed(2)}" fill="#fff"/>`;
+const eyeH=(x,y,r,ink)=>`<path d="M${(x-r*1.1).toFixed(1)} ${(y+r*.45).toFixed(1)}Q${x} ${(y-r*1.5).toFixed(1)} ${(x+r*1.1).toFixed(1)} ${(y+r*.45).toFixed(1)}" fill="none" stroke="${ink}" stroke-width="${Math.max(2.4,r*.62).toFixed(1)}" stroke-linecap="round"/>`;
+const ANIMALS={
+  perro:{name:'Perro',head:`<ellipse cx="50" cy="54" rx="30" ry="29" fill="#e8b67a" ${OL}/><ellipse cx="50" cy="68" rx="16" ry="12" fill="#fbe6c6"/>`,front:`<ellipse cx="23" cy="44" rx="11" ry="22" transform="rotate(22 23 44)" fill="#8b5a35" ${OL}/><ellipse cx="77" cy="44" rx="11" ry="22" transform="rotate(-22 77 44)" fill="#8b5a35" ${OL}/>`,eyes:[39,61,50,4.3],face:`<ellipse cx="50" cy="62" rx="6.5" ry="4.8" fill="${INK}"/>${line('M50 66v5M43 71q7 6 14 0')}`},
+  gato:{name:'Gato',back:`<path d="M21 46L24 13L46 31Z" fill="#7f95cc" ${OL}/><path d="M79 46L76 13L54 31Z" fill="#7f95cc" ${OL}/><path d="M27 37L27.5 22L38 31Z" fill="#ffb3c1"/><path d="M73 37L72.5 22L62 31Z" fill="#ffb3c1"/>`,head:`<ellipse cx="50" cy="57" rx="31" ry="27" fill="#9db1e2" ${OL}/><path d="M50 31v7M43 32l1.6 6M57 32l-1.6 6" stroke="#5f72a8" stroke-width="2.8" stroke-linecap="round"/>`,eyes:[39,61,54,4.3],face:`<path d="M46.5 62h7l-3.5 3.6z" fill="#ff8fa3" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/>${line('M50 65.6q-3 4-7 2M50 65.6q3 4 7 2',2.3)}${line('M31 61h-13M32 66l-12 3.5M69 61h13M68 66l12 3.5',1.8)}`},
+  conejo:{name:'Conejo',back:`<ellipse cx="37" cy="27" rx="9" ry="22" transform="rotate(-8 37 27)" fill="#f3eee8" ${OL}/><ellipse cx="63" cy="27" rx="9" ry="22" transform="rotate(8 63 27)" fill="#f3eee8" ${OL}/><ellipse cx="37" cy="29" rx="4" ry="15" transform="rotate(-8 37 29)" fill="#ffb3c1"/><ellipse cx="63" cy="29" rx="4" ry="15" transform="rotate(8 63 29)" fill="#ffb3c1"/>`,head:`<ellipse cx="50" cy="62" rx="27" ry="24" fill="#f7f3ee" ${OL}/>`,eyes:[40,60,58,4],face:`${cheeks(32,68,67)}<ellipse cx="50" cy="65" rx="3.6" ry="2.7" fill="#ff8fa3"/><path d="M46.5 69.5h7v6.5h-7z" fill="#fff" stroke="${INK}" stroke-width="1.8" stroke-linejoin="round"/>${line('M50 69.5v6.5',1.4)}`},
+  cerdo:{name:'Cerdo',back:`<path d="M25 40L22 17L43 28Z" fill="#f28ca3" ${OL}/><path d="M75 40L78 17L57 28Z" fill="#f28ca3" ${OL}/>`,head:`<circle cx="50" cy="56" r="30" fill="#f9b6c4" ${OL}/>`,eyes:[38,62,48,4.3],face:`${cheeks(29,71,61)}<ellipse cx="50" cy="65" rx="13" ry="9.5" fill="#f58aa2" stroke="${INK}" stroke-width="2.6"/><ellipse cx="45.5" cy="65" rx="2.4" ry="3.4" fill="#8c3550"/><ellipse cx="54.5" cy="65" rx="2.4" ry="3.4" fill="#8c3550"/>`},
+  rana:{name:'Rana',head:`<circle cx="32" cy="36" r="13" fill="#79c267" ${OL}/><circle cx="68" cy="36" r="13" fill="#79c267" ${OL}/><ellipse cx="50" cy="61" rx="35" ry="25" fill="#86cc72" ${OL}/><circle cx="32" cy="36" r="8" fill="#fff"/><circle cx="68" cy="36" r="8" fill="#fff"/>`,eyes:[33,67,37,4.4],face:`${cheeks(25,75,63)}<circle cx="46" cy="53" r="1.6" fill="${INK}"/><circle cx="54" cy="53" r="1.6" fill="${INK}"/>${line('M33 64Q50 78 67 64',3)}`},
+  pollito:{name:'Pollito',back:line('M50 28q-4-10 3-15M50 28q4-8 12-8',3),head:`<circle cx="50" cy="57" r="30" fill="#ffd84a" ${OL}/>`,eyes:[39,61,52,4.3],face:`${cheeks(31,69,63)}<path d="M43 60L57 60L50 69Z" fill="#ff9a2e" stroke="${INK}" stroke-width="2.2" stroke-linejoin="round"/>`},
+  oso:{name:'Oso',back:`<circle cx="27" cy="31" r="11" fill="#a8714a" ${OL}/><circle cx="73" cy="31" r="11" fill="#a8714a" ${OL}/><circle cx="27" cy="31" r="5.5" fill="#e3b68f"/><circle cx="73" cy="31" r="5.5" fill="#e3b68f"/>`,head:`<circle cx="50" cy="56" r="29" fill="#b37b52" ${OL}/><ellipse cx="50" cy="67" rx="14" ry="11" fill="#ecd2b4"/>`,eyes:[39,61,51,4.3],face:`<ellipse cx="50" cy="63" rx="5.6" ry="4" fill="${INK}"/>${line('M50 67v4M45 72q5 4 10 0',2.4)}`},
+  zorro:{name:'Zorro',back:`<path d="M20 44L22 10L44 31Z" fill="#ef8b3d" ${OL}/><path d="M80 44L78 10L56 31Z" fill="#ef8b3d" ${OL}/><path d="M25 34L25.5 19L35.5 29Z" fill="#fff4e6"/><path d="M75 34L74.5 19L64.5 29Z" fill="#fff4e6"/>`,head:`<path d="M16 40Q50 26 84 40Q80 70 50 86Q20 70 16 40Z" fill="#ef8b3d" ${OL}/><path d="M22 52Q38 54 50 66Q62 54 78 52Q72 73 50 85Q28 73 22 52Z" fill="#fff6ea"/>`,eyes:[37,63,50,4.3],face:`<ellipse cx="50" cy="79" rx="5" ry="3.8" fill="${INK}"/>`},
+  panda:{name:'Panda',back:`<circle cx="26" cy="30" r="11" fill="${INK}"/><circle cx="74" cy="30" r="11" fill="${INK}"/>`,head:`<circle cx="50" cy="56" r="30" fill="#ffffff" ${OL}/><ellipse cx="38" cy="53" rx="8.5" ry="11" transform="rotate(30 38 53)" fill="${INK}"/><ellipse cx="62" cy="53" rx="8.5" ry="11" transform="rotate(-30 62 53)" fill="${INK}"/>`,eyeSvg:`<circle cx="39" cy="52" r="3.6" fill="#fff"/><circle cx="39.6" cy="52.4" r="1.9" fill="${INK}"/><circle cx="61" cy="52" r="3.6" fill="#fff"/><circle cx="60.4" cy="52.4" r="1.9" fill="${INK}"/>`,eyes:[39,61,52,3.2],hink:'#fff',face:`<ellipse cx="50" cy="65" rx="4.6" ry="3.3" fill="${INK}"/>${line('M50 68v3M46 72q4 3 8 0',2.2)}`},
+  raton:{name:'Ratón',back:`<circle cx="25" cy="33" r="17" fill="#b6b0ab" ${OL}/><circle cx="75" cy="33" r="17" fill="#b6b0ab" ${OL}/><circle cx="25" cy="33" r="10" fill="#ffb3c1"/><circle cx="75" cy="33" r="10" fill="#ffb3c1"/>`,head:`<ellipse cx="50" cy="60" rx="26" ry="24" fill="#c9c3be" ${OL}/>`,eyes:[40,60,56,4],face:`<circle cx="50" cy="66" r="3.6" fill="#ff8fa3" stroke="${INK}" stroke-width="1.5"/>${line('M36 66h-14M37 70l-12 4M64 66h14M63 70l12 4',1.8)}`},
+  vaca:{name:'Vaca',back:`<path d="M34 25q-5-10 1-15q2 8 7 10z" fill="#f3e3c0" stroke="${INK}" stroke-width="2.2" stroke-linejoin="round"/><path d="M66 25q5-10-1-15q-2 8-7 10z" fill="#f3e3c0" stroke="${INK}" stroke-width="2.2" stroke-linejoin="round"/><ellipse cx="18" cy="42" rx="12" ry="6.5" transform="rotate(-20 18 42)" fill="#f2efe9" ${OL}/><ellipse cx="82" cy="42" rx="12" ry="6.5" transform="rotate(20 82 42)" fill="#f2efe9" ${OL}/>`,head:`<ellipse cx="50" cy="50" rx="27" ry="28" fill="#f8f6f2" ${OL}/><path d="M55 25q14-2 18 10q-2 10-12 9q-9-2-6-19z" fill="${INK}"/>`,eyes:[39,61,47,4.3],face:`<ellipse cx="50" cy="71" rx="21" ry="13" fill="#f6b3b9" ${OL}/><ellipse cx="43" cy="71" rx="2.6" ry="3.6" fill="#8c3550"/><ellipse cx="57" cy="71" rx="2.6" ry="3.6" fill="#8c3550"/>`},
+  pinguino:{name:'Pingüino',head:`<circle cx="50" cy="54" r="31" fill="#2f3b52" ${OL}/><path d="M50 44C44 32 24 34 26 52C27 68 40 80 50 80C60 80 73 68 74 52C76 34 56 32 50 44Z" fill="#fff"/>`,eyes:[40,60,54,4.3],face:`${cheeks(33,67,64)}<path d="M44 61L56 61L50 68Z" fill="#ffa62b" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>`},
+  leon:{name:'León',back:`${maneCircles(true)}${maneCircles(false)}<circle cx="34" cy="35" r="7" fill="#f6c45e" ${OL}/><circle cx="66" cy="35" r="7" fill="#f6c45e" ${OL}/>`,head:`<circle cx="50" cy="55" r="24" fill="#f6c45e" ${OL}/><ellipse cx="50" cy="65" rx="11" ry="8" fill="#fde7b8"/>`,eyes:[41,59,51,3.8],face:`<path d="M45.5 60h9l-4.5 4.5z" fill="${INK}"/>${line('M50 64.5v3M46 69q4 3 8 0',2.2)}`},
+  koala:{name:'Koala',back:`<circle cx="21" cy="40" r="17" fill="#9fa5ad" ${OL}/><circle cx="79" cy="40" r="17" fill="#9fa5ad" ${OL}/><circle cx="22" cy="41" r="10" fill="#eceff2"/><circle cx="78" cy="41" r="10" fill="#eceff2"/>`,head:`<ellipse cx="50" cy="56" rx="28" ry="27" fill="#b0b6be" ${OL}/>`,eyes:[37,63,51,3.8],face:`<ellipse cx="50" cy="61" rx="8" ry="11" fill="#3b3f46"/><ellipse cx="47" cy="56" rx="2" ry="3" fill="#fff" opacity=".45"/>`},
+  buho:{name:'Búho',head:`<path d="M22 32L28 14L41 27Q50 24 59 27L72 14L78 32Q88 54 76 76Q50 92 24 76Q12 54 22 32Z" fill="#9b6b43" ${OL}/><circle cx="38" cy="48" r="13" fill="#f4e2c4"/><circle cx="62" cy="48" r="13" fill="#f4e2c4"/><path d="M38 73l4 4 4-4M54 73l4 4 4-4" fill="none" stroke="#6b4426" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`,eyes:[38,62,48,6.6],face:`<path d="M45 58L55 58L50 67Z" fill="#ffa62b" stroke="${INK}" stroke-width="2.2" stroke-linejoin="round"/>`},
+  malamute:{name:'Malamute',back:`<path d="M20 46L23 10L47 30Z" fill="#4b5262" ${OL}/><path d="M80 46L77 10L53 30Z" fill="#4b5262" ${OL}/><path d="M25.5 36L26.5 19L38 30Z" fill="#f4c9cc"/><path d="M74.5 36L73.5 19L62 30Z" fill="#f4c9cc"/>`,head:`<ellipse cx="50" cy="56" rx="32" ry="29" fill="#4b5262" ${OL}/><path d="M19.5 60Q21 45 35 44.5Q44 44 47 36.5L50 30L53 36.5Q56 44 65 44.5Q79 45 80.5 60Q81 75 66 82Q50 88 34 82Q19 75 19.5 60Z" fill="#f7f7f4"/><circle cx="37" cy="39.5" r="3.4" fill="#f7f7f4"/><circle cx="63" cy="39.5" r="3.4" fill="#f7f7f4"/>`,eyes:[38,62,53,4.3],face:`${cheeks(29,71,65,4.2)}<ellipse cx="50" cy="63" rx="6.2" ry="4.6" fill="${INK}"/>${line('M50 67v3.6M43.5 70.6q6.5 6 13 0')}<path d="M47.4 72.6q2.6 6.4 5.2 0z" fill="#ff8fa3" stroke="${INK}" stroke-width="1.4" stroke-linejoin="round"/>`},
+  calico:{name:'Calico',back:`<path d="M21 46L24 13L46 31Z" fill="#f29a4a" ${OL}/><path d="M79 46L76 13L54 31Z" fill="#3b3a44" ${OL}/><path d="M27 37L27.5 22L38 31Z" fill="#ffb3c1"/><path d="M73 37L72.5 22L62 31Z" fill="#ffb3c1"/>`,head:`<ellipse cx="50" cy="57" rx="31" ry="27" fill="#fbf8f2" ${OL}/><path d="M24 46Q26 35 40 32.5Q48 34 46 45Q38 51 28 53Q23 51 24 46Z" fill="#f29a4a"/><path d="M56 33.5Q65 31.5 72 39Q78 46 76.5 53Q68 50 62 44.5Q56.5 40 56 33.5Z" fill="#3b3a44"/><path d="M64 62Q72 60 74.5 66Q70 71.5 64 69.5Z" fill="#f29a4a"/>`,eyeSvg:`<circle cx="39" cy="55" r="4.8" fill="#6fb24f"/><circle cx="39" cy="55" r="2.7" fill="${INK}"/><circle cx="40.4" cy="53.4" r="1.4" fill="#fff"/><circle cx="61" cy="55" r="4.8" fill="#6fb24f"/><circle cx="61" cy="55" r="2.7" fill="${INK}"/><circle cx="62.4" cy="53.4" r="1.4" fill="#fff"/>`,eyes:[39,61,55,4.3],face:`<path d="M46.5 62.5h7l-3.5 3.6z" fill="#ff8fa3" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/>${line('M50 66.1q-3 4-7 2M50 66.1q3 4 7 2',2.3)}${line('M31 62h-13M32 67l-12 3.5M69 62h13M68 67l12 3.5',1.8)}`},
+  zorrillo:{name:'Zorrillo',back:`<circle cx="28" cy="32" r="9" fill="#2f2f3a" ${OL}/><circle cx="72" cy="32" r="9" fill="#2f2f3a" ${OL}/>`,head:`<ellipse cx="50" cy="56" rx="30" ry="28" fill="#34343f" ${OL}/><path d="M44 29Q50 25 56 29L54 50Q50 54 46 50Z" fill="#f4f4f6"/><ellipse cx="50" cy="70" rx="14" ry="10" fill="#e9e9ee"/><circle cx="37" cy="55" r="6" fill="#fff"/><circle cx="63" cy="55" r="6" fill="#fff"/>`,eyes:[37,63,55,3.6],face:`<ellipse cx="50" cy="66" rx="4.6" ry="3.3" fill="#ff8fa3" stroke="${INK}" stroke-width="1.4"/>${line('M50 69.5v2.5M46 73q4 3 8 0',2.1)}${cheeks(28,72,66,4)}`}
+};
+const PET_CACHE={};
+function petInner(k){
+  if(PET_CACHE[k])return PET_CACHE[k];
+  const a=ANIMALS[k],[x1,x2,y,r]=a.eyes,ink=a.hink||INK;
+  return PET_CACHE[k]=`<g filter="url(#clay)"><g class="pe">${a.back||''}</g>${a.head}<g class="pe">${a.front||''}</g><g class="ey">${a.eyeSvg||eyeN(x1,y,r)+eyeN(x2,y,r)}</g><g class="yh">${eyeH(x1,y,r,ink)+eyeH(x2,y,r,ink)}</g>${a.face||''}</g>`;
+}
+const pet=k=>`<svg class="pet" viewBox="0 0 100 100" aria-hidden="true">${petInner(k)}</svg>`;
+
+return{pet,ANIMALS};
+})();
 
 /* ---------- Interfaz ---------- */
 function init(){
   const $=s=>document.querySelector(s);
-  let type='micro',zone='all',plan=[],P=null,AC=null,sound=true,wl=null,shared=false;
+  let type='micro',zone='all',theme=null,plan=[],P=null,AC=null,sound=true,wl=null,shared=false;
   const ICON={play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',pause:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
     son:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M17 8.5a5 5 0 0 1 0 7"/></svg>',
     soff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg>',
@@ -1258,7 +1545,8 @@ function init(){
     moff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/><path d="M3 3l18 18"/></svg>',
     swap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"/></svg>',
     sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>',
-    moon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>'};
+    moon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>',
+    voz:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H10l-4.5 3.5v-3.5H4z"/><path d="M8 9.5h8M8 12.3h5"/></svg>'};
 
   // tema claro / oscuro
   const root=document.documentElement;
@@ -1278,12 +1566,17 @@ function init(){
 
   $('#chips').innerHTML=`<button class="chip" data-zone="all" aria-pressed="true" style="--zc:var(--brand)"><i></i>Cuerpo completo</button><button class="chip" data-zone="sentado" aria-pressed="false" style="--zc:var(--accent)"><i></i>Sentado</button>`+
     Z.filter(z=>z.id!=='ojos').map(z=>`<button class="chip" data-zone="${z.id}" aria-pressed="false" style="--zc:${z.c}"><i></i>${z.n}</button>`).join('');
+  $('#themes').innerHTML=THEMES.map(t=>`<button class="th" data-theme="${t.id}" aria-pressed="false" style="--tc:${t.c}"><span class="th-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${TI[t.id]}</svg></span><span><b>${t.n}</b><span class="d">${t.d}</span></span></button>`).join('');
+  function showTab(w){const z=w==='z';$('#tabZ').setAttribute('aria-selected',z);$('#tabT').setAttribute('aria-selected',!z);$('#chips').hidden=!z;$('#themes').hidden=z}
+  $('#tabZ').onclick=()=>showTab('z');$('#tabT').onclick=()=>showTab('t');
+  function markPick(){document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',!theme&&x.dataset.zone===zone));document.querySelectorAll('.th').forEach(x=>x.setAttribute('aria-pressed',!!theme&&x.dataset.theme===theme.id))}
 
   const glowFor=(g,now)=>!g?.5:g.kind==='hold'?.62+.3*Math.sin(now/1000*Math.PI*1.4):g.kind==='rest'?.1:g.kind==='back'?.3:.5;
   const blinkAt=now=>(now/1000)%4.3<.14?1:0;
 
   function renderPlan(){
-    $('#planTitle').textContent=shared?'Pausa compartida':'Pausa de hoy';
+    $('#planTitle').textContent=shared?'Pausa compartida':theme?theme.n:'Pausa de hoy';
+    $('#planDesc').hidden=!theme;$('#planDesc').textContent=theme?(shared?theme.n+' · ':'')+theme.d:'';
     $('#meta').textContent=plan.length+' ejercicios · '+mmss(total(plan))+' min';
     $('#list').innerHTML=plan.map((e,i)=>{const z=zOf(e.z);
       return `<li class="row" style="--zc:${z.c}"><svg class="pv thumb" viewBox="0 12 200 200" aria-hidden="true">${render(e.a,{...thumbPose(e),g:.6},'t'+i)}</svg>
@@ -1291,28 +1584,29 @@ function init(){
       <button class="ib" data-swap="${i}" aria-label="Cambiar ${e.n} por otro ejercicio">${ICON.swap}</button></li>`}).join('');
     $('#copyBox').hidden=true;
   }
-  function regen(){shared=false;plan=build(type,zone);renderPlan()}
+  function regen(){shared=false;plan=theme?buildTheme(type,theme):build(type,zone);renderPlan()}
   regen();
   // abre la pausa exacta que llega en el enlace
   function loadShared(r){
     r=r||readHash(location.hash);if(!r)return false;
-    type=r.type;zone='all';plan=r.plan;shared=true;
+    type=r.type;zone='all';theme=r.theme||null;plan=r.plan;shared=true;
     document.querySelectorAll('.type').forEach(x=>x.setAttribute('aria-pressed',x.dataset.type===type));
-    document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.zone==='all'));
+    markPick();showTab(theme?'t':'z');
     renderPlan();toast('Te compartieron esta pausa');
     setTimeout(()=>{try{document.querySelector('.plan').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}},300);
     return true;
   }
 
   document.querySelectorAll('.type').forEach(b=>b.onclick=()=>{type=b.dataset.type;document.querySelectorAll('.type').forEach(x=>x.setAttribute('aria-pressed',x===b));regen()});
-  $('#chips').onclick=ev=>{const b=ev.target.closest('.chip');if(!b)return;zone=b.dataset.zone;document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));regen()};
+  $('#chips').onclick=ev=>{const b=ev.target.closest('.chip');if(!b)return;zone=b.dataset.zone;theme=null;markPick();regen()};
+  $('#themes').onclick=ev=>{const b=ev.target.closest('.th');if(!b)return;theme=thOf(b.dataset.theme);zone='all';markPick();regen()};
   $('#bShuffle').onclick=regen;
-  $('#list').onclick=ev=>{const b=ev.target.closest('[data-swap]');if(!b)return;swapOne(plan,+b.dataset.swap,type,zone);shared=false;renderPlan()};
+  $('#list').onclick=ev=>{const b=ev.target.closest('[data-swap]');if(!b)return;if(theme)swapTheme(plan,+b.dataset.swap,type,theme);else swapOne(plan,+b.dataset.swap,type,zone);shared=false;renderPlan()};
 
   let toastT;
   function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,1800)}
-  function shareText(){const link=APP_URL+'#'+pauseHash(type,plan);
-    return{link,short:`Hagamos esta pausa activa: ${type==='micro'?'micro pausa':'pausa larga'} de ${mmss(total(plan))} min. Si se abre otra pausa, pega el link en "¿Te compartieron una pausa?".`,msg:`Hagamos esta pausa activa: ${type==='micro'?'micro pausa':'pausa larga'} de ${mmss(total(plan))} min.\n${link}\n\nSi se abre otra pausa, pega este mensaje en Pausa Viva, en "¿Te compartieron una pausa?".`}}
+  function shareText(){const link=APP_URL+'#'+pauseHash(type,plan,theme),nm=theme?` «${theme.n}»`:'';
+    return{link,short:`Hagamos esta pausa activa${nm}: ${type==='micro'?'micro pausa':'pausa larga'} de ${mmss(total(plan))} min. Si se abre otra pausa, pega el link en "¿Te compartieron una pausa?".`,msg:`Hagamos esta pausa activa${nm}: ${type==='micro'?'micro pausa':'pausa larga'} de ${mmss(total(plan))} min.\n${link}\n\nSi se abre otra pausa, pega este mensaje en Pausa Viva, en "¿Te compartieron una pausa?".`}}
   $('#bCopy').onclick=()=>{
     const t=shareText();
     $('#shList').innerHTML=plan.map(e=>`<li>${e.n}</li>`).join('');
@@ -1399,6 +1693,58 @@ function init(){
   musicBtn();
   $('#bMusic').onclick=()=>{musicOn=!musicOn;try{localStorage.setItem('pv-music',musicOn?'1':'0')}catch(e){}musicBtn();if(P&&!P.paused)musicOn?musicStart():musicStop()};
 
+  // ---------- Voz guía: la voz en español del propio navegador va diciendo las indicaciones ----------
+  const VO={on:false,ok:false,v:null};
+  try{VO.ok='speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined'}catch(e){}
+  try{VO.on=VO.ok&&localStorage.getItem('pv-voice')==='1'}catch(e){}
+  const VPREF=['es-cl','es-419','es-us','es-mx','es-ar','es-co','es-pe','es-es'];
+  const vScore=v=>{const l=String(v.lang||'').replace('_','-').toLowerCase(),i=VPREF.indexOf(l);
+    return(i<0?1:12-i)+(/natural|online|neural/i.test(v.name||'')?20:/google/i.test(v.name||'')?8:0)};
+  function pickVoice(){try{const vs=speechSynthesis.getVoices().filter(v=>/^es/i.test(v.lang||''));VO.v=vs.sort((a,b)=>vScore(b)-vScore(a))[0]||null}catch(e){}}
+  if(VO.ok){pickVoice();try{speechSynthesis.addEventListener('voiceschanged',pickVoice)}catch(e){}}
+  function duck(d){if(!MU||!MU.timer||!AC)return;try{MU.bus.gain.cancelScheduledValues(AC.currentTime);MU.bus.gain.setTargetAtTime(d?.09:.28,AC.currentTime,d?.08:.4)}catch(e){}}
+  let vT=0;
+  function say(t){
+    if(!VO.on||!VO.ok||!t)return;
+    try{
+      const s=speechSynthesis,u=new SpeechSynthesisUtterance(t);
+      u.lang=VO.v?VO.v.lang:'es-CL';if(VO.v)u.voice=VO.v;u.rate=1.04;u.pitch=1;u.volume=1;
+      u.onstart=()=>duck(true);u.onend=u.onerror=()=>{try{if(!s.speaking&&!s.pending)duck(false)}catch(e){}};
+      clearTimeout(vT);
+      if(s.speaking||s.pending){s.cancel();vT=setTimeout(()=>{try{s.speak(u)}catch(e){}},70)}else s.speak(u);
+    }catch(e){}
+  }
+  function hush(){clearTimeout(vT);try{if(VO.ok)speechSynthesis.cancel()}catch(e){}duck(false)}
+  const N2W=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte'];
+  function voiceIntro(i){
+    const e=plan[i];if(!e)return;
+    say((i===0?'Primer ejercicio: ':i===plan.length-1?'Último ejercicio: ':'Siguiente: ')+e.n+'. '+(e.pos||''));
+  }
+  function voiceSeg(e,i){
+    if(!VO.on||!e.s||!e.tl)return;
+    const g=e.tl[i],nx=e.tl[i+1],s=e.s;let t='';
+    if(g.rep){
+      // repeticiones lentas o de respiración: dice cada paso; si son rápidas, cuenta
+      const lm=!!s.path&&(s.path.some(x=>/inhala|exhala/i.test(x.say||''))||s.path.every(x=>x.m+(x.h||0)>=1.8));
+      if(lm){const pv=e.tl[i-1];if(g.kind==='move'||!pv||pv.label!==g.label)t=g.label}
+      else if(g.first)t=g.rep===g.n&&g.n>3?'Última':(N2W[g.rep]||String(g.rep));
+    }else if(g.kind==='go'){if(!(nx&&nx.kind==='hold'&&nx.label===g.label))t=g.label}
+    else if(g.kind==='hold')t=g.label+(g.d>=5?', '+Math.round(g.d)+' segundos':'');
+    else if(g.kind==='loop')t=(g.label?g.label+'. ':'')+'Sigue el movimiento durante '+Math.round(g.d)+' segundos';
+    else if(!(g.kind==='back'&&g.d<1.2&&nx&&nx.kind==='rest'))t=g.label;
+    if(t)say(t);
+  }
+  const voiceBtn=()=>{const b=$('#bVoice');b.hidden=!VO.ok;b.innerHTML=ICON.voz+'<span>Voz<span class="vx"> guía</span></span>';
+    b.classList.toggle('on',VO.on);b.setAttribute('aria-pressed',VO.on);b.setAttribute('aria-label',VO.on?'Apagar la voz guía':'Activar la voz guía')};
+  voiceBtn();
+  $('#bVoice').onclick=()=>{
+    VO.on=!VO.on;try{localStorage.setItem('pv-voice',VO.on?'1':'0')}catch(e){}voiceBtn();
+    if(VO.on){pickVoice();say('Voz guía activada');
+      let none=false;try{none=speechSynthesis.getVoices().length>0&&!VO.v}catch(e){}
+      toast(none?'Voz activada. Este navegador no tiene voz en español':'Voz guía activada')}
+    else{hush();toast('Voz guía apagada')}
+  };
+
   // reproductor
   const cache={};
   const setTxt=(id,v)=>{if(cache[id]!==v){cache[id]=v;$(id).textContent=v}};
@@ -1419,12 +1765,12 @@ function init(){
     $('#segs').innerHTML=plan.map(()=>'<div class="seg"><i></i></div>').join('');
     $('#plRun').hidden=false;$('#plCtrl').hidden=false;$('#plDone').hidden=true;
     $('#player').hidden=false;document.body.style.overflow='hidden';
-    setEx();playBtn();beep(520,.1);musicStart();requestAnimationFrame(loop);
+    setEx();playBtn();beep(520,.1);musicStart();voiceIntro(0);requestAnimationFrame(loop);
   }
   function go(i){
     if(!P)return;
     if(i>=plan.length){finish();return}
-    P.i=Math.max(0,i);P.phase='prep';P.left=PREP;P.t=0;P.seg=-1;P.cued=false;P.cue=0;setEx();beep(520,.1);
+    P.i=Math.max(0,i);P.phase='prep';P.left=PREP;P.t=0;P.seg=-1;P.cued=false;P.cue=0;setEx();beep(520,.1);voiceIntro(P.i);
   }
   function advance(){
     const e=plan[P.i];
@@ -1440,8 +1786,10 @@ function init(){
     document.querySelectorAll('.seg i').forEach(s=>s.style.width='100%');
     $('#dMsg').textContent=`Llevas ${cnt} ${cnt===1?'pausa':'pausas'} hoy. Toma agua y vuelve con calma.`;
     $('#dNext').textContent=new Date(Date.now()+36e5).toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+    const sr=stDone();stRefresh();renderDoneStreak(sr);
+    if(sr.prize&&!ST.hidden)prizeFx(sr.prize,'Pausa lista. ');else say('Pausa lista. Buen trabajo.');
   }
-  function close(){P=null;musicStop();try{wl&&wl.release();wl=null}catch(e){}$('#player').hidden=true;document.body.style.overflow=''}
+  function close(){P=null;musicStop();hush();try{wl&&wl.release();wl=null}catch(e){}$('#player').hidden=true;document.body.style.overflow=''}
   function loop(now){
     if(!P)return;
     const dt=Math.min(.25,(now-P.last)/1000);P.last=now;
@@ -1458,7 +1806,7 @@ function init(){
       const r=tlAt(e,run?P.t:0);
       pose={...r.pose,g:run?glowFor(r.g,now):.2};
       if(run){
-        if(r.i!==P.seg){P.seg=r.i;cueSeg(r.g)}
+        if(r.i!==P.seg){P.seg=r.i;cueSeg(r.g);voiceSeg(e,r.i)}
         const g=r.g,s2=String(Math.max(1,Math.ceil(r.rem-1e-6)));pill=r.say||g.label;rest=g.kind==='rest';big=true;
         step=[g.sub,g.rep?`Repetición ${g.rep} de ${g.n}`:''].filter(Boolean).join(' · ');
         clock=g.rep?(g.kind==='hold'&&g.d>=2?s2:g.rep+'/'+g.n):g.cd?s2:g.kind==='go'?String(e.s.hold):'✓';
@@ -1483,7 +1831,7 @@ function init(){
   $('#bAgain').onclick=start;
   $('#bHome').onclick=()=>{close();regen()};
   $('#bClose').onclick=close;
-  $('#bPlay').onclick=()=>{if(P){P.paused=!P.paused;playBtn();P.paused?musicStop():musicStart()}};
+  $('#bPlay').onclick=()=>{if(P){P.paused=!P.paused;playBtn();if(P.paused){musicStop();hush()}else musicStart()}};
   $('#bNext').onclick=()=>go(P.i+1);
   $('#bPrev').onclick=()=>go(P.i-1);
   // ---------- Recordatorios opcionales: cada persona los activa en su navegador ----------
@@ -1560,13 +1908,167 @@ function init(){
     document.querySelectorAll('.type').forEach(x=>x.setAttribute('aria-pressed',x.dataset.type===type));regen();start()};
   $('#alSnooze').onclick=()=>{$('#alarm').hidden=true;snoozeAt=Date.now()+10*60*1000;toast('Te aviso de nuevo en 10 minutos')};
   $('#alNo').onclick=()=>{$('#alarm').hidden=true};
+
+  // ---------- Racha de días hábiles y premios (todo queda en este navegador) ----------
+  // Cuenta cada día hábil (lunes a viernes) con al menos una pausa terminada. Premios: día 1, 2, 4, 5 y luego cada 3 días.
+  // Si faltan días hábiles, la app pregunta si fue por vacaciones, licencia o un día libre y permite mantener la racha.
+  const PRIZES=['malamute','calico','perro','gato','conejo','pollito','raton','rana','cerdo','oso','panda','zorro','koala','pinguino','vaca','buho','leon','zorrillo'];
+  const PNAME={malamute:'Malamute',calico:'Gata calico'};
+  const pName=k=>PNAME[k]||HUE.ANIMALS[k].name;
+  const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const isWork=d=>d.getDay()>0&&d.getDay()<6;
+  const noon=d=>{const x=new Date(d);x.setHours(12,0,0,0);return x};
+  const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+  const fromYmd=k=>{const[y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d,12)};
+  const isMile=n=>n===1||n===2||n===4||n===5||(n>5&&(n-5)%3===0);
+  const nextMile=n=>{let m=n+1;while(!isMile(m))m++;return m};
+  const prevMile=n=>{let m=n;while(m>0&&!isMile(m))m--;return m};
+  const dias=n=>n===1?'día':'días',hab=n=>n===1?'día hábil':'días hábiles';
+  let ST={days:[],ok:[],paused:'',hidden:false,got:[],stars:0,no:'',best:0,aw:''};
+  try{const o=JSON.parse(localStorage.getItem('pv-streak')||'{}');if(o&&typeof o==='object')ST={...ST,...o}}catch(e){}
+  ['days','ok','got'].forEach(k=>{if(!Array.isArray(ST[k]))ST[k]=[]});
+  const saveST=()=>{try{localStorage.setItem('pv-streak',JSON.stringify(ST))}catch(e){}};
+  function stCalc(now){
+    now=noon(now||new Date());
+    const k0=ymd(now),D=new Set(ST.days),O=new Set(ST.ok),cov=k=>O.has(k)||(!!ST.paused&&k>=ST.paused);
+    if(!ST.days.length)return{n:0,gap:null,today:false,k0};
+    const first=ST.days.reduce((a,b)=>a<b?a:b);
+    let d=new Date(now),n=0;
+    for(;ymd(d)>=first;d=addD(d,-1)){const k=ymd(d);if(!isWork(d)||D.has(k)&&++n||cov(k)||k===k0)continue;break}
+    let gap=null;
+    if(ymd(d)>=first){
+      const miss=[];
+      for(;ymd(d)>=first;d=addD(d,-1)){const k=ymd(d);if(!isWork(d))continue;if(D.has(k)||cov(k))break;miss.push(k)}
+      let pn=0;
+      for(;ymd(d)>=first;d=addD(d,-1)){const k=ymd(d);if(!isWork(d)||D.has(k)&&++pn||cov(k))continue;break}
+      if(pn>=2&&miss.length)gap={days:miss,prev:pn,key:miss[miss.length-1]+'_'+miss[0]};
+    }
+    return{n,gap,today:D.has(k0),k0};
+  }
+  const askGap=c=>!!(c.gap&&ST.no!==c.gap.key);
+  // al volver de vacaciones o licencia, los días hábiles en pausa quedan cubiertos
+  function resume(now){
+    if(!ST.paused)return;const k0=ymd(noon(now||new Date()));
+    for(let d=fromYmd(ST.paused);ymd(d)<k0;d=addD(d,1)){const k=ymd(d);if(isWork(d)&&!ST.days.includes(k)&&!ST.ok.includes(k))ST.ok.push(k)}
+    ST.paused='';
+  }
+  // entrega el premio del día si corresponde (una vez por día)
+  function settle(c){
+    if(!c.today||askGap(c)||ST.aw===c.k0||!isMile(c.n))return null;
+    ST.aw=c.k0;const nx=PRIZES.find(p=>!ST.got.includes(p));
+    if(nx){ST.got.push(nx);return nx}
+    ST.stars=(ST.stars||0)+1;return'star';
+  }
+  function stDone(){
+    const now=new Date(),k=ymd(now);
+    if(!isWork(now))return{weekend:true,...stCalc(now)};
+    const first=!ST.days.includes(k);
+    if(first){ST.days.push(k);ST.days.sort();if(ST.days.length>900)ST.days=ST.days.slice(-900)}
+    resume(now);
+    const c=stCalc(now),prize=settle(c);
+    ST.best=Math.max(ST.best||0,c.n);if(ST.ok.length>900)ST.ok=ST.ok.slice(-900);saveST();
+    return{...c,first,prize};
+  }
+  const PAW='<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.6" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.6" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="14.4" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="18.4" cy="10.4" rx="2.2" ry="2.8"/></g></svg>';
+  const STAR='<svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>';
+  const SPK=(x,y,dl,b)=>`<svg class="spk${b?' b':''}" viewBox="0 0 24 24" style="left:${x}px;top:${y}px;animation-delay:${dl}s" aria-hidden="true"><path fill="currentColor" d="M12 1.5l2.4 8.1 8.1 2.4-8.1 2.4L12 22.5l-2.4-8.1L1.5 12l8.1-2.4z"/></svg>`;
+  const gapText=c=>`Tu racha de ${c.gap.prev} ${dias(c.gap.prev)} quedó en pausa: faltaron ${c.gap.days.length} ${hab(c.gap.days.length)} sin pausas. Si fue por vacaciones, licencia o un día libre, puedes mantenerla.`;
+  const gapButtons='<div class="acts"><button class="btn pri" data-gap="keep">Sí, mantener mi racha</button><button class="btn sec" data-gap="no">No, empezar de nuevo</button></div>';
+  let lastDone=null;
+  function stRefresh(){
+    const c=stCalc(),b=$('#bStreak');
+    b.hidden=!!ST.hidden;$('#stkN').textContent=c.n;b.classList.toggle('zero',!c.n);
+    b.setAttribute('aria-label',`Racha: ${c.n} ${hab(c.n)}. Ver racha y premios`);
+    const ask=!ST.hidden&&askGap(c);
+    $('#gapCard').hidden=!ask;if(ask)$('#gapCard').innerHTML=`<p>${gapText(c)}</p>${gapButtons}`;
+    $('#stHidNote').hidden=!ST.hidden;
+    if(!$('#stSheet').hidden)renderSheet();
+    return c;
+  }
+  function renderSheet(){
+    const now=noon(new Date()),c=stCalc(now),D=new Set(ST.days),O=new Set(ST.ok);
+    $('#stNum').textContent=c.n;
+    $('#stDays').textContent=c.n===1?'día hábil de racha':'días hábiles seguidos';
+    $('#stBest').textContent=(ST.best||0)>c.n?`Tu mejor racha: ${ST.best} ${dias(ST.best)}`:c.today?'Hoy ya sumaste tu día.':'Hoy todavía no haces tu pausa.';
+    const mon=addD(now,-((now.getDay()+6)%7));
+    $('#stWeek').innerHTML=['Lu','Ma','Mi','Ju','Vi'].map((l,i)=>{const d=addD(mon,i),k=ymd(d);
+      const cls=D.has(k)?'done':(O.has(k)||(ST.paused&&k>=ST.paused&&k<=c.k0))?'ok':k===c.k0?'today':k>c.k0?'fut':'miss';
+      const lab={done:'pausa hecha',ok:'cubierto',today:'hoy',fut:'por venir',miss:'sin pausa'}[cls];
+      return`<div class="wd ${cls}"><i aria-label="${l}: ${lab}">${cls==='done'?PAW:cls==='ok'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.5l4 4 9-9"/></svg>':''}</i>${l}</div>`}).join('');
+    const nm=nextMile(c.n),pm=prevMile(c.n),left=nm-c.n;
+    $('#stBar').innerHTML=Array.from({length:nm-pm},(_,i)=>`<i class="${i<c.n-pm?'on':''}"></i>`).join('');
+    $('#stNext').textContent=c.n===0?'Termina una pausa en un día hábil para empezar tu racha y ganar tu primer compañero.':`Próximo premio el día ${nm}: te ${left===1?'falta':'faltan'} ${left} ${hab(left)}.`;
+    const ask=askGap(c);$('#stGap').hidden=!ask;if(ask)$('#stGap').innerHTML=`<p>${gapText(c)}</p>${gapButtons}`;
+    const got=ST.got.filter(k=>PRIZES.includes(k)),nxt=PRIZES.find(p=>!got.includes(p));
+    $('#stColN').textContent=`${got.length} de ${PRIZES.length}`;
+    $('#stCol').innerHTML=PRIZES.map(k=>got.includes(k)?`<button class="pz" data-pet="${k}" aria-label="${pName(k)}">${HUE.pet(k)}</button>`:
+      `<span class="pz lock${k===nxt?' next':''}" aria-label="${k===nxt?'Próximo compañero, día '+nm:'Por descubrir'}">${HUE.pet(k)}${k===nxt?`<small>Día ${nm}</small>`:''}</span>`).join('');
+    $('#stStars').hidden=!ST.stars;$('#stStars').textContent=`Colección completa · ${ST.stars} ${ST.stars===1?'estrella':'estrellas'} extra`;
+    $('#stPause').checked=!!ST.paused;
+    $('#stPauseTx').textContent=ST.paused?`Racha en pausa desde el ${fromYmd(ST.paused).toLocaleDateString('es-CL',{day:'numeric',month:'long'})}. Se reanuda sola con tu próxima pausa.`:'Actívalo si sales de vacaciones o con licencia: tu racha queda en pausa y no se pierde.';
+    $('#stHide').checked=!!ST.hidden;
+  }
+  // bloque de racha en la pantalla final
+  function renderDoneStreak(r){
+    const box=$('#dStreak');lastDone=r;
+    if(ST.hidden||!r){box.hidden=true;box.innerHTML='';return}
+    box.hidden=false;
+    if(r.weekend){box.innerHTML=`<div class="dst-row">${PAW}<div><b>Los fines de semana no cuentan para la racha</b><span>Pero igual te hacen bien.</span></div></div>`;return}
+    const c=stCalc();
+    if(askGap(c)){box.innerHTML=`<div class="gapcard"><p>Antes de sumar el día de hoy: ${gapText(c).charAt(0).toLowerCase()+gapText(c).slice(1)}</p>${gapButtons}</div>`;return}
+    const left=nextMile(c.n)-c.n,got=ST.got.length;
+    if(r.prize){
+      const art=r.prize==='star'?STAR:HUE.pet(r.prize).replace('class="pet"','class="pet happy"');
+      box.innerHTML=`<div class="prize"><div class="prize-art">${art}${SPK(6,22,.35)}${SPK(122,14,.55,1)}${SPK(128,96,.75)}${SPK(14,104,.95,1)}</div>
+        <h3>${r.prize==='star'?'¡Colección completa!':'¡Nuevo compañero!'}</h3>
+        <p>${r.prize==='star'?`Sumas una estrella extra por tu racha de <b>${c.n} ${dias(c.n)}</b>.`:`<b>${pName(r.prize)}</b> se suma a tu colección ${c.n===1?'por tu <b>primer día</b> de racha':`por tu racha de <b>${c.n} días</b>`}.`}</p>
+        <p>Tienes ${Math.min(got,PRIZES.length)} de ${PRIZES.length} · próximo premio en ${left} ${hab(left)}.</p>
+        <button class="lnk" data-open="streak">Ver tu colección</button></div>`;
+      const pv=box.querySelector('.pet');if(pv)setTimeout(()=>pv.classList.remove('happy'),1600);
+      return;
+    }
+    box.innerHTML=`<div class="dst-row">${PAW}<div><b>Racha: ${c.n} ${hab(c.n)}</b><span>${r.first?'Hoy suma a tu racha.':'Hoy ya estaba sumado.'} Próximo premio en ${left} ${hab(left)}.</span></div></div><button class="lnk" data-open="streak">Ver tu colección</button>`;
+  }
+  function onGap(keep){
+    const c=stCalc();if(!c.gap)return;
+    if(keep){c.gap.days.forEach(k=>{if(!ST.ok.includes(k))ST.ok.push(k)});ST.ok.sort()}else ST.no=c.gap.key;
+    const c2=stCalc();ST.best=Math.max(ST.best||0,c2.n);
+    const prize=!$('#plDone').hidden&&lastDone&&!lastDone.weekend?settle(c2):null;
+    saveST();stRefresh();
+    if(!$('#plDone').hidden&&lastDone&&!lastDone.weekend){renderDoneStreak({...lastDone,prize});if(prize)prizeFx(prize)}
+    toast(keep?`Racha mantenida: ${c2.n} ${dias(c2.n)}`:'Empiezas una racha nueva');
+  }
+  function prizeFx(prize,pre){
+    beep(784,.16,.75);beep(988,.16,.9);beep(1318,.32,1.05);
+    say((pre||'')+(prize==='star'?'Colección completa. Sumas una estrella extra.':'Nuevo compañero: '+pName(prize)+'.'));
+  }
+  document.addEventListener('click',ev=>{
+    const g=ev.target.closest('[data-gap]');if(g){onGap(g.dataset.gap==='keep');return}
+    const o=ev.target.closest('[data-open="streak"]');if(o){openSheet();return}
+    const pz=ev.target.closest('[data-pet]');
+    if(pz){const pv=pz.querySelector('.pet');pv.classList.remove('bob','happy');void pv.getBBox();pv.classList.add('bob','happy');setTimeout(()=>pv.classList.remove('bob','happy'),900);toast(pName(pz.dataset.pet))}
+  });
+  // parpadeo tranquilo de los compañeros a la vista
+  setInterval(()=>{document.querySelectorAll('#plDone:not([hidden]) .prize .pet:not(.happy), #stSheet:not([hidden]) .pz:not(.lock) .pet').forEach(p=>{if(Math.random()<.35){p.classList.add('blink');setTimeout(()=>p.classList.remove('blink'),260)}})},1800);
+  function openSheet(){renderSheet();$('#stSheet').hidden=false;setTimeout(()=>{try{$('#stClose').focus()}catch(e){}},50)}
+  const closeSheet=()=>{$('#stSheet').hidden=true;try{(ST.hidden?$('#stShow'):$('#bStreak')).focus()}catch(e){}};
+  $('#bStreak').onclick=openSheet;
+  $('#stClose').onclick=closeSheet;
+  $('#stSheet').addEventListener('click',ev=>{if(ev.target.id==='stSheet')closeSheet()});
+  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!$('#stSheet').hidden)closeSheet()});
+  $('#stPause').onchange=()=>{if($('#stPause').checked)ST.paused=ymd(noon(new Date()));else resume();saveST();stRefresh();renderSheet();
+    toast(ST.paused?'Racha en pausa':'Racha activa de nuevo')};
+  $('#stHide').onchange=()=>{ST.hidden=$('#stHide').checked;saveST();stRefresh();
+    toast(ST.hidden?'Racha oculta. Puedes mostrarla de nuevo al final de la página':'Racha visible')};
+  $('#stShow').onclick=()=>{ST.hidden=false;saveST();stRefresh();openSheet()};
+  stRefresh();
   remLine();
   document.addEventListener('keydown',ev=>{
     if(!P)return;
     if(ev.key==='Escape')close();
     else if(ev.key==='ArrowRight')go(P.i+1);
     else if(ev.key==='ArrowLeft')go(P.i-1);
-    else if(ev.key===' '&&ev.target.tagName!=='BUTTON'){ev.preventDefault();P.paused=!P.paused;playBtn();P.paused?musicStop():musicStart()}
+    else if(ev.key===' '&&ev.target.tagName!=='BUTTON'){ev.preventDefault();P.paused=!P.paused;playBtn();if(P.paused){musicStop();hush()}else musicStart()}
   });
   loadShared();
   window.addEventListener('hashchange',()=>{if(!P)loadShared()});
