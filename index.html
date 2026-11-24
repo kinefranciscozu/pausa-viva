@@ -268,7 +268,7 @@ a.btn{text-decoration:none}
 .wd{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--muted)}
 .wd i{width:40px;height:40px;max-width:100%;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:var(--accent)}
 .wd i svg{width:20px;height:20px}
-.wd.done i{background:color-mix(in srgb,var(--accent) 15%,var(--surface));border-color:var(--accent)}
+.wd.hit i{background:color-mix(in srgb,var(--accent) 15%,var(--surface));border-color:var(--accent)}
 .wd.ok i{border-style:dashed;border-color:var(--brand);color:var(--brand)}
 .wd.today{color:var(--ink)}
 .wd.today i{border-color:var(--ink)}
@@ -313,6 +313,111 @@ a.btn{text-decoration:none}
 @keyframes petIn{from{opacity:0;transform:scale(.5) translateY(16px)}}
 @keyframes glowIn{from{opacity:0;transform:scale(.6)}}
 @keyframes spk{0%{opacity:0;transform:scale(.3) rotate(0)}25%{opacity:1}100%{opacity:0;transform:scale(1) rotate(50deg) translateY(-8px)}}
+/* ícono de perfil (compañero elegido) */
+.stk-ic{display:grid;place-items:center;flex:none}
+.stk.has-av{padding-left:4px}
+.stk.has-av .stk-ic{width:32px;height:32px;border-radius:50%;background:color-mix(in srgb,var(--brand) 13%,var(--surface))}
+.stk .stk-ic .pet{width:28px;height:28px;color:inherit}
+.st-av{flex:none;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--brand) 13%,var(--surface))}
+.st-av .pet{width:52px;height:52px}
+.st-av>svg:not(.pet){width:32px;height:32px;color:var(--accent)}
+.pz{cursor:pointer}
+.pz.lock{cursor:default}
+.pz.mine{border:2px solid var(--brand)}
+.pz.sel{outline:2.5px solid var(--accent);outline-offset:2px}
+.pz .mk{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;box-shadow:0 0 0 2px var(--surface)}
+.pz .mk svg{width:12px;height:12px}
+.st-pick{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.pk-art{width:56px;height:56px;flex:none;border-radius:50%;background:color-mix(in srgb,var(--brand) 13%,var(--surface));display:grid;place-items:center}
+.pk-art .pet{width:48px;height:48px}
+.pk-tx{flex:1;min-width:0}
+.pk-tx b{display:block;font-size:16.5px;line-height:1.25}
+.pk-tx span{display:block;font-size:14px;color:var(--muted)}
+.st-pick .btn.pri,.prize-acts .btn{flex:none;font-size:15px;padding:10px 16px;border-radius:12px}
+.pk-ok{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--brand);font-size:15px;white-space:nowrap}
+.pk-ok svg{width:18px;height:18px}
+.st-paw{align-self:flex-start;font-size:14.5px}
+@media (max-width:400px){.st-pick{flex-wrap:wrap}.st-pick .btn.pri{flex:1 1 100%}}
+.ok-wrap{position:relative}
+.ok-av{position:absolute;right:-24px;bottom:-8px;width:52px;height:52px;border-radius:50%;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;box-shadow:0 6px 16px rgba(3,48,59,.12)}
+.ok-av .pet{width:44px;height:44px}
+@media (prefers-reduced-motion:no-preference){.ok-av:not([hidden]){animation:avPop .6s cubic-bezier(.2,1.4,.4,1) .2s both}}
+@keyframes avPop{from{opacity:0;transform:scale(.3)}}
+.prize-acts{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;margin-top:8px}
+.prize .pz-note{font-size:14.5px}
+
+/* recordatorios: secciones */
+.rem-sec{display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:1px solid var(--line)}
+.rem-sec h3{font-size:18px}
+.rem-ul{margin:0;padding-left:20px;color:var(--muted);font-size:14.5px;line-height:1.45;display:grid;gap:4px}
+.rem-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto;grid-auto-flow:column;gap:6px 12px;font-weight:600;font-size:14.5px;color:var(--muted)}
+.rem-row input{width:100%;min-width:0}
+.rem-row[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.sheet-next b{color:var(--ink)}
+
+/* bienvenida */
+.intro{position:fixed;inset:0;z-index:75;background:color-mix(in srgb,var(--ink) 52%,transparent);display:grid;place-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.intro .in-card{position:relative;width:100%;max-width:460px;max-height:100%;overflow:auto;background:var(--surface);border-radius:26px;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(3,30,38,.28)}
+.in-art{position:relative;flex:none;height:248px;background:linear-gradient(135deg,var(--hero1),var(--hero2));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;overflow:hidden}
+.in-art::before,.in-art::after{content:"";position:absolute;border-radius:50%;background:color-mix(in srgb,var(--hero-ink) 7%,transparent)}
+.in-art::before{width:240px;height:240px;left:-90px;top:-110px}
+.in-art::after{width:180px;height:180px;right:-70px;bottom:-90px}
+.in-skip{position:absolute;top:12px;right:12px;z-index:3;padding:7px 14px;border-radius:99px;font-weight:700;font-size:14.5px;background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--ink)}
+.in-body{padding:22px 22px 4px;display:flex;flex-direction:column;gap:10px}
+.in-k{margin:0;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.in-body h2{font-size:27px}
+.in-tx{display:flex;flex-direction:column;gap:10px;color:var(--muted);font-size:16px;line-height:1.5}
+.in-tx p{margin:0}
+.in-tx b{color:var(--ink)}
+.in-small{font-size:14.5px}
+.in-types{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.in-types div{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--bg)}
+.in-types b{display:block;font-family:var(--display);font-size:17px}
+.in-types span{display:block;font-size:14px;font-weight:600;color:var(--brand)}
+.in-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.in-list li{display:flex;gap:12px;align-items:flex-start}
+.in-list svg{flex:none;width:22px;height:22px;color:var(--brand);margin-top:2px}
+.in-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px 22px}
+.in-dots{display:flex;gap:7px}
+.in-dots i{width:8px;height:8px;border-radius:99px;background:var(--line);transition:width .25s,background .25s}
+.in-dots i.on{width:24px;background:var(--brand)}
+.in-bt{display:flex;gap:8px}
+.in-bt .btn{flex:none;font-size:16px;padding:12px 18px}
+.in-bt .btn.pri{flex:none;font-size:16px;padding:12px 22px;min-width:120px}
+.in-stage{position:relative;width:190px;height:190px}
+.in-stage svg{width:100%;height:100%;display:block}
+.in-stage .pill{top:-2px;font-size:14.5px;padding:5px 12px}
+.in-stage .clock{bottom:-6px;font-size:19px;padding:2px 13px}
+.in-mock{position:relative;display:flex;flex-direction:column;align-items:center;gap:16px}
+.in-cards{display:flex;align-items:center;gap:10px}
+.in-card2{width:104px;display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:16px;background:var(--surface);color:var(--ink);box-shadow:0 10px 24px rgba(3,30,38,.18);text-align:left}
+.in-card2 .th-ic{width:34px;height:34px}
+.in-card2 .th-ic svg{width:20px;height:20px}
+.in-card2 b{font-family:var(--display);font-size:15px;line-height:1.15;min-height:2.3em}
+.in-card2.c0{transform:rotate(-5deg) translateY(8px)}
+.in-card2.c1{transform:translateY(-6px);box-shadow:0 14px 30px rgba(3,30,38,.22)}
+.in-card2.c2{transform:rotate(5deg) translateY(8px)}
+.in-pills{display:flex;gap:8px}
+.in-pills>span{box-shadow:0 6px 16px rgba(3,30,38,.15);animation:none!important}
+.in-pets{display:flex;align-items:flex-end;gap:6px}
+.in-pet{display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--surface) 92%,transparent);box-shadow:0 8px 20px rgba(3,30,38,.16)}
+.in-pet .pet{width:82%;height:82%}
+.in-pet.p0,.in-pet.p2{width:72px;height:72px}
+.in-pet.p1{width:98px;height:98px}
+.in-week{display:flex;gap:8px;padding:8px 12px;border-radius:99px;background:color-mix(in srgb,var(--surface) 92%,transparent)}
+.in-week span{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:700;color:var(--muted)}
+.in-week i{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:var(--accent)}
+.in-week .on i{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface))}
+.in-week i svg{width:15px;height:15px}
+@media (prefers-reduced-motion:no-preference){
+  .in-card.fwd .in-body,.in-card.fwd .in-art>*{animation:inF .38s ease-out both}
+  .in-card.back .in-body,.in-card.back .in-art>*{animation:inB .38s ease-out both}
+  .in-card.fwd .in-pet.p1,.in-card.back .in-pet.p1{animation:petIn .7s cubic-bezier(.2,1.35,.4,1) .1s both}
+}
+@keyframes inF{from{opacity:0;transform:translateX(18px)}}
+@keyframes inB{from{opacity:0;transform:translateX(-18px)}}
+@media (max-height:700px){.in-art{height:200px}.in-stage{width:160px;height:160px}}
+@media (max-width:380px){.in-body{padding:18px 18px 4px}.in-foot{padding:16px 18px 18px}.in-body h2{font-size:24px}.in-card2{width:94px}}
 </style>
 </head>
 <body>
@@ -331,7 +436,7 @@ a.btn{text-decoration:none}
   <header class="top">
     <div class="logo"><span class="mark" aria-hidden="true"><i></i><i></i></span>Pausa Viva</div>
     <span class="count" id="count">Hoy: 0 pausas</span>
-    <button class="stk zero" id="bStreak" aria-label="Racha y premios"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.6" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.6" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="14.4" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="18.4" cy="10.4" rx="2.2" ry="2.8"/></g></svg><span id="stkN">0</span></button>
+    <button class="stk zero" id="bStreak" aria-label="Racha y premios"><span class="stk-ic" id="stkIc"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.6" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.6" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="14.4" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="18.4" cy="10.4" rx="2.2" ry="2.8"/></g></svg></span><span id="stkN">0</span></button>
     <button class="ib" id="bBell" aria-label="Recordatorios" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg></button>
     <button class="ib" id="bTheme" aria-label="Cambiar entre fondo claro y oscuro"></button>
   </header>
@@ -386,6 +491,7 @@ a.btn{text-decoration:none}
     </ul>
     <p class="note">Guía general de pausas activas. No reemplaza la evaluación de un profesional de salud.</p>
     <p class="note"><b>Privacidad:</b> esta app no pide ni guarda datos personales. Lo que recuerda (tu contador, tu racha y tus premios, los últimos ejercicios, los recordatorios y tus preferencias) queda solo en este navegador.</p>
+    <p class="note"><button class="lnk" id="bIntro">Ver cómo funciona Pausa Viva</button></p>
     <p class="note" id="stHidNote" hidden>Ocultaste la racha y los premios. <button class="lnk" id="stShow">Mostrarlos de nuevo</button></p>
   </section>
 
@@ -438,7 +544,7 @@ a.btn{text-decoration:none}
   </div>
 
   <div class="done" id="plDone" hidden>
-    <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <div class="ok-wrap"><div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><span class="ok-av" id="dAv" hidden></span></div>
     <h2>Pausa lista</h2>
     <p id="dMsg"></p>
     <p>Próxima pausa sugerida: <b id="dNext"></b></p>
@@ -454,9 +560,18 @@ a.btn{text-decoration:none}
     <div class="sheet-h"><h2 id="remH">Recordatorios</h2><button class="ib" id="remClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <label class="sw"><input type="checkbox" id="remOn"><span class="track"><i></i></span><span>Avisarme cuando toque una pausa</span></label>
     <p class="sheet-p">Micro pausa cada hora y pausa larga cada 2 horas. Suena un aviso mientras esta página esté abierta, aunque estés en otra pestaña. Si tu navegador lo permite, también verás una notificación.</p>
-    <div class="rem-row"><label for="remStart">Desde</label><input type="time" id="remStart" value="09:00" step="60"><label for="remEnd">hasta</label><input type="time" id="remEnd" value="18:00" step="60"></div>
-    <div class="days" id="remDays" aria-label="Días"></div>
     <p class="sheet-next" id="remNext"></p>
+    <div class="rem-sec"><h3>Horario</h3>
+      <div class="rem-row"><label for="remStart">Desde</label><input type="time" id="remStart" value="09:00" step="60"><label for="remEnd">Hasta</label><input type="time" id="remEnd" value="18:00" step="60"></div>
+      <div class="days" id="remDays" aria-label="Días"></div>
+    </div>
+    <div class="rem-sec"><h3>Avisos inteligentes</h3>
+      <label class="sw"><input type="checkbox" id="remSmart"><span class="track"><i></i></span><span>Adaptar los avisos a lo que haces</span></label>
+      <ul class="rem-ul"><li>Si hiciste una pausa hace menos de 35 minutos, ese aviso se salta.</li><li>Si la última fue larga, el siguiente aviso te propone una micro.</li><li>Si no alcanzaste la anterior, te propone la larga.</li></ul>
+      <label class="sw"><input type="checkbox" id="remLunch"><span class="track"><i></i></span><span>Sin avisos en la colación</span></label>
+      <div class="rem-row" id="lunchRow"><label for="remLS">Desde</label><input type="time" id="remLS" value="13:00" step="60"><label for="remLE">Hasta</label><input type="time" id="remLE" value="14:00" step="60"></div>
+      <p class="sheet-note">Mientras estás haciendo una pausa, los avisos nunca te interrumpen.</p>
+    </div>
     <div class="acts"><button class="btn sec" id="remTest">Probar el aviso</button></div>
     <p class="sheet-note">Con la página cerrada no puede avisarte. Si quieres el aviso en el celular igual, crea alarmas repetidas en su app de reloj.</p>
   </div>
@@ -479,17 +594,28 @@ a.btn{text-decoration:none}
 <div class="sheet" id="stSheet" hidden role="dialog" aria-modal="true" aria-labelledby="stH">
   <div class="sheet-card">
     <div class="sheet-h"><h2 id="stH">Tu racha</h2><button class="ib" id="stClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-    <div class="st-top"><div class="st-big"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16.2" rx="5.2" ry="4.4"/><ellipse cx="5.6" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.6" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="14.4" cy="6.4" rx="2.2" ry="2.8"/><ellipse cx="18.4" cy="10.4" rx="2.2" ry="2.8"/></g></svg><b id="stNum">0</b></div><div class="st-tx"><b id="stDays">días hábiles seguidos</b><span id="stBest"></span></div></div>
+    <div class="st-top"><div class="st-big"><span class="st-av" id="stAv"></span><b id="stNum">0</b></div><div class="st-tx"><b id="stDays">días hábiles seguidos</b><span id="stBest"></span></div></div>
     <div class="st-week" id="stWeek"></div>
     <div class="st-next"><div class="st-bar" id="stBar" aria-hidden="true"></div><p id="stNext"></p></div>
     <div class="gapcard" id="stGap" hidden></div>
     <div class="st-col-h"><b>Tu colección</b><span id="stColN"></span></div>
+    <p class="sheet-note" id="stColTip">Toca un compañero para usarlo como tu ícono.</p>
     <div class="st-col" id="stCol"></div>
+    <div class="st-pick" id="stPick" hidden></div>
+    <button class="lnk st-paw" id="stPaw" data-use="" hidden>Usar la huellita en vez de un compañero</button>
     <p class="st-stars" id="stStars" hidden></p>
     <p class="sheet-note">Cuenta cada día hábil (lunes a viernes) en que terminas al menos una pausa. Hay premio el día 1, 2, 4 y 5 de racha, y después cada 3 días.</p>
     <label class="sw"><input type="checkbox" id="stPause"><span class="track"><i></i></span><span>Estoy de vacaciones o con licencia</span></label>
     <p class="sheet-note" id="stPauseTx"></p>
     <label class="sw"><input type="checkbox" id="stHide"><span class="track"><i></i></span><span>Ocultar la racha y los premios</span></label>
+  </div>
+</div>
+<div class="intro" id="intro" hidden role="dialog" aria-modal="true" aria-labelledby="inH">
+  <div class="in-card">
+    <button class="in-skip" id="inSkip">Saltar</button>
+    <div class="in-art" id="inArt"></div>
+    <div class="in-body" aria-live="polite"><p class="in-k" id="inK"></p><h2 id="inH"></h2><div class="in-tx" id="inTx"></div></div>
+    <div class="in-foot"><div class="in-dots" id="inDots" aria-hidden="true"></div><div class="in-bt"><button class="btn sec" id="inBack">Atrás</button><button class="btn pri" id="inNext">Siguiente</button></div></div>
   </div>
 </div>
 <div class="toast" id="toast" hidden></div>
@@ -1758,6 +1884,7 @@ function init(){
   function playBtn(){$('#bPlay').innerHTML=P&&P.paused?ICON.play:ICON.pause;$('#bPlay').setAttribute('aria-label',P&&P.paused?'Continuar':'Pausar')}
   function start(){
     if(!plan.length)return;
+    snoozeAt=0;$('#alarm').hidden=true;
     remember(plan);
     try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch(e){}
     try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(l=>wl=l).catch(()=>{})}catch(e){}
@@ -1786,7 +1913,9 @@ function init(){
     document.querySelectorAll('.seg i').forEach(s=>s.style.width='100%');
     $('#dMsg').textContent=`Llevas ${cnt} ${cnt===1?'pausa':'pausas'} hoy. Toma agua y vuelve con calma.`;
     $('#dNext').textContent=new Date(Date.now()+36e5).toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
-    const sr=stDone();stRefresh();renderDoneStreak(sr);
+    logPause(type);snoozeAt=0;remLine();
+    if(REM.on){const nx=nextSlot();if(nx&&nx.d===0)$('#dNext').textContent=hhmm(nx.m)}
+    const sr=stDone();stRefresh();renderDoneStreak(sr);paintDoneAv();
     if(sr.prize&&!ST.hidden)prizeFx(sr.prize,'Pausa lista. ');else say('Pausa lista. Buen trabajo.');
   }
   function close(){P=null;musicStop();hush();try{wl&&wl.release();wl=null}catch(e){}$('#player').hidden=true;document.body.style.overflow=''}
@@ -1836,24 +1965,44 @@ function init(){
   $('#bPrev').onclick=()=>go(P.i-1);
   // ---------- Recordatorios opcionales: cada persona los activa en su navegador ----------
   const DAYS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],DAYS2=['Do','Lu','Ma','Mi','Ju','Vi','Sá'];
-  let REM={on:false,start:'09:00',end:'18:00',days:[1,2,3,4,5]};
+  let REM={on:false,start:'09:00',end:'18:00',days:[1,2,3,4,5],smart:true,lunch:false,lS:'13:00',lE:'14:00'};
   try{REM={...REM,...JSON.parse(localStorage.getItem('pv-rem')||'{}')}}catch(e){}
-  let firedKey='',snoozeAt=0,lastType='micro';
+  let firedKey='',snoozeAt=0,lastType='micro',skipNote=null;
+  // historial corto de pausas terminadas (para los avisos inteligentes)
+  let LOG=[];try{const l=JSON.parse(localStorage.getItem('pv-log')||'[]');if(Array.isArray(l))LOG=l.filter(x=>x&&x.t)}catch(e){}
+  const logPause=tp=>{LOG.push({t:Date.now(),type:tp});LOG=LOG.slice(-30);try{localStorage.setItem('pv-log',JSON.stringify(LOG))}catch(e){}};
   try{firedKey=localStorage.getItem('pv-rem-fired')||''}catch(e){}
   const saveRem=()=>{try{localStorage.setItem('pv-rem',JSON.stringify(REM))}catch(e){}};
   const toMin=s=>{const[h,m]=String(s||'0:0').split(':').map(Number);return(h||0)*60+(m||0)};
   const hhmm=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
-  const slotsOf=()=>{const a=toMin(REM.start),b=toMin(REM.end),out=[];for(let k=1;a+k*60<=b;k++)out.push({m:a+k*60,type:k%2?'micro':'larga'});return out};
+  const inLunch=m=>REM.lunch&&m>=toMin(REM.lS)&&m<toMin(REM.lE);
+  const slotsOf=()=>{const a=toMin(REM.start),b=toMin(REM.end),out=[];for(let k=1;a+k*60<=b;k++)out.push({m:a+k*60,type:k%2?'micro':'larga'});return out.filter(x=>!inLunch(x.m))};
+  const atMin=(day,m)=>{const x=new Date(day);x.setHours(0,m,0,0);return x};
+  // decide qué hacer con un aviso según las pausas que la persona ya hizo
+  function decide(at,sched){
+    if(!REM.smart)return{type:sched,why:''};
+    const T=at.getTime(),last=LOG[LOG.length-1];
+    if(last&&last.t>T-35*60e3)return{skip:true,type:sched,why:'recent'};
+    const lastL=LOG.slice().reverse().find(x=>x.type==='larga');
+    if(sched==='larga'&&lastL&&T-lastL.t<100*60e3)return{type:'micro',why:'afterLong'};
+    if(sched==='micro'&&T-atMin(at,toMin(REM.start)).getTime()>=110*60e3&&(!last||T-last.t>=110*60e3))return{type:'larga',why:'missed'};
+    return{type:sched,why:''};
+  }
   function nextSlot(){
-    const now=new Date(),sl=slotsOf();if(!sl.length||!REM.days.length)return null;
+    const now=new Date(),sl=slotsOf();if(!sl.length||!REM.days.length)return null;let skipped=null;
     for(let d=0;d<8;d++){const day=new Date(now);day.setDate(now.getDate()+d);if(!REM.days.includes(day.getDay()))continue;
-      const nm=d?-1:now.getHours()*60+now.getMinutes(),s=sl.find(x=>x.m>nm);
-      if(s)return{d,day:day.getDay(),m:s.m,type:s.type}}
+      const nm=d?-1:now.getHours()*60+now.getMinutes();
+      for(const s of sl){if(s.m<=nm)continue;const dc=decide(atMin(day,s.m),s.type);
+        if(dc.skip){if(!skipped)skipped=s.m;continue}
+        return{d,day:day.getDay(),m:s.m,type:dc.type,why:dc.why,skipped}}}
     return null;
   }
   function remLine(){
     const b=$('#bBell');b.classList.toggle('on',!!REM.on);b.setAttribute('aria-pressed',!!REM.on);
-    const n=REM.on?nextSlot():null,txt=n?`Próximo aviso: ${n.d===0?'':n.d===1?'mañana ':DAYS[n.day]+' '}${hhmm(n.m)} · ${n.type==='micro'?'micro pausa':'pausa larga'}`:'';
+    const n=REM.on?nextSlot():null;
+    let txt=n?`Próximo aviso: ${n.d===0?'':n.d===1?'mañana ':DAYS[n.day]+' '}${hhmm(n.m)} · ${n.type==='micro'?'micro pausa':'pausa larga'}`:'';
+    if(n&&n.skipped!=null)txt+=`. Saltamos el de las ${hhmm(n.skipped)}: hiciste una pausa hace poco.`;
+    else if(n&&skipNote&&Date.now()<skipNote.until)txt+=`. Saltamos el de las ${hhmm(skipNote.m)}: ya habías hecho una pausa.`;
     $('#remLine').hidden=!n;$('#remLine').textContent=txt;
     $('#remNext').textContent=REM.on?(n?txt:'Revisa el horario: no queda ninguna pausa dentro de él.'):'Los avisos están apagados.';
   }
@@ -1862,23 +2011,28 @@ function init(){
       [[660,0],[880,.18],[1046,.36],[880,.95],[1046,1.13],[1318,1.31]].forEach(([fr,dl])=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=fr;
         g.gain.setValueAtTime(.0001,t+dl);g.gain.exponentialRampToValueAtTime(.25,t+dl+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dl+.5);o.connect(g);g.connect(AC.destination);o.start(t+dl);o.stop(t+dl+.55)})}catch(e){}
   }
-  function fire(tp){
+  function fire(tp,why){
     lastType=tp;
     $('#alTitle').textContent=tp==='micro'?'Hora de tu micro pausa':'Hora de tu pausa larga';
-    $('#alSub').textContent=tp==='micro'?'3 minutos para soltar el cuerpo.':'5 minutos para moverte un poco más.';
+    $('#alSub').textContent=why==='afterLong'?'Hiciste una pausa larga hace poco: ahora basta con una micro de 3 minutos.':
+      why==='missed'?'No alcanzaste la pausa anterior: te proponemos la larga, de 5 minutos.':
+      tp==='micro'?'3 minutos para soltar el cuerpo.':'5 minutos para moverte un poco más.';
     $('#alarm').hidden=false;chime();remLine();
     try{if('Notification' in window&&Notification.permission==='granted'&&(document.hidden||!document.hasFocus())){const n=new Notification($('#alTitle').textContent,{body:$('#alSub').textContent,tag:'pausa-viva'});n.onclick=()=>{try{window.focus()}catch(e){}n.close()}}}catch(e){}
   }
   function remTick(){
     if(!REM.on)return;
     const now=new Date();
-    if(snoozeAt&&Date.now()>=snoozeAt){snoozeAt=0;fire(lastType);return}
+    if(snoozeAt&&Date.now()>=snoozeAt){snoozeAt=0;if(!P)fire(lastType,'');return}
     if(!REM.days.includes(now.getDay()))return;
     const nm=now.getHours()*60+now.getMinutes(),s=slotsOf().filter(x=>x.m<=nm).pop();
     if(!s||nm-s.m>3)return;
     const key=now.toDateString()+' '+s.m;if(key===firedKey)return;
     firedKey=key;try{localStorage.setItem('pv-rem-fired',key)}catch(e){}
-    fire(s.type);
+    if(P)return;   // está haciendo una pausa: no se interrumpe
+    const dc=decide(atMin(now,s.m),s.type);
+    if(dc.skip){skipNote={m:s.m,until:Date.now()+30*60e3};remLine();return}
+    fire(dc.type,dc.why);
   }
   setInterval(()=>{remTick();remLine()},10000);
   document.addEventListener('pointerdown',()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch(e){}},{once:true});
@@ -1887,6 +2041,8 @@ function init(){
   $('#remDays').innerHTML=[1,2,3,4,5,6,0].map(d=>`<button type="button" data-day="${d}" aria-pressed="false" aria-label="${DAYS[d]}">${DAYS2[d]}</button>`).join('');
   function fillRem(){
     $('#remOn').checked=!!REM.on;$('#remStart').value=REM.start;$('#remEnd').value=REM.end;
+    $('#remSmart').checked=REM.smart!==false;$('#remLunch').checked=!!REM.lunch;$('#remLS').value=REM.lS;$('#remLE').value=REM.lE;
+    $('#lunchRow').setAttribute('aria-disabled',!REM.lunch);
     document.querySelectorAll('#remDays button').forEach(b=>b.setAttribute('aria-pressed',REM.days.includes(+b.dataset.day)));
     remLine();
   }
@@ -1899,9 +2055,13 @@ function init(){
   $('#remOn').onchange=()=>{REM.on=$('#remOn').checked;if(REM.on){try{if('Notification' in window&&Notification.permission==='default')Notification.requestPermission().catch(()=>{})}catch(e){}try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch(e){}}saveRem();remLine();toast(REM.on?'Recordatorios activados':'Recordatorios apagados')};
   const setTimes=()=>{const a=$('#remStart').value||'09:00',b=$('#remEnd').value||'18:00';REM.start=a;REM.end=b;saveRem();remLine()};
   $('#remStart').onchange=setTimes;$('#remEnd').onchange=setTimes;
+  $('#remSmart').onchange=()=>{REM.smart=$('#remSmart').checked;saveRem();remLine();toast(REM.smart?'Avisos inteligentes activados':'Avisos a la hora fija')};
+  $('#remLunch').onchange=()=>{REM.lunch=$('#remLunch').checked;$('#lunchRow').setAttribute('aria-disabled',!REM.lunch);saveRem();remLine()};
+  const setLunch=()=>{REM.lS=$('#remLS').value||'13:00';REM.lE=$('#remLE').value||'14:00';saveRem();remLine()};
+  $('#remLS').onchange=setLunch;$('#remLE').onchange=setLunch;
   $('#remDays').onclick=ev=>{const b=ev.target.closest('[data-day]');if(!b)return;const d=+b.dataset.day;
     REM.days=REM.days.includes(d)?REM.days.filter(x=>x!==d):[...REM.days,d];b.setAttribute('aria-pressed',REM.days.includes(d));saveRem();remLine()};
-  $('#remTest').onclick=()=>{closeRem();fire('micro')};
+  $('#remTest').onclick=()=>{closeRem();fire('micro','')};
 
   // aviso
   $('#alGo').onclick=()=>{$('#alarm').hidden=true;if(P)close();type=lastType;
@@ -1927,6 +2087,11 @@ function init(){
   let ST={days:[],ok:[],paused:'',hidden:false,got:[],stars:0,no:'',best:0,aw:''};
   try{const o=JSON.parse(localStorage.getItem('pv-streak')||'{}');if(o&&typeof o==='object')ST={...ST,...o}}catch(e){}
   ['days','ok','got'].forEach(k=>{if(!Array.isArray(ST[k]))ST[k]=[]});
+  if(!ST.won||typeof ST.won!=='object')ST.won={};
+  if(typeof ST.av!=='string')ST.av=ST.got[0]||'';   // quienes ya tenían premios parten con el primero como ícono
+  let autoAvK='',pickK='';
+  const myAv=()=>!ST.hidden&&ST.av&&ST.got.includes(ST.av)?ST.av:'';
+  const fmtD=k=>fromYmd(k).toLocaleDateString('es-CL',{day:'numeric',month:'long'});
   const saveST=()=>{try{localStorage.setItem('pv-streak',JSON.stringify(ST))}catch(e){}};
   function stCalc(now){
     now=noon(now||new Date());
@@ -1956,7 +2121,7 @@ function init(){
   function settle(c){
     if(!c.today||askGap(c)||ST.aw===c.k0||!isMile(c.n))return null;
     ST.aw=c.k0;const nx=PRIZES.find(p=>!ST.got.includes(p));
-    if(nx){ST.got.push(nx);return nx}
+    if(nx){ST.got.push(nx);ST.won[nx]=c.k0;if(!ST.av&&!ST.avSet){ST.av=nx;autoAvK=nx}return nx}
     ST.stars=(ST.stars||0)+1;return'star';
   }
   function stDone(){
@@ -1978,7 +2143,8 @@ function init(){
   function stRefresh(){
     const c=stCalc(),b=$('#bStreak');
     b.hidden=!!ST.hidden;$('#stkN').textContent=c.n;b.classList.toggle('zero',!c.n);
-    b.setAttribute('aria-label',`Racha: ${c.n} ${hab(c.n)}. Ver racha y premios`);
+    const av=myAv();b.classList.toggle('has-av',!!av);$('#stkIc').innerHTML=av?HUE.pet(av):PAW;
+    b.setAttribute('aria-label',`Racha: ${c.n} ${hab(c.n)}${av?'. Tu ícono: '+pName(av):''}. Ver racha y premios`);
     const ask=!ST.hidden&&askGap(c);
     $('#gapCard').hidden=!ask;if(ask)$('#gapCard').innerHTML=`<p>${gapText(c)}</p>${gapButtons}`;
     $('#stHidNote').hidden=!ST.hidden;
@@ -1988,21 +2154,23 @@ function init(){
   function renderSheet(){
     const now=noon(new Date()),c=stCalc(now),D=new Set(ST.days),O=new Set(ST.ok);
     $('#stNum').textContent=c.n;
+    const av=myAv();$('#stAv').innerHTML=av?HUE.pet(av):PAW;$('#stAv').setAttribute('aria-label',av?'Tu ícono: '+pName(av):'');
     $('#stDays').textContent=c.n===1?'día hábil de racha':'días hábiles seguidos';
     $('#stBest').textContent=(ST.best||0)>c.n?`Tu mejor racha: ${ST.best} ${dias(ST.best)}`:c.today?'Hoy ya sumaste tu día.':'Hoy todavía no haces tu pausa.';
     const mon=addD(now,-((now.getDay()+6)%7));
     $('#stWeek').innerHTML=['Lu','Ma','Mi','Ju','Vi'].map((l,i)=>{const d=addD(mon,i),k=ymd(d);
-      const cls=D.has(k)?'done':(O.has(k)||(ST.paused&&k>=ST.paused&&k<=c.k0))?'ok':k===c.k0?'today':k>c.k0?'fut':'miss';
-      const lab={done:'pausa hecha',ok:'cubierto',today:'hoy',fut:'por venir',miss:'sin pausa'}[cls];
-      return`<div class="wd ${cls}"><i aria-label="${l}: ${lab}">${cls==='done'?PAW:cls==='ok'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.5l4 4 9-9"/></svg>':''}</i>${l}</div>`}).join('');
+      const cls=D.has(k)?'hit':(O.has(k)||(ST.paused&&k>=ST.paused&&k<=c.k0))?'ok':k===c.k0?'today':k>c.k0?'fut':'miss';
+      const lab={hit:'pausa hecha',ok:'cubierto',today:'hoy',fut:'por venir',miss:'sin pausa'}[cls];
+      return`<div class="wd ${cls}"><i aria-label="${l}: ${lab}">${cls==='hit'?PAW:cls==='ok'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12.5l4 4 9-9"/></svg>':''}</i>${l}</div>`}).join('');
     const nm=nextMile(c.n),pm=prevMile(c.n),left=nm-c.n;
     $('#stBar').innerHTML=Array.from({length:nm-pm},(_,i)=>`<i class="${i<c.n-pm?'on':''}"></i>`).join('');
     $('#stNext').textContent=c.n===0?'Termina una pausa en un día hábil para empezar tu racha y ganar tu primer compañero.':`Próximo premio el día ${nm}: te ${left===1?'falta':'faltan'} ${left} ${hab(left)}.`;
     const ask=askGap(c);$('#stGap').hidden=!ask;if(ask)$('#stGap').innerHTML=`<p>${gapText(c)}</p>${gapButtons}`;
     const got=ST.got.filter(k=>PRIZES.includes(k)),nxt=PRIZES.find(p=>!got.includes(p));
     $('#stColN').textContent=`${got.length} de ${PRIZES.length}`;
-    $('#stCol').innerHTML=PRIZES.map(k=>got.includes(k)?`<button class="pz" data-pet="${k}" aria-label="${pName(k)}">${HUE.pet(k)}</button>`:
+    $('#stCol').innerHTML=PRIZES.map(k=>got.includes(k)?`<button class="pz${k===ST.av?' mine':''}${k===pickK?' sel':''}" data-pet="${k}" aria-pressed="${k===pickK}" aria-label="${pName(k)}${k===ST.av?', tu ícono':''}">${HUE.pet(k)}${k===ST.av?`<span class="mk"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5.5 12.5l4 4 9-9\"/></svg></span>`:''}</button>`:
       `<span class="pz lock${k===nxt?' next':''}" aria-label="${k===nxt?'Próximo compañero, día '+nm:'Por descubrir'}">${HUE.pet(k)}${k===nxt?`<small>Día ${nm}</small>`:''}</span>`).join('');
+    $('#stColTip').hidden=!got.length;$('#stPaw').hidden=!ST.av;renderPick();
     $('#stStars').hidden=!ST.stars;$('#stStars').textContent=`Colección completa · ${ST.stars} ${ST.stars===1?'estrella':'estrellas'} extra`;
     $('#stPause').checked=!!ST.paused;
     $('#stPauseTx').textContent=ST.paused?`Racha en pausa desde el ${fromYmd(ST.paused).toLocaleDateString('es-CL',{day:'numeric',month:'long'})}. Se reanuda sola con tu próxima pausa.`:'Actívalo si sales de vacaciones o con licencia: tu racha queda en pausa y no se pierde.';
@@ -2023,7 +2191,8 @@ function init(){
         <h3>${r.prize==='star'?'¡Colección completa!':'¡Nuevo compañero!'}</h3>
         <p>${r.prize==='star'?`Sumas una estrella extra por tu racha de <b>${c.n} ${dias(c.n)}</b>.`:`<b>${pName(r.prize)}</b> se suma a tu colección ${c.n===1?'por tu <b>primer día</b> de racha':`por tu racha de <b>${c.n} días</b>`}.`}</p>
         <p>Tienes ${Math.min(got,PRIZES.length)} de ${PRIZES.length} · próximo premio en ${left} ${hab(left)}.</p>
-        <button class="lnk" data-open="streak">Ver tu colección</button></div>`;
+        ${r.prize!=='star'&&autoAvK===r.prize?'<p class="pz-note">Quedó como tu ícono. Puedes cambiarlo cuando quieras en tu colección.</p>':''}
+        <div class="prize-acts">${r.prize==='star'?'':ST.av===r.prize?(autoAvK===r.prize?'':`<span class="pk-ok"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5.5 12.5l4 4 9-9\"/></svg> Es tu ícono</span>`):`<button class="btn sec" data-use="${r.prize}">Usar como mi ícono</button>`}<button class="lnk" data-open="streak">Ver tu colección</button></div></div>`;
       const pv=box.querySelector('.pet');if(pv)setTimeout(()=>pv.classList.remove('happy'),1600);
       return;
     }
@@ -2038,6 +2207,22 @@ function init(){
     if(!$('#plDone').hidden&&lastDone&&!lastDone.weekend){renderDoneStreak({...lastDone,prize});if(prize)prizeFx(prize)}
     toast(keep?`Racha mantenida: ${c2.n} ${dias(c2.n)}`:'Empiezas una racha nueva');
   }
+  function renderPick(){
+    const box=$('#stPick');if(!pickK||!ST.got.includes(pickK)){box.hidden=true;box.innerHTML='';return}
+    const mine=ST.av===pickK,w=ST.won[pickK];box.hidden=false;
+    box.innerHTML=`<span class="pk-art">${HUE.pet(pickK)}</span><span class="pk-tx"><b>${pName(pickK)}</b><span>${w?'Ganado el '+fmtD(w):'Parte de tu colección'}</span></span>`+
+      (mine?`<span class="pk-ok"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5.5 12.5l4 4 9-9\"/></svg> Es tu ícono</span>`:`<button class="btn pri" data-use="${pickK}">Usar como mi ícono</button>`);
+  }
+  function paintDoneAv(){
+    const a=myAv(),el=$('#dAv');el.hidden=!a;if(!a){el.innerHTML='';return}
+    el.innerHTML=HUE.pet(a).replace('class="pet"','class="pet happy"');el.setAttribute('aria-label','Tu ícono: '+pName(a));
+    const pv=el.querySelector('.pet');setTimeout(()=>pv&&pv.classList.remove('happy'),1700);
+  }
+  function setAv(k){
+    ST.av=k;ST.avSet=true;saveST();stRefresh();if(!$('#stSheet').hidden)renderSheet();
+    if(!$('#plDone').hidden)paintDoneAv();
+    toast(k?`${pName(k)} es tu ícono`:'Volviste a la huellita');
+  }
   function prizeFx(prize,pre){
     beep(784,.16,.75);beep(988,.16,.9);beep(1318,.32,1.05);
     say((pre||'')+(prize==='star'?'Colección completa. Sumas una estrella extra.':'Nuevo compañero: '+pName(prize)+'.'));
@@ -2046,19 +2231,21 @@ function init(){
     const g=ev.target.closest('[data-gap]');if(g){onGap(g.dataset.gap==='keep');return}
     const o=ev.target.closest('[data-open="streak"]');if(o){openSheet();return}
     const pz=ev.target.closest('[data-pet]');
-    if(pz){const pv=pz.querySelector('.pet');pv.classList.remove('bob','happy');void pv.getBBox();pv.classList.add('bob','happy');setTimeout(()=>pv.classList.remove('bob','happy'),900);toast(pName(pz.dataset.pet))}
+    if(pz){pickK=pz.dataset.pet;renderSheet();const pv=$('#stCol').querySelector(`[data-pet="${pickK}"] .pet`);if(pv){pv.classList.add('bob','happy');setTimeout(()=>pv.classList.remove('bob','happy'),900)}return}
+    const u=ev.target.closest('[data-use]');
+    if(u){const k=u.dataset.use;setAv(k);if(u.closest('#dStreak'))u.outerHTML=`<span class="pk-ok"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5.5 12.5l4 4 9-9\"/></svg> Es tu ícono</span>`}
   });
   // parpadeo tranquilo de los compañeros a la vista
-  setInterval(()=>{document.querySelectorAll('#plDone:not([hidden]) .prize .pet:not(.happy), #stSheet:not([hidden]) .pz:not(.lock) .pet').forEach(p=>{if(Math.random()<.35){p.classList.add('blink');setTimeout(()=>p.classList.remove('blink'),260)}})},1800);
+  setInterval(()=>{document.querySelectorAll('#plDone:not([hidden]) .prize .pet:not(.happy), #plDone:not([hidden]) .ok-av .pet:not(.happy), #stSheet:not([hidden]) .pz:not(.lock) .pet, #stSheet:not([hidden]) .st-av .pet, .stk-ic .pet').forEach(p=>{if(Math.random()<.35){p.classList.add('blink');setTimeout(()=>p.classList.remove('blink'),260)}})},1800);
   function openSheet(){renderSheet();$('#stSheet').hidden=false;setTimeout(()=>{try{$('#stClose').focus()}catch(e){}},50)}
-  const closeSheet=()=>{$('#stSheet').hidden=true;try{(ST.hidden?$('#stShow'):$('#bStreak')).focus()}catch(e){}};
+  const closeSheet=()=>{$('#stSheet').hidden=true;pickK='';try{(ST.hidden?$('#stShow'):$('#bStreak')).focus()}catch(e){}};
   $('#bStreak').onclick=openSheet;
   $('#stClose').onclick=closeSheet;
   $('#stSheet').addEventListener('click',ev=>{if(ev.target.id==='stSheet')closeSheet()});
   document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!$('#stSheet').hidden)closeSheet()});
   $('#stPause').onchange=()=>{if($('#stPause').checked)ST.paused=ymd(noon(new Date()));else resume();saveST();stRefresh();renderSheet();
     toast(ST.paused?'Racha en pausa':'Racha activa de nuevo')};
-  $('#stHide').onchange=()=>{ST.hidden=$('#stHide').checked;saveST();stRefresh();
+  $('#stHide').onchange=()=>{ST.hidden=$('#stHide').checked;saveST();stRefresh();if(!$('#plDone').hidden)paintDoneAv();
     toast(ST.hidden?'Racha oculta. Puedes mostrarla de nuevo al final de la página':'Racha visible')};
   $('#stShow').onclick=()=>{ST.hidden=false;saveST();stRefresh();openSheet()};
   stRefresh();
@@ -2070,8 +2257,82 @@ function init(){
     else if(ev.key==='ArrowLeft')go(P.i-1);
     else if(ev.key===' '&&ev.target.tagName!=='BUTTON'){ev.preventDefault();P.paused=!P.paused;playBtn();if(P.paused){musicStop();hush()}else musicStart()}
   });
+
+  // ---------- Bienvenida: 3 pantallas la primera vez (se puede volver a ver al final de la página) ----------
+  const IN_EX=BYNAME['Inclinación lateral'];
+  const IC=(d,w)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w||2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const IN_STEPS=[
+    {k:'Bienvenida',h:'Pausas activas guiadas, en tu puesto',
+     art:()=>`<div class="in-stage"><svg class="pv" viewBox="0 0 220 220" aria-hidden="true" style="--zc:${(Z.find(z=>z.id===IN_EX.z)||{c:'var(--brand)'}).c}">
+        <defs><clipPath id="inClip"><circle cx="110" cy="110" r="96"/></clipPath></defs>
+        <circle cx="110" cy="110" r="104" class="rbg"/><circle cx="110" cy="110" r="104" class="rfg" id="inRing" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 110 110)"/>
+        <circle cx="110" cy="110" r="96" class="disc"/><g clip-path="url(#inClip)"><g id="inFig" transform="translate(110 112) scale(.86) translate(-100 -118)"></g></g></svg>
+        <span class="pill" id="inPill"></span><span class="clock" id="inClock"></span></div>`,
+     tx:()=>`<p>Un personaje te muestra cada ejercicio al ritmo real: cuándo moverte, cuándo sostener y cuándo descansar.</p>
+       <div class="in-types"><div><b>Micro pausa</b><span>3 min · cada hora</span></div><div><b>Pausa larga</b><span>5 min · cada 2 horas</span></div></div>
+       <p class="in-small">¿No alcanzaste la micro? Haz la larga.</p>`},
+    {k:'Cómo funciona',h:'Elige la pausa que necesitas',
+     art:()=>`<div class="in-mock">
+        <div class="in-cards">${['ojo','est','fin'].map((id,i)=>{const t=thOf(id);return`<div class="in-card2 c${i}" style="--tc:${t.c}"><span class="th-ic">${IC(TI[id])}</span><b>${t.n}</b></div>`}).join('')}</div>
+        <div class="in-pills"><span class="mus-btn off">${ICON.mus}<span>Poner música</span></span><span class="vo-btn on">${ICON.voz}<span>Voz guía</span></span></div></div>`,
+     tx:()=>`<ul class="in-list">
+        <li>${IC('<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8" fill="currentColor"/>')}<span><b>Por zona o por momento.</b> Cuello, espalda o manos, o pausas como «Ojos cansados» o «Bajar el estrés».</span></li>
+        <li>${IC('<path d="M4 5.5h16v10H10l-4.5 3.5v-3.5H4z"/><path d="M8 9.5h8M8 12.3h5"/>')}<span><b>Voz guía y música.</b> Actívalas arriba durante la pausa, si quieres.</span></li>
+        <li>${IC('<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4M8.2 13.2l7.6 4"/>')}<span><b>Compártela.</b> Envía el link por Teams y todos hacen la misma pausa.</span></li></ul>
+       <p class="in-small">Busca tensión suave, nunca dolor. Si te mareas o algo duele, detente.</p>`},
+    {k:'Tu constancia',h:'Tu racha y tus compañeros',
+     art:()=>`<div class="in-pets">${['calico','malamute','perro'].map((k,i)=>`<span class="in-pet p${i}">${HUE.pet(k)}</span>`).join('')}</div>
+        <div class="in-week">${['Lu','Ma','Mi','Ju','Vi'].map((d,i)=>`<span class="${i<3?'on':''}"><i>${i<3?PAW:''}</i>${d}</span>`).join('')}</div>`,
+     tx:()=>`<p>Cada día hábil con al menos una pausa suma a tu racha. Los días 1, 2, 4 y 5, y luego cada 3 días, ganas un compañero que puedes usar como <b>tu ícono</b>.</p>
+       <p>¿Vacaciones o licencia? Tu racha no se pierde.</p>
+       <p class="in-small">Todo queda en este navegador: no pedimos datos personales. <button class="lnk" id="inRem">Configurar recordatorios</button></p>`}
+  ];
+  let inStep=0,inRAF=0,inT0=0;
+  function inAnim(now){
+    if($('#intro').hidden||inStep!==0){inRAF=0;return}
+    const e=IN_EX,t=((now-inT0)/1000)%e.d,r=tlAt(e,t),fig=$('#inFig');
+    if(fig){fig.innerHTML=render(e.a,r.pose,'in');
+      $('#inPill').textContent=r.say||r.g.label||'';
+      $('#inClock').textContent=r.g.kind==='hold'?String(Math.max(1,Math.ceil(r.rem-1e-6))):mmss(Math.ceil(e.d-t));
+      $('#inRing').setAttribute('stroke-dashoffset',String(100-100*r.u))}
+    inRAF=requestAnimationFrame(inAnim);
+  }
+  function inShow(i,dir){
+    inStep=Math.max(0,Math.min(IN_STEPS.length-1,i));const s=IN_STEPS[inStep];
+    $('#inArt').innerHTML=s.art();$('#inK').textContent=`${s.k} · ${inStep+1} de ${IN_STEPS.length}`;$('#inH').textContent=s.h;$('#inTx').innerHTML=s.tx();
+    document.querySelectorAll('#inDots i').forEach((d,k)=>d.classList.toggle('on',k===inStep));
+    $('#inBack').hidden=inStep===0;$('#inNext').textContent=inStep===IN_STEPS.length-1?'Empezar':'Siguiente';
+    const card=$('#intro .in-card');card.classList.remove('fwd','back');void card.offsetWidth;card.classList.add(dir<0?'back':'fwd');
+    if(inStep===0&&!inRAF){inT0=performance.now();inRAF=requestAnimationFrame(inAnim)}
+    const rm=$('#inRem');if(rm)rm.onclick=()=>{closeIntro();openRem()};
+    // los compañeros parpadean de vez en cuando
+    if(inStep===2)document.querySelectorAll('#inArt .pet').forEach((p,k)=>setTimeout(()=>{p.classList.add('blink');setTimeout(()=>p.classList.remove('blink'),260)},900+k*700));
+  }
+  function openIntro(){
+    $('#inDots').innerHTML=IN_STEPS.map(()=>'<i></i>').join('');
+    $('#intro').hidden=false;document.body.style.overflow='hidden';inShow(0,1);
+    setTimeout(()=>{try{$('#inNext').focus()}catch(e){}},60);
+  }
+  function closeIntro(){
+    if($('#intro').hidden)return;
+    $('#intro').hidden=true;document.body.style.overflow='';cancelAnimationFrame(inRAF);inRAF=0;
+    try{localStorage.setItem('pv-intro','1')}catch(e){}
+  }
+  $('#inNext').onclick=()=>{if(inStep<IN_STEPS.length-1)inShow(inStep+1,1);else{closeIntro();try{$('#bStart').focus({preventScroll:true})}catch(e){}}};
+  $('#inBack').onclick=()=>inShow(inStep-1,-1);
+  $('#inSkip').onclick=closeIntro;
+  $('#bIntro').onclick=openIntro;
+  document.addEventListener('keydown',ev=>{
+    if($('#intro').hidden)return;
+    if(ev.key==='Escape')closeIntro();
+    else if(ev.key==='ArrowRight'&&inStep<IN_STEPS.length-1)inShow(inStep+1,1);
+    else if(ev.key==='ArrowLeft'&&inStep>0)inShow(inStep-1,-1);
+  });
   loadShared();
   window.addEventListener('hashchange',()=>{if(!P)loadShared()});
+  // primera visita: bienvenida (si llega con una pausa compartida, se la muestra otro día)
+  let seenIntro=false;try{seenIntro=localStorage.getItem('pv-intro')==='1'}catch(e){seenIntro=true}
+  if(!seenIntro&&!readHash(location.hash))setTimeout(()=>{if(!P)openIntro()},450);
 }
 if(typeof document!=='undefined')init();
 </script>
